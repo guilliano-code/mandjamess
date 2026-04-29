@@ -2,7 +2,8 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<style>html,body{overflow:hidden;height:100%;position:relative}#preloader{position:fixed;inset:0;width:100%;height:100%;background:#080808;z-index:9999}</style>
 <title>Prestige Catering — Onvergetelijke Smaakbelevingen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,8 +13,9 @@
 #preloader {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  height: -webkit-fill-available;
   height: 100dvh;
   background: var(--dark);
   z-index: 9999;
@@ -2573,6 +2575,10 @@ footer {
 </div>
 
 <script>
+/* ── Scroll to top on every load/refresh ── */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 /* ── Shared state (must be first to avoid TDZ errors) ── */
 const slider     = document.getElementById('people-slider');
 let selectedPkg  = { name: '', price: 0 };
@@ -2664,14 +2670,13 @@ function calcPrice() {
   });
   const noScroll = e => e.preventDefault();
   document.addEventListener('touchmove', noScroll, { passive: false });
-  document.documentElement.style.overflow = 'hidden';
-  document.body.style.overflow = 'hidden';
 
   setTimeout(() => {
     document.getElementById('preloader').classList.add('done');
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
+    document.documentElement.style.cssText = '';
+    document.body.style.cssText = '';
     document.removeEventListener('touchmove', noScroll);
+    window.scrollTo(0, 0);
   }, 2200);
 })();
 
