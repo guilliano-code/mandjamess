@@ -11,7 +11,10 @@
 /* ─── Preloader ──────────────────────────────────────────────── */
 #preloader {
   position: fixed;
-  inset: 0;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   background: var(--dark);
   z-index: 9999;
   display: flex;
@@ -20,6 +23,8 @@
   justify-content: center;
   gap: 24px;
   transition: opacity 0.7s ease, visibility 0.7s ease;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 #preloader.done { opacity: 0; visibility: hidden; }
 .preloader-logo {
@@ -2657,11 +2662,17 @@ function calcPrice() {
     s.style.animationDelay = (i * 0.07) + 's';
     logo.appendChild(s);
   });
+  const noScroll = e => e.preventDefault();
+  document.addEventListener('touchmove', noScroll, { passive: false });
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+
   setTimeout(() => {
     document.getElementById('preloader').classList.add('done');
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
+    document.removeEventListener('touchmove', noScroll);
   }, 2200);
-  document.body.style.overflow = 'hidden';
 })();
 
 /* ── Custom cursor ── */
