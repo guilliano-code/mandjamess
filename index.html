@@ -946,6 +946,51 @@ input[type="range"]::-webkit-slider-runnable-track {
   font-weight: 700;
 }
 
+/* ─── Kids Menu stepper ──────────────────────────────────────── */
+.kids-stepper-card {
+  cursor: default;
+}
+.kids-stepper-card:hover {
+  border-color: rgba(196,30,58,0.4);
+}
+.kids-stepper-card.active {
+  border-color: var(--red);
+  background: var(--red-g);
+}
+.kids-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 10px 0 6px;
+  border: 1px solid rgba(245,240,235,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  width: fit-content;
+}
+.kids-btn {
+  width: 32px; height: 32px;
+  background: rgba(245,240,235,0.06);
+  border: none;
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--trans);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.kids-btn:hover { background: var(--red); }
+.kids-count-display {
+  min-width: 36px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--white);
+  padding: 0 4px;
+  background: rgba(245,240,235,0.04);
+  line-height: 32px;
+}
+
 /* Price summary */
 .price-summary {
   background: var(--dark);
@@ -2103,13 +2148,17 @@ footer {
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao7',event)">?</button>
         </div>
         <div class="addon-item">
-          <input type="checkbox" id="ao8" value="0" data-name="Kids Menu" onchange="calcPrice()">
-          <label class="addon-label" for="ao8">
-            <div class="addon-check"></div>
+          <input type="checkbox" id="ao8" value="0" data-name="Kids Menu" style="display:none">
+          <div class="addon-label kids-stepper-card" id="kids-card">
             <div class="addon-name">🧒 Kids Menu</div>
-            <div class="addon-short">Gegrilde kip, maïs, friet & frisdrank voor kinderen — en levert u korting op uw pakket.</div>
-            <div class="addon-price" style="color:#4ade80">− €10 / €12,50 / €15 p.p.</div>
-          </label>
+            <div class="addon-short">Gegrilde kip, maïs, friet & frisdrank. Kies het aantal kinderen — en ontvang korting per kindermenu.</div>
+            <div class="kids-stepper">
+              <button class="kids-btn" type="button" onclick="adjustKids(-1)">−</button>
+              <div class="kids-count-display" id="kids-count">0</div>
+              <button class="kids-btn" type="button" onclick="adjustKids(1)">+</button>
+            </div>
+            <div class="addon-price" id="kids-price-label" style="color:#4ade80">Kies een pakket voor de korting</div>
+          </div>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao8',event)">?</button>
         </div>
       </div>
@@ -2132,6 +2181,7 @@ footer {
         <div class="price-row"><span>Aantal gasten</span><span id="ps-guests">50 personen</span></div>
         <div class="price-row"><span>Pakketkosten</span><span id="ps-base">—</span></div>
         <div class="price-row"><span>Extra's (incl.)</span><span id="ps-addons">€0,00</span></div>
+        <div class="price-row" id="ps-kids-row" style="display:none;color:#4ade80"><span id="ps-kids-label">Kids Menu korting</span><span id="ps-kids">—</span></div>
         <div class="price-row" id="ps-discount-row" style="display:none;color:#4ade80"><span id="ps-discount-label">Groepskorting</span><span id="ps-discount">—</span></div>
         <div class="price-row total"><span>Geschatte totaal</span><span id="ps-total">—</span></div>
       </div>
@@ -2506,17 +2556,36 @@ function calcPrice() {
     else                  addonPP  += parseFloat(cb.value) || 0;
   });
 
-  // Kids Menu: tiered discount per package
-  const kidsChecked = document.getElementById('ao8')?.checked;
+  // Kids Menu: tiered discount × number of kids chosen
+  const kidsCount    = parseInt(document.getElementById('kids-count')?.textContent) || 0;
   const kidsDiscount = selectedPkg.name === 'BBQ Basis' ? 10 : selectedPkg.name === 'BBQ Compleet' ? 12.50 : 15;
-  if (kidsChecked) addonPP -= kidsDiscount;
+  const kidsTotal    = kidsCount * kidsDiscount;
+  if (kidsCount > 0) addonFlat -= kidsTotal;
 
-  // Update Kids Menu card price label to reflect current discount
-  const kidsLabel = document.querySelector('#ao8 ~ .addon-label .addon-price') ||
-                    document.querySelector('label[for="ao8"] .addon-price');
+  // Update Kids Menu card label
+  const kidsLabel = document.getElementById('kids-price-label');
   if (kidsLabel) {
-    const kdAmt = selectedPkg.name ? `− €${kidsDiscount.toFixed(2).replace('.',',')} korting p.p.` : '− €10 / €12,50 / €15 p.p.';
-    kidsLabel.textContent = kdAmt;
+    if (!selectedPkg.name) {
+      kidsLabel.textContent = 'Kies een pakket voor de korting';
+      kidsLabel.style.color = 'rgba(245,240,235,0.4)';
+    } else {
+      kidsLabel.textContent = kidsCount > 0
+        ? `− €${kidsDiscount.toFixed(2).replace('.',',')} p.kind · ${kidsCount} kind${kidsCount > 1 ? 'eren' : ''} = − €${kidsTotal.toFixed(2).replace('.',',')}`
+        : `− €${kidsDiscount.toFixed(2).replace('.',',')} korting per kindermenu`;
+      kidsLabel.style.color = '#4ade80';
+    }
+  }
+
+  // Kids row in summary
+  const kidsRow = document.getElementById('ps-kids-row');
+  if (kidsRow) {
+    if (kidsCount > 0) {
+      kidsRow.style.display = 'flex';
+      document.getElementById('ps-kids-label').textContent = `Kids Menu (${kidsCount}×)`;
+      document.getElementById('ps-kids').textContent = '− ' + fmt(kidsTotal);
+    } else {
+      kidsRow.style.display = 'none';
+    }
   }
 
   const addonTotal    = addonPP * guests + addonFlat;
@@ -2931,6 +3000,19 @@ function initCarousel(carouselId, dotsId) {
   carousel.addEventListener('scroll', updateDots, { passive: true });
   window.addEventListener('resize', updateDots);
   updateDots();
+}
+
+/* ── Kids Menu stepper ── */
+function adjustKids(delta) {
+  const el      = document.getElementById('kids-count');
+  const card    = document.getElementById('kids-card');
+  const max     = parseInt(document.getElementById('people-slider').value) || 500;
+  let count     = parseInt(el.textContent) + delta;
+  count = Math.max(0, Math.min(count, max));
+  el.textContent = count;
+  card.classList.toggle('active', count > 0);
+  document.getElementById('ao8').checked = count > 0;
+  calcPrice();
 }
 
 /* ── Init (must run last, after all functions are defined) ── */
