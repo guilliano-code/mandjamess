@@ -13,10 +13,9 @@ html.is-loading,html.is-loading body{overflow:hidden!important;height:100%;touch
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="dns-prefetch" href="https://images.unsplash.com">
 <!-- Fonts non-blocking -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"></noscript>
-<!-- Preload first hero image -->
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=75">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=75" fetchpriority="high">
 <style>
 /* ─── Preloader ──────────────────────────────────────────────── */
 #preloader {
@@ -399,36 +398,6 @@ ul { list-style: none; }
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
 
-/* ─── Stats Bar ──────────────────────────────────────────────── */
-.stats-bar {
-  background: var(--dark2);
-  border-top: 1px solid rgba(196,30,58,0.3);
-  border-bottom: 1px solid rgba(196,30,58,0.3);
-  padding: 36px 80px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-.stat-item {
-  text-align: center;
-  padding: 0 20px;
-  border-right: 1px solid rgba(245,240,235,0.08);
-}
-.stat-item:last-child { border-right: none; }
-.stat-num {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: var(--red);
-  line-height: 1;
-  margin-bottom: 6px;
-}
-.stat-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(245,240,235,0.5);
-}
 
 /* ─── Section Shared ─────────────────────────────────────────── */
 section { padding: 100px 80px; }
@@ -1031,6 +1000,8 @@ input[type="range"]::-webkit-slider-runnable-track {
   background: var(--dark2);
   text-align: center;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
 }
 .testimonials-header { margin-bottom: 60px; }
 .testimonials-header .section-sub { margin: 0 auto; }
@@ -1061,6 +1032,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   gap: 24px;
   width: max-content;
   animation: scrollTestimonials 35s linear infinite;
+  will-change: transform;
 }
 @keyframes scrollTestimonials {
   0% { transform: translateX(0); }
@@ -1113,6 +1085,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 /* ─── Process ────────────────────────────────────────────────── */
 #process {
   background: var(--dark);
+  content-visibility: auto;
+  contain-intrinsic-size: 0 700px;
 }
 .process-inner {
   display: grid;
@@ -1202,6 +1176,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* ─── Contact ────────────────────────────────────────────────── */
 #contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 700px;
   background: var(--dark2);
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1416,6 +1392,7 @@ footer {
   width: max-content;
   animation: brandScroll 30s linear infinite;
   align-items: center;
+  will-change: transform;
 }
 @keyframes brandScroll {
   0%   { transform: translateX(0); }
@@ -1462,7 +1439,6 @@ footer {
   .packages-grid { grid-template-columns: 1fr; }
   .addons-grid { grid-template-columns: repeat(2, 1fr); }
   #contact { grid-template-columns: 1fr; gap: 48px; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 36px 40px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .process-inner { grid-template-columns: 1fr; }
 }
@@ -1477,7 +1453,6 @@ footer {
   .hero-indicators { left: 24px; }
   .hero-scroll { display: none; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 28px 24px; gap: 16px; }
-  .stat-item { border-right: none; }
   /* services → snap carousel on mobile */
   #services .services-grid {
     display: flex;
@@ -1789,8 +1764,8 @@ footer {
 <!-- ── About ── -->
 <section id="about">
   <div class="about-images fade-up">
-    <img class="about-img-main" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&q=75" alt="Catering" loading="lazy" decoding="async">
-    <img class="about-img-accent" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75" alt="Chef" loading="lazy" decoding="async">
+    <img class="about-img-main" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&q=75" alt="Catering" loading="lazy" decoding="async" width="800" height="600">
+    <img class="about-img-accent" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75" alt="Chef" loading="lazy" decoding="async" width="600" height="450">
     <div class="about-badge"><strong>15+</strong>Jaar<br>Expertise</div>
   </div>
   <div class="about-content">
@@ -1840,7 +1815,7 @@ footer {
   </div>
   <div class="services-grid" id="services-carousel">
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=75" alt="Fine Dining" loading="lazy" decoding="async">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=75" alt="Fine Dining" loading="lazy" decoding="async" width="800" height="600">
       <div class="service-overlay">
         <div class="service-num">01</div>
         <div class="service-text">
@@ -1851,7 +1826,7 @@ footer {
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=75" alt="Borrel Catering" loading="lazy" decoding="async">
+      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=75" alt="Borrel Catering" loading="lazy" decoding="async" width="800" height="600">
       <div class="service-overlay">
         <div class="service-num">02</div>
         <div class="service-text">
@@ -2715,7 +2690,7 @@ const io = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.14 });
 
-document.querySelectorAll('.fade-up, .stat-item').forEach(el => io.observe(el));
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
 function animateCount(el, target) {
   const dur = 1800, step = 16;
