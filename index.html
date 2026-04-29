@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <style>
-html.is-loading,html.is-loading body{overflow:hidden!important;touch-action:none}
-#preloader{position:fixed;inset:0;width:100%;height:100%;background:#080808;z-index:9999}
+html.is-loading,html.is-loading body{overflow:hidden!important;height:100%;touch-action:none}
+#preloader{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;min-height:-webkit-fill-available;background:#080808;z-index:9999}
 </style>
 <title>Prestige Catering — Onvergetelijke Smaakbelevingen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -218,7 +218,8 @@ ul { list-style: none; }
 /* ─── Hero Slider ────────────────────────────────────────────── */
 #hero {
   position: relative;
-  height: 100vh;
+  height: 78vh;
+  min-height: 520px;
   overflow: hidden;
 }
 
@@ -1386,59 +1387,6 @@ footer {
 }
 .float-btn:hover .float-tooltip { opacity: 1; }
 
-/* ─── Quote / Filosofie ──────────────────────────────────────── */
-#quote {
-  position: relative;
-  padding: 140px 80px;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80');
-  overflow: hidden;
-  text-align: center;
-}
-#quote::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(8,8,8,0.82);
-}
-.quote-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-  margin: 0 auto;
-}
-.quote-mark {
-  font-size: 8rem;
-  line-height: 0.4;
-  color: var(--red);
-  font-family: 'Playfair Display', serif;
-  opacity: 0.4;
-  margin-bottom: 12px;
-  display: block;
-}
-.quote-text {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-  font-style: italic;
-  line-height: 1.4;
-  color: var(--white);
-  margin-bottom: 28px;
-}
-.quote-author {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--red);
-}
-.quote-line {
-  width: 60px;
-  height: 2px;
-  background: var(--red);
-  margin: 0 auto 16px;
-}
 
 /* ─── Brands / Klanten ───────────────────────────────────────── */
 #brands {
@@ -1520,6 +1468,7 @@ footer {
   #navbar { padding: 0 24px; height: 68px; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
+  #hero { height: 60vh; min-height: 420px; }
   .hero-content { padding: 0 24px; }
   .hero-indicators { left: 24px; }
   .hero-scroll { display: none; }
@@ -1973,15 +1922,6 @@ footer {
   </div>
 </section>
 
-<!-- ── Quote / Filosofie ── -->
-<div id="quote">
-  <div class="quote-inner fade-up">
-    <span class="quote-mark">"</span>
-    <p class="quote-text">Eten is meer dan voeding — het is het middelpunt van elk onvergetelijk moment dat mensen samen beleven.</p>
-    <div class="quote-line"></div>
-    <div class="quote-author">Onze Culinaire Filosofie</div>
-  </div>
-</div>
 
 <!-- ── Booking ── -->
 <section id="booking">
@@ -2711,7 +2651,7 @@ window.addEventListener('scroll', () => {
 /* ── Navbar sticky / hide-on-scroll-down ── */
 const navbar = document.getElementById('navbar');
 const floatBook = document.getElementById('float-book');
-const heroH = window.innerHeight;
+const heroH = window.innerHeight * 0.78;
 let lastY = 0, ticking = false;
 
 window.addEventListener('scroll', () => {
@@ -2787,15 +2727,6 @@ function animateCount(el, target) {
   }, step);
 }
 
-/* ── Parallax on quote section ── */
-const quoteEl = document.getElementById('quote');
-window.addEventListener('scroll', () => {
-  const rect = quoteEl.getBoundingClientRect();
-  if (rect.bottom > 0 && rect.top < window.innerHeight) {
-    const pct = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-    quoteEl.style.backgroundPositionY = (50 + pct * 20) + '%';
-  }
-}, { passive: true });
 
 /* ── People slider ── */
 function updatePeople(el) {
