@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" class="is-loading">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<style>html,body{overflow:hidden;height:100%;position:relative}#preloader{position:fixed;inset:0;width:100%;height:100%;background:#080808;z-index:9999}</style>
+<style>
+html.is-loading,html.is-loading body{overflow:hidden!important;touch-action:none}
+#preloader{position:fixed;inset:0;width:100%;height:100%;background:#080808;z-index:9999}
+</style>
 <title>Prestige Catering — Onvergetelijke Smaakbelevingen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2673,8 +2676,7 @@ function calcPrice() {
 
   setTimeout(() => {
     document.getElementById('preloader').classList.add('done');
-    document.documentElement.style.cssText = '';
-    document.body.style.cssText = '';
+    document.documentElement.classList.remove('is-loading');
     document.removeEventListener('touchmove', noScroll);
     window.scrollTo(0, 0);
   }, 2200);
