@@ -10,7 +10,13 @@ html.is-loading,html.is-loading body{overflow:hidden!important;height:100%;touch
 <title>Prestige Catering — Onvergetelijke Smaakbelevingen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="dns-prefetch" href="https://images.unsplash.com">
+<!-- Fonts non-blocking -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"></noscript>
+<!-- Preload first hero image -->
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=75">
 <style>
 /* ─── Preloader ──────────────────────────────────────────────── */
 #preloader {
@@ -1669,7 +1675,7 @@ footer {
   <div class="hero-slides">
 
     <div class="hero-slide active">
-      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80')"></div>
+      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=75')"></div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-tag">Luxe Catering Ervaring</p>
@@ -1683,7 +1689,7 @@ footer {
     </div>
 
     <div class="hero-slide">
-      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1555244162-803834f70033?w=1600&q=80')"></div>
+      <div class="hero-slide-bg" data-bg="https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&q=75"></div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-tag">Vers & Seizoensgebonden</p>
@@ -1697,7 +1703,7 @@ footer {
     </div>
 
     <div class="hero-slide">
-      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=1600&q=80')"></div>
+      <div class="hero-slide-bg" data-bg="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=1200&q=75"></div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-tag">Events & Zakelijk</p>
@@ -1725,24 +1731,6 @@ footer {
 </section>
 
 <!-- ── Stats Bar ── -->
-<div class="stats-bar">
-  <div class="stat-item fade-up">
-    <div class="stat-num" data-count="850">0</div>
-    <div class="stat-label">Evenementen Per Jaar</div>
-  </div>
-  <div class="stat-item fade-up">
-    <div class="stat-num" data-count="15">0</div>
-    <div class="stat-label">Jaar Ervaring</div>
-  </div>
-  <div class="stat-item fade-up">
-    <div class="stat-num" data-count="98">0</div>
-    <div class="stat-label">% Tevreden Klanten</div>
-  </div>
-  <div class="stat-item fade-up">
-    <div class="stat-num" data-count="12">0</div>
-    <div class="stat-label">Culinaire Specialiteiten</div>
-  </div>
-</div>
 
 <!-- ── Brands ── -->
 <div id="brands">
@@ -1750,6 +1738,10 @@ footer {
   <div style="overflow:hidden;position:relative;">
     <div class="brands-track">
       <div class="brand-item">Heineken</div>
+      <div class="brand-item">·</div>
+      <div class="brand-item">Dirk</div>
+      <div class="brand-item">·</div>
+      <div class="brand-item">ibis Hotels</div>
       <div class="brand-item">·</div>
       <div class="brand-item">KPMG</div>
       <div class="brand-item">·</div>
@@ -1769,6 +1761,10 @@ footer {
       <div class="brand-item">·</div>
       <!-- duplicate for infinite -->
       <div class="brand-item">Heineken</div>
+      <div class="brand-item">·</div>
+      <div class="brand-item">Dirk</div>
+      <div class="brand-item">·</div>
+      <div class="brand-item">ibis Hotels</div>
       <div class="brand-item">·</div>
       <div class="brand-item">KPMG</div>
       <div class="brand-item">·</div>
@@ -1793,8 +1789,8 @@ footer {
 <!-- ── About ── -->
 <section id="about">
   <div class="about-images fade-up">
-    <img class="about-img-main" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&q=80" alt="Catering">
-    <img class="about-img-accent" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="Chef">
+    <img class="about-img-main" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&q=75" alt="Catering" loading="lazy" decoding="async">
+    <img class="about-img-accent" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75" alt="Chef" loading="lazy" decoding="async">
     <div class="about-badge"><strong>15+</strong>Jaar<br>Expertise</div>
   </div>
   <div class="about-content">
@@ -1844,7 +1840,7 @@ footer {
   </div>
   <div class="services-grid" id="services-carousel">
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Fine Dining">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=75" alt="Fine Dining" loading="lazy" decoding="async">
       <div class="service-overlay">
         <div class="service-num">01</div>
         <div class="service-text">
@@ -1855,7 +1851,7 @@ footer {
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80" alt="Borrel Catering">
+      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=75" alt="Borrel Catering" loading="lazy" decoding="async">
       <div class="service-overlay">
         <div class="service-num">02</div>
         <div class="service-text">
@@ -1866,7 +1862,7 @@ footer {
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80" alt="BBQ">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=75" loading="lazy" decoding="async" alt="BBQ">
       <div class="service-overlay">
         <div class="service-num">03</div>
         <div class="service-text">
@@ -1877,7 +1873,7 @@ footer {
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=80" alt="Aziatisch">
+      <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=75" loading="lazy" decoding="async" alt="Aziatisch">
       <div class="service-overlay">
         <div class="service-num">04</div>
         <div class="service-text">
@@ -1888,7 +1884,7 @@ footer {
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80" alt="Bruidscatering">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=75" loading="lazy" decoding="async" alt="Bruidscatering">
       <div class="service-overlay">
         <div class="service-num">05</div>
         <div class="service-text">
@@ -1899,7 +1895,7 @@ footer {
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=800&q=80" alt="Zakelijk">
+      <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=800&q=75" loading="lazy" decoding="async" alt="Zakelijk">
       <div class="service-overlay">
         <div class="service-num">06</div>
         <div class="service-text">
@@ -2346,7 +2342,7 @@ footer {
       </div>
     </div>
     <div class="process-image fade-up">
-      <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&q=80" alt="Chef aan het werk">
+      <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&q=75" loading="lazy" decoding="async" alt="Chef aan het werk">
       <div class="process-image-overlay"></div>
     </div>
   </div>
@@ -2355,12 +2351,12 @@ footer {
 <!-- ── Gallery Strip ── -->
 <div id="gallery">
   <div class="gallery-strip">
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&q=80" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=400&q=80" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=80" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
   </div>
 </div>
 
@@ -2516,6 +2512,13 @@ footer {
 </div>
 
 <script>
+/* ── Deferred hero slide backgrounds ── */
+document.querySelectorAll('.hero-slide-bg[data-bg]').forEach(el => {
+  const img = new Image();
+  img.onload = () => { el.style.backgroundImage = "url('" + el.dataset.bg + "')"; };
+  img.src = el.dataset.bg;
+});
+
 /* ── Scroll to top on every load/refresh ── */
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
