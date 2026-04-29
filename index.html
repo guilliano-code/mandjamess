@@ -758,6 +758,58 @@ section { padding: 100px 80px; }
   color: var(--white);
 }
 
+/* ─── Kortingen grid ─────────────────────────────────────────── */
+.discounts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.discount-card {
+  background: var(--dark2);
+  border: 1px solid rgba(245,240,235,0.07);
+  border-radius: 10px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color var(--trans), transform var(--trans);
+}
+.discount-card:hover {
+  border-color: rgba(212,0,26,0.3);
+  transform: translateY(-3px);
+}
+.discount-icon {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+.discount-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(245,240,235,0.4);
+}
+.discount-amount {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #4ade80;
+  line-height: 1.2;
+}
+.discount-desc {
+  font-size: 0.78rem;
+  color: rgba(245,240,235,0.5);
+  line-height: 1.55;
+  margin-top: 4px;
+}
+@media (max-width: 1024px) {
+  .discounts-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .discounts-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .discount-card { padding: 18px 14px; }
+}
+
 /* ─── Booking Form ───────────────────────────────────────────── */
 .booking-form-wrapper {
   background: var(--dark2);
@@ -1611,7 +1663,7 @@ footer {
   transition: background var(--trans);
 }
 .addon-modal-close:hover { background: var(--red); color: var(--white); border-color: var(--red); }
-.addon-modal-emoji { font-size: 2.8rem; margin-bottom: 12px; }
+.addon-modal-emoji { display: none; }
 .addon-modal-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
 .addon-modal-price {
   display: inline-block;
@@ -2010,6 +2062,34 @@ footer {
     </div>
   </div>
 
+  <!-- Kortingen -->
+  <div class="discounts-grid fade-up">
+    <div class="discount-card">
+      <div class="discount-icon">📅</div>
+      <div class="discount-label">Early Bird</div>
+      <div class="discount-amount">- €3 tot €5 p.p.</div>
+      <div class="discount-desc">Boek 8 weken of meer van tevoren en ontvang automatisch korting per persoon.</div>
+    </div>
+    <div class="discount-card">
+      <div class="discount-icon">👥</div>
+      <div class="discount-label">Referral Bonus</div>
+      <div class="discount-amount">€200 – €300 tegoed</div>
+      <div class="discount-desc">Breng een vriend die ook boekt en ontvang €200–€300 als tegoed op uw volgende boeking.</div>
+    </div>
+    <div class="discount-card">
+      <div class="discount-icon">⭐</div>
+      <div class="discount-label">Vaste Klant</div>
+      <div class="discount-amount">Gratis upgrade</div>
+      <div class="discount-desc">Al eerder geboekt? U krijgt een gratis pakket-upgrade en voorrangsplanning voor uw datum.</div>
+    </div>
+    <div class="discount-card">
+      <div class="discount-icon">📊</div>
+      <div class="discount-label">Volumekorting</div>
+      <div class="discount-amount">- €2,50 p.p.</div>
+      <div class="discount-desc">Vanaf 200 gasten ontvangt u automatisch €2,50 korting per persoon. Wordt verrekend in de offerte.</div>
+    </div>
+  </div>
+
   <!-- Booking Form -->
   <div class="booking-form-wrapper fade-up">
     <h3 class="booking-form-title">Vraag uw offerte aan</h3>
@@ -2056,11 +2136,11 @@ footer {
       </div>
 
       <div class="form-field full">
-        <label>Aantal Gasten</label>
+        <label>Aantal Gasten (incl. kinderen)</label>
         <div class="people-slider-wrap">
           <div class="people-display">
             <span class="people-count" id="people-display">50</span>
-            <span class="people-label">gasten</span>
+            <span class="people-label">gasten (incl. kinderen)</span>
           </div>
           <input type="range" min="15" max="500" value="50" id="people-slider" oninput="updatePeople(this)">
           <div id="discount-hint" style="font-size:0.72rem;font-weight:700;letter-spacing:1px;margin-top:8px;min-height:18px;transition:color 0.3s"></div>
@@ -2081,7 +2161,7 @@ footer {
           <input type="checkbox" id="ao1" value="500.00" data-name="Heated Tent" data-flat="true" onchange="calcPrice()">
           <label class="addon-label" for="ao1">
             <div class="addon-check"></div>
-            <div class="addon-name">🏕️ Heated Tent</div>
+            <div class="addon-name">Verwarmde Tent</div>
             <div class="addon-short">Volledig verwarmde feesttent voor tot 100 gasten — uw BBQ gaat door, ongeacht het weer.</div>
             <div class="addon-price">€400 – €600 vast</div>
           </label>
@@ -2091,7 +2171,7 @@ footer {
           <input type="checkbox" id="ao2" value="450.00" data-name="Premium Decoration" data-flat="true" onchange="calcPrice()">
           <label class="addon-label" for="ao2">
             <div class="addon-check"></div>
-            <div class="addon-name">✨ Premium Decoratie</div>
+            <div class="addon-name">Premium Decoratie</div>
             <div class="addon-short">Tafelkleden, sfeerverlichting, centerpieces en bloemen — uw locatie ziet er direct professioneel uit.</div>
             <div class="addon-price">€300 – €600 vast</div>
           </label>
@@ -2101,7 +2181,7 @@ footer {
           <input type="checkbox" id="ao3" value="750.00" data-name="DJ / Live Music" data-flat="true" onchange="calcPrice()">
           <label class="addon-label" for="ao3">
             <div class="addon-check"></div>
-            <div class="addon-name">🎧 DJ / Live Music</div>
+            <div class="addon-name">DJ / Live Muziek</div>
             <div class="addon-short">Professionele DJ of livemuzikant voor 4 uur — van lounge tijdens het eten tot feest erna.</div>
             <div class="addon-price">€500 – €1.000 vast</div>
           </label>
@@ -2111,7 +2191,7 @@ footer {
           <input type="checkbox" id="ao4" value="300.00" data-name="Photo Booth" data-flat="true" onchange="calcPrice()">
           <label class="addon-label" for="ao4">
             <div class="addon-check"></div>
-            <div class="addon-name">📸 Photo Booth</div>
+            <div class="addon-name">Fotohokje</div>
             <div class="addon-short">Selfie-booth met props, directe prints en digitale galerij — een hit bij elke leeftijd.</div>
             <div class="addon-price">€200 – €400 vast</div>
           </label>
@@ -2121,7 +2201,7 @@ footer {
           <input type="checkbox" id="ao5" value="12.00" data-name="Premium Bar Service" onchange="calcPrice()">
           <label class="addon-label" for="ao5">
             <div class="addon-check"></div>
-            <div class="addon-name">🍺 Premium Bar Service</div>
+            <div class="addon-name">Premium Bar Service</div>
             <div class="addon-short">Onbeperkt bier, wijn en frisdrank — bediend door ons team gedurende de volledige service.</div>
             <div class="addon-price">+ €12 p.p.</div>
           </label>
@@ -2131,7 +2211,7 @@ footer {
           <input type="checkbox" id="ao6" value="17.50" data-name="Premium Catering Upgrade" onchange="calcPrice()">
           <label class="addon-label" for="ao6">
             <div class="addon-check"></div>
-            <div class="addon-name">🥩 Premium Catering Upgrade</div>
+            <div class="addon-name">Premium Catering Upgrade</div>
             <div class="addon-short">Wagyu burger, côte de boeuf en Duroc varkenshaas — A-kwaliteit vlees voor gasten die het verschil proeven.</div>
             <div class="addon-price">+ €15 – €20 p.p.</div>
           </label>
@@ -2141,7 +2221,7 @@ footer {
           <input type="checkbox" id="ao7" value="175.00" data-name="Extra Crew Member" data-flat="true" onchange="calcPrice()">
           <label class="addon-label" for="ao7">
             <div class="addon-check"></div>
-            <div class="addon-name">👤 Extra Crew Member</div>
+            <div class="addon-name">Extra Crew Lid</div>
             <div class="addon-short">Een extra professioneel crewlid — kortere wachttijden en meer aandacht voor uw gasten.</div>
             <div class="addon-price">€150 – €200 vast</div>
           </label>
@@ -2150,14 +2230,14 @@ footer {
         <div class="addon-item">
           <input type="checkbox" id="ao8" value="0" data-name="Kids Menu" style="display:none">
           <div class="addon-label kids-stepper-card" id="kids-card">
-            <div class="addon-name">🧒 Kids Menu</div>
-            <div class="addon-short">Gegrilde kip, maïs, friet & frisdrank. Kies het aantal kinderen — en ontvang korting per kindermenu.</div>
+            <div class="addon-name">Kindermenu</div>
+            <div class="addon-short">Gegrilde kip, maïs, friet & frisdrank voor kinderen t/m 12 jaar. − €15,00 korting per kindermenu.</div>
             <div class="kids-stepper">
               <button class="kids-btn" type="button" onclick="adjustKids(-1)">−</button>
               <div class="kids-count-display" id="kids-count">0</div>
               <button class="kids-btn" type="button" onclick="adjustKids(1)">+</button>
             </div>
-            <div class="addon-price" id="kids-price-label" style="color:#4ade80">Kies een pakket voor de korting</div>
+            <div class="addon-price" id="kids-price-label" style="color:#4ade80">− €15,00 korting p. kind (t/m 12 jaar)</div>
           </div>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao8',event)">?</button>
         </div>
@@ -2544,7 +2624,7 @@ let selectedPkg  = { name: '', price: 0 };
 /* ── Price helpers ── */
 function fmt(n) {
   if (typeof n !== 'number' || isNaN(n)) return '—';
-  return '€' + n.toFixed(2).replace('.', ',');
+  return '€' + (n % 1 === 0 ? n.toFixed(0) : n.toFixed(2).replace('.', ','));
 }
 
 function calcPrice() {
@@ -2558,22 +2638,17 @@ function calcPrice() {
 
   // Kids Menu: tiered discount × number of kids chosen
   const kidsCount    = parseInt(document.getElementById('kids-count')?.textContent) || 0;
-  const kidsDiscount = selectedPkg.name === 'BBQ Basis' ? 10 : selectedPkg.name === 'BBQ Compleet' ? 12.50 : 15;
+  const kidsDiscount = 15;
   const kidsTotal    = kidsCount * kidsDiscount;
   if (kidsCount > 0) addonFlat -= kidsTotal;
 
   // Update Kids Menu card label
   const kidsLabel = document.getElementById('kids-price-label');
   if (kidsLabel) {
-    if (!selectedPkg.name) {
-      kidsLabel.textContent = 'Kies een pakket voor de korting';
-      kidsLabel.style.color = 'rgba(245,240,235,0.4)';
-    } else {
-      kidsLabel.textContent = kidsCount > 0
-        ? `− €${kidsDiscount.toFixed(2).replace('.',',')} p.kind · ${kidsCount} kind${kidsCount > 1 ? 'eren' : ''} = − €${kidsTotal.toFixed(2).replace('.',',')}`
-        : `− €${kidsDiscount.toFixed(2).replace('.',',')} korting per kindermenu`;
-      kidsLabel.style.color = '#4ade80';
-    }
+    kidsLabel.textContent = kidsCount > 0
+      ? kidsCount + ' kind' + (kidsCount > 1 ? 'eren' : '') + ' x €15 = - €' + kidsTotal.toFixed(0)
+      : '- €15 korting per kindermenu (t/m 12 jaar)';
+    kidsLabel.style.color = '#4ade80';
   }
 
   // Kids row in summary
@@ -2582,14 +2657,14 @@ function calcPrice() {
     if (kidsCount > 0) {
       kidsRow.style.display = 'flex';
       document.getElementById('ps-kids-label').textContent = `Kids Menu (${kidsCount}×)`;
-      document.getElementById('ps-kids').textContent = '− ' + fmt(kidsTotal);
+      document.getElementById('ps-kids').textContent = '- ' + fmt(kidsTotal);
     } else {
       kidsRow.style.display = 'none';
     }
   }
 
   const addonTotal    = addonPP * guests + addonFlat;
-  const discountPct   = guests > 150 ? 0.20 : guests > 75 ? 0.10 : 0;
+  const discountPct   = guests >= 200 ? 0.025 : 0;
   const discountRow   = document.getElementById('ps-discount-row');
   const discountEl    = document.getElementById('ps-discount');
   const discountLabel = document.getElementById('ps-discount-label');
@@ -2600,14 +2675,11 @@ function calcPrice() {
   addonsEl.style.color = addonTotal < 0 ? '#4ade80' : '';
 
   const hint = document.getElementById('discount-hint');
-  if (guests > 150) {
-    hint.textContent = '🎉 20% groepskorting actief (meer dan 150 personen)';
+  if (guests >= 200) {
+    hint.textContent = 'Volumekorting actief — €2,50 p.p. korting bij 200+ gasten';
     hint.style.color = '#4ade80';
-  } else if (guests > 75) {
-    hint.textContent = '🎉 10% groepskorting actief (meer dan 75 personen)';
-    hint.style.color = '#4ade80';
-  } else if (guests > 60) {
-    hint.textContent = 'Tip: bij meer dan 75 personen krijgt u 10% korting';
+  } else if (guests >= 180) {
+    hint.textContent = 'Tip: bij 200+ gasten ontvangt u €2,50 p.p. volumekorting';
     hint.style.color = 'rgba(245,240,235,0.35)';
   } else {
     hint.textContent = '';
@@ -2635,7 +2707,7 @@ function calcPrice() {
   baseEl.textContent = fmt(pkgPrice * guests);
 
   if (discountPct > 0) {
-    discountLabel.textContent  = 'Groepskorting ' + (discountPct * 100) + '%';
+    discountLabel.textContent  = 'Volumekorting (200+ gasten)';
     discountEl.textContent     = '- ' + fmt(discount);
     discountRow.style.display  = 'flex';
   } else {
@@ -2898,44 +2970,44 @@ document.querySelectorAll('.package-card').forEach(card => {
 /* ── Add-on info modal ── */
 const addonData = {
   ao1: {
-    emoji: '🏕️', name: 'Heated Tent', price: '€400 – €600 vast',
+    name: 'Verwarmde Tent', price: '€400 – €600 vast',
     desc: 'Geen compromissen door het weer. Onze verwarmde feesttent biedt ruimte voor tot 100 gasten en zorgt dat uw BBQ doorgaat — ongeacht de temperatuur of regen. Compleet met verlichting, opgesteld en afgebroken door ons team.',
     includes: ['Professionele partytent (tot 100 m²)', 'Elektrische verwarming inbegrepen', 'Sfeerverlichting inbegrepen', 'Opbouw dag voor het evenement', 'Afbraak dag erna — geen omkijken naar']
   },
   ao2: {
-    emoji: '✨', name: 'Premium Decoratie', price: '€300 – €600 vast',
+    name: 'Premium Decoratie', price: '€300 – €600 vast',
     desc: 'Van linnen tafelkleden en kaarsenhouders tot sfeerverlichting en seizoensbloemen — ons decoratieteam zorgt dat uw locatie er precies uitziet zoals u het in gedachten had. Stijlvol, compleet en zonder gedoe.',
     includes: ['Tafelkleden & linnen servetten', 'Sfeer- en accentverlichting', 'Centerpieces & kaarsenhouders', 'Seizoensgebonden bloemenopstelling', 'Op- en afbouw door ons team']
   },
   ao3: {
-    emoji: '🎧', name: 'DJ / Live Music', price: '€500 – €1.000 vast',
+    name: 'DJ / Live Muziek', price: '€500 – €1.000 vast',
     desc: 'De juiste muziek maakt het verschil tussen een goed evenement en een feest dat nog maanden nabesproken wordt. Kies een professionele DJ of livemuzikant voor tot 4 uur — van loungemuziek tijdens de BBQ tot feest erna.',
     includes: ['DJ of livemuzikant (tot 4 uur)', 'Professioneel geluidssysteem', 'Sfeerverlichting & LED-installatie', 'Playlist-wensen mogelijk', 'Soundcheck 1 uur voor aanvang']
   },
   ao4: {
-    emoji: '📸', name: 'Photo Booth', price: '€200 – €400 vast',
+    name: 'Fotohokje', price: '€200 – €400 vast',
     desc: "Een instant-hit bij gasten van alle leeftijden. Uw gasten maken onbeperkt foto's, krijgen direct een print mee en ontvangen achteraf de volledige digitale galerij. Inclusief props en accessoires.",
     includes: ['Professionele fotobooth (3 uur)', 'Props & accessoires inbegrepen', 'Onbeperkt foto\'s maken', 'Directe prints (10×15 cm)', 'Digitale galerij achteraf per e-mail']
   },
   ao5: {
-    emoji: '🍺', name: 'Premium Bar Service', price: '+ €12 p.p.',
+    name: 'Premium Bar Service', price: '+ €12 p.p.',
     desc: 'Geen bonnetjes, geen bar-wachtrijen. Ons barteam schenkt onbeperkt bier (tap of fles), huiswijn en frisdrank bij — voor de volledige serviceduur. Één vast bedrag per persoon, wij regelen de rest.',
     includes: ['Onbeperkt bier (tap of fles)', 'Huiswijn rood & wit', 'Frisdrank & water inbegrepen', 'Bediening door ons barteam', 'Actief gedurende volledige service']
   },
   ao6: {
-    emoji: '🥩', name: 'Premium Catering Upgrade', price: '+ €15 – €20 p.p.',
+    name: 'Premium Catering Upgrade', price: '+ €15 – €20 p.p.',
     desc: 'Upgrade uw vleesassortiment naar het absolute topniveau. A-kwaliteit vlees van gespecialiseerde slagers: Wagyu burger, côte de boeuf aan het bot en Duroc varkenshaas met kruidenboter — voor gasten die het verschil proeven.',
     includes: ['Wagyu smash burger (180g)', 'Côte de boeuf aan het bot', 'Duroc varkenshaas met kruidenboter', 'Verse chimichurri & huisdipsauzen', 'Live bereid aan het grillstation']
   },
   ao7: {
-    emoji: '👤', name: 'Extra Crew Member', price: '€150 – €200 vast',
+    name: 'Extra Crew Lid', price: '€150 – €200 vast',
     desc: 'Meer handen betekent snellere service, kortere wachttijden en meer persoonlijke aandacht voor uw gasten. Ideaal bij groepen boven de 75 personen of bij evenementen waarbij service extra belangrijk is.',
     includes: ['1 extra professioneel crewlid', 'Inzetbaar bij grillstation of bediening', 'Volledig getraind in Mandja Grill service', 'Actief voor volledige serviceduur', 'Inclusief uniform & materiaal']
   },
   ao8: {
-    emoji: '🧒', name: 'Kids Menu', price: '− €10 / €12,50 / €15 p.p.',
-    desc: 'Kinderen welkom — en dat scheelt u ook nog geld. Voeg het Kids Menu toe en ontvang automatisch korting per persoon op uw pakket: €10 bij BBQ Basis, €12,50 bij BBQ Compleet, €15 bij BBQ Premium. Kinderen krijgen gegrilde kip, maïskolf, friet en frisdrank.',
-    includes: ['Gegrilde kip of hamburger', 'Maïskolf & friet', 'Frisdrank of sap inbegrepen', 'Allergie-opties op aanvraag', '🎁 BBQ Basis: −€10 p.p. | Compleet: −€12,50 | Premium: −€15']
+    name: 'Kindermenu', price: '− €15,00 p. kind (t/m 12 jaar)',
+    desc: 'Kinderen t/m 12 jaar zijn welkom aan de BBQ — en dat scheelt u ook. Per kindermenu ontvangt u automatisch €15,00 korting op uw totaalprijs. Kinderen krijgen gegrilde kip, maïskolf, friet en frisdrank, vers bereid door ons team.',
+    includes: ['Gegrilde kip of hamburger (kinderportion)', 'Maïskolf & friet', 'Frisdrank of sap inbegrepen', 'Allergie-opties op aanvraag', '− €15,00 korting per kindermenu, automatisch verrekend']
   }
 };
 let currentAddonId = null;
