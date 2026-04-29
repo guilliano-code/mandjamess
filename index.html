@@ -95,8 +95,8 @@ body.cursor-hover .cursor-ring { width: 56px; height: 56px; border-color: rgba(1
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --red:    #C41E3A;
-  --red-d:  #9B1530;
+  --red:    #D4001A;
+  --red-d:  #A80015;
   --red-g:  rgba(196,30,58,0.15);
   --gold:   #C9A96E;
   --dark:   #080808;
@@ -546,62 +546,69 @@ section { padding: 100px 80px; }
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
 }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+}
 .service-card {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  aspect-ratio: 4/5;
+  height: 160px;
   background: var(--dark3);
 }
 .service-card img {
+  position: absolute;
+  inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.7s ease;
-  filter: brightness(0.55);
+  transition: transform 0.7s ease, filter 0.5s ease;
+  filter: brightness(0.45);
 }
-.service-card:hover img { transform: scale(1.08); filter: brightness(0.35); }
+.service-card:hover img { transform: scale(1.06); filter: brightness(0.25); }
 
 .service-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, transparent 60%);
+  background: linear-gradient(to right, rgba(8,8,8,0.88) 40%, transparent 100%);
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 32px;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 0 32px;
   transition: var(--trans);
 }
 .service-num {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--red);
-  margin-bottom: 8px;
+  font-size: 2rem;
+  font-weight: 800;
+  color: rgba(245,240,235,0.06);
+  letter-spacing: 0;
+  flex-shrink: 0;
+  line-height: 1;
+  transition: color 0.4s ease;
 }
+.service-card:hover .service-num { color: rgba(212,0,26,0.25); }
+.service-text { display: flex; flex-direction: column; gap: 4px; }
 .service-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 10px;
+  line-height: 1.2;
 }
 .service-desc {
-  font-size: 0.8rem;
-  color: rgba(245,240,235,0.65);
-  line-height: 1.6;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
+  font-size: 0.78rem;
+  color: rgba(245,240,235,0.55);
+  line-height: 1.5;
+  max-width: 340px;
 }
-.service-card:hover .service-desc { max-height: 80px; }
 .service-line {
-  width: 32px; height: 2px;
+  width: 0; height: 2px;
   background: var(--red);
-  margin: 12px 0 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
+  margin-top: 6px;
+  transition: width 0.4s ease;
 }
-.service-card:hover .service-line { transform: scaleX(1); }
+.service-card:hover .service-line { width: 32px; }
 
 /* ─── Booking / Pakketten ────────────────────────────────────── */
 #booking {
@@ -912,6 +919,12 @@ input[type="range"]::-webkit-slider-runnable-track {
   transition: opacity 0.2s;
 }
 .addon-item input:checked + .addon-label .addon-check::after { opacity: 1; }
+.addon-short {
+  font-size: 0.74rem;
+  color: rgba(245,240,235,0.45);
+  line-height: 1.45;
+  margin-bottom: 2px;
+}
 .addon-name {
   font-size: 0.82rem;
   font-weight: 600;
@@ -1460,6 +1473,7 @@ footer {
   #about { grid-template-columns: 1fr; gap: 48px; }
   .about-images { height: 400px; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .service-card { height: 140px; }
   .packages-grid { grid-template-columns: 1fr; }
   .addons-grid { grid-template-columns: repeat(2, 1fr); }
   #contact { grid-template-columns: 1fr; gap: 48px; }
@@ -1479,6 +1493,11 @@ footer {
   .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 28px 24px; gap: 16px; }
   .stat-item { border-right: none; }
   .services-grid { grid-template-columns: 1fr; }
+  .service-card { height: 110px; }
+  .service-num { font-size: 1.4rem; }
+  .service-overlay { padding: 0 20px; gap: 14px; }
+  .service-name { font-size: 1rem; }
+  .service-desc { font-size: 0.72rem; }
   .addons-grid { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
   .booking-form-wrapper { padding: 32px 24px; }
@@ -1491,6 +1510,104 @@ footer {
   .contact-form-panel { padding: 32px 24px; }
   .contact-form-panel .form-grid { grid-template-columns: 1fr; }
 }
+/* ─── Add-on info button & modal ────────────────────────────── */
+.addon-info-btn {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(245,240,235,0.08);
+  border: 1px solid rgba(245,240,235,0.18);
+  color: rgba(245,240,235,0.5);
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--trans), border-color var(--trans), color var(--trans);
+  z-index: 3;
+  line-height: 1;
+}
+.addon-info-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+
+.addon-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.addon-modal-overlay.open { opacity: 1; visibility: visible; }
+.addon-modal {
+  background: var(--dark2);
+  border: 1px solid rgba(245,240,235,0.1);
+  border-radius: 16px;
+  padding: 40px 36px;
+  max-width: 420px;
+  width: 100%;
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.addon-modal-overlay.open .addon-modal { transform: translateY(0) scale(1); }
+.addon-modal-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(245,240,235,0.06);
+  border: 1px solid rgba(245,240,235,0.1);
+  color: rgba(245,240,235,0.6);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--trans);
+}
+.addon-modal-close:hover { background: var(--red); color: var(--white); border-color: var(--red); }
+.addon-modal-emoji { font-size: 2.8rem; margin-bottom: 12px; }
+.addon-modal-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+.addon-modal-price {
+  display: inline-block;
+  background: var(--red-g);
+  border: 1px solid rgba(232,0,28,0.3);
+  color: var(--red);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.addon-modal-desc { font-size: 0.88rem; line-height: 1.7; color: rgba(245,240,235,0.7); margin-bottom: 20px; }
+.addon-modal-includes { background: var(--dark3); border-radius: 10px; padding: 16px 18px; margin-bottom: 24px; }
+.addon-modal-includes-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,240,235,0.4); margin-bottom: 10px; }
+.addon-modal-includes ul { display: flex; flex-direction: column; gap: 7px; }
+.addon-modal-includes li { display: flex; gap: 8px; font-size: 0.82rem; color: rgba(245,240,235,0.7); }
+.addon-modal-includes li::before { content: 'v'; color: var(--red); font-weight: 700; flex-shrink: 0; }
+.addon-modal-actions { display: flex; gap: 10px; }
+.addon-modal-actions .btn-primary { flex: 1; padding: 13px; font-size: 0.8rem; }
+.btn-ghost {
+  flex: 1; padding: 13px;
+  background: transparent;
+  border: 1.5px solid rgba(245,240,235,0.15);
+  color: rgba(245,240,235,0.6);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700; font-size: 0.8rem;
+  border-radius: 2px; cursor: pointer;
+  transition: border-color var(--trans), color var(--trans);
+}
+.btn-ghost:hover { border-color: rgba(245,240,235,0.4); color: var(--white); }
 </style>
 </head>
 <body>
@@ -1523,7 +1640,7 @@ footer {
 
 <!-- ── Navbar ── -->
 <nav id="navbar">
-  <div class="nav-logo">Prestige<span>.</span></div>
+  <div class="nav-logo">Mandja<span>grill</span></div>
   <ul class="nav-links">
     <li><a href="#about">Over Ons</a></li>
     <li><a href="#services">Keukens</a></li>
@@ -1717,57 +1834,69 @@ footer {
   </div>
   <div class="services-grid">
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Fine Dining">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Fine Dining">
       <div class="service-overlay">
         <div class="service-num">01</div>
-        <div class="service-name">Fine Dining</div>
-        <div class="service-desc">Meerdere gangen, impeccabele presentatie en topingrediënten voor de meest exclusieve gelegenheden.</div>
-        <div class="service-line"></div>
+        <div class="service-text">
+          <div class="service-name">Fine Dining</div>
+          <div class="service-desc">Meerdere gangen, impeccabele presentatie en topingrediënten voor de meest exclusieve gelegenheden.</div>
+          <div class="service-line"></div>
+        </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=600&q=80" alt="Borrel Catering">
+      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80" alt="Borrel Catering">
       <div class="service-overlay">
         <div class="service-num">02</div>
-        <div class="service-name">Borrel & Bites</div>
-        <div class="service-desc">Ambachtelijke borrelhapjes en verrassende bite-sized creaties voor de perfecte receptie of netwerkborrel.</div>
-        <div class="service-line"></div>
+        <div class="service-text">
+          <div class="service-name">Borrel & Bites</div>
+          <div class="service-desc">Ambachtelijke borrelhapjes en verrassende bite-sized creaties voor de perfecte receptie of netwerkborrel.</div>
+          <div class="service-line"></div>
+        </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="BBQ">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80" alt="BBQ">
       <div class="service-overlay">
         <div class="service-num">03</div>
-        <div class="service-name">Premium BBQ</div>
-        <div class="service-desc">Slow-smoked vlees, live grillstation en seizoensgebonden salades voor een feestelijke sfeer buiten.</div>
-        <div class="service-line"></div>
+        <div class="service-text">
+          <div class="service-name">Premium BBQ</div>
+          <div class="service-desc">Slow-smoked vlees, live grillstation en seizoensgebonden salades voor een feestelijke sfeer buiten.</div>
+          <div class="service-line"></div>
+        </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=600&q=80" alt="Aziatisch">
+      <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=80" alt="Aziatisch">
       <div class="service-overlay">
         <div class="service-num">04</div>
-        <div class="service-name">Aziatische Fusion</div>
-        <div class="service-desc">Authentieke smaken uit Japan, Thailand en Vietnam gecombineerd met moderne culinaire technieken.</div>
-        <div class="service-line"></div>
+        <div class="service-text">
+          <div class="service-name">Aziatische Fusion</div>
+          <div class="service-desc">Authentieke smaken uit Japan, Thailand en Vietnam gecombineerd met moderne culinaire technieken.</div>
+          <div class="service-line"></div>
+        </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Bruidscatering">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80" alt="Bruidscatering">
       <div class="service-overlay">
         <div class="service-num">05</div>
-        <div class="service-name">Bruiloft Catering</div>
-        <div class="service-desc">Van het perfecte diner tot de bruidstaart — wij maken uw mooiste dag ook culinair onvergetelijk.</div>
-        <div class="service-line"></div>
+        <div class="service-text">
+          <div class="service-name">Bruiloft Catering</div>
+          <div class="service-desc">Van het perfecte diner tot de bruidstaart — wij maken uw mooiste dag ook culinair onvergetelijk.</div>
+          <div class="service-line"></div>
+        </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=600&q=80" alt="Zakelijk">
+      <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=800&q=80" alt="Zakelijk">
       <div class="service-overlay">
         <div class="service-num">06</div>
-        <div class="service-name">Zakelijke Events</div>
-        <div class="service-desc">Professionele catering voor congressen, teambuilding, productlanceringen en personeelsfeesten.</div>
-        <div class="service-line"></div>
+        <div class="service-text">
+          <div class="service-name">Zakelijke Events</div>
+          <div class="service-desc">Professionele catering voor congressen, teambuilding, productlanceringen en personeelsfeesten.</div>
+          <div class="service-line"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1909,6 +2038,7 @@ footer {
             <span class="people-label">gasten</span>
           </div>
           <input type="range" min="15" max="500" value="50" id="people-slider" oninput="updatePeople(this)">
+          <div id="discount-hint" style="font-size:0.72rem;font-weight:700;letter-spacing:1px;margin-top:8px;min-height:18px;transition:color 0.3s"></div>
         </div>
       </div>
 
@@ -1927,72 +2057,90 @@ footer {
           <label class="addon-label" for="ao1">
             <div class="addon-check"></div>
             <div class="addon-name">🥂 Champagnebegroeting</div>
+            <div class="addon-short">Verwelkom uw gasten met een glas champagne of prosecco bij aankomst.</div>
             <div class="addon-price">+ €8,50 p.p.</div>
           </label>
+          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao1',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao2" value="12.00" data-name="Amuse Bouche" onchange="calcPrice()">
           <label class="addon-label" for="ao2">
             <div class="addon-check"></div>
             <div class="addon-name">🍽️ Amuse Bouche</div>
+            <div class="addon-short">Drie verfijnde kleine hapjes als culinaire opening, vers bereid door onze chef-kok.</div>
             <div class="addon-price">+ €12,00 p.p.</div>
           </label>
+          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao2',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao3" value="15.00" data-name="Premium Wijnpakket" onchange="calcPrice()">
           <label class="addon-label" for="ao3">
             <div class="addon-check"></div>
             <div class="addon-name">🍷 Premium Wijnpakket</div>
+            <div class="addon-short">Geselecteerde rode, witte en rosé wijnen bij elk gerecht, ongelimiteerd bijschenken.</div>
             <div class="addon-price">+ €15,00 p.p.</div>
           </label>
+          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao3',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao4" value="6.00" data-name="Dessertbuffet" onchange="calcPrice()">
           <label class="addon-label" for="ao4">
             <div class="addon-check"></div>
             <div class="addon-name">🍰 Dessertbuffet</div>
+            <div class="addon-short">Weelderig buffet met mini-gebakjes, vers fruit, sorbets en ambachtelijk ijs.</div>
             <div class="addon-price">+ €6,00 p.p.</div>
           </label>
+          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao4',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao5" value="350.00" data-name="Live Muziek" data-flat="true" onchange="calcPrice()">
           <label class="addon-label" for="ao5">
             <div class="addon-check"></div>
             <div class="addon-name">🎶 Live Muziek</div>
+            <div class="addon-short">Professionele muzikant of duo, tot 3 uur jazz, akoestisch of klassiek repertoire.</div>
             <div class="addon-price">+ €350 vast</div>
           </label>
+          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao5',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao6" value="4.50" data-name="Kindermenu" onchange="calcPrice()">
           <label class="addon-label" for="ao6">
             <div class="addon-check"></div>
             <div class="addon-name">🧒 Kindermenu</div>
+            <div class="addon-short">Kindvriendelijk menu voor gasten tot 12 jaar, inclusief frisdrank of sap.</div>
             <div class="addon-price">+ €4,50 p.p.</div>
           </label>
+          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao6',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao7" value="280.00" data-name="Bloemenarrangement" data-flat="true" onchange="calcPrice()">
           <label class="addon-label" for="ao7">
             <div class="addon-check"></div>
             <div class="addon-name">💐 Bloemenarrangement</div>
+            <div class="addon-short">Professionele bloemstukken voor alle tafels plus een groot centraal arrangement.</div>
             <div class="addon-price">+ €280 vast</div>
           </label>
+          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao7',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao8" value="9.00" data-name="Cocktailbar" onchange="calcPrice()">
           <label class="addon-label" for="ao8">
             <div class="addon-check"></div>
             <div class="addon-name">🍹 Cocktailbar</div>
+            <div class="addon-short">Volledig uitgeruste bar met bartender, 8 cocktails en 4 mocktails, 2,5 uur actief.</div>
             <div class="addon-price">+ €9,00 p.p.</div>
           </label>
+          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao8',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao9" value="18.00" data-name="Chef's Table Experience" onchange="calcPrice()">
           <label class="addon-label" for="ao9">
             <div class="addon-check"></div>
             <div class="addon-name">⭐ Chef's Table Experience</div>
+            <div class="addon-short">Live kookdemonstratie door onze chef-kok aan een exclusief tafel voor max. 12 gasten.</div>
             <div class="addon-price">+ €18,00 p.p.</div>
           </label>
+          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao9',event)">?</button>
         </div>
       </div>
     </div>
@@ -2004,6 +2152,7 @@ footer {
         <div class="price-row"><span>Aantal gasten</span><span id="ps-guests">50 personen</span></div>
         <div class="price-row"><span>Pakketkosten</span><span id="ps-base">—</span></div>
         <div class="price-row"><span>Extra's (incl.)</span><span id="ps-addons">€0,00</span></div>
+        <div class="price-row" id="ps-discount-row" style="display:none;color:#4ade80"><span id="ps-discount-label">Groepskorting</span><span id="ps-discount">—</span></div>
         <div class="price-row total"><span>Geschatte totaal</span><span id="ps-total">—</span></div>
       </div>
       <div class="price-note">* Indicatieve prijs excl. BTW.<br>Exacte offerte na intake gesprek.</div>
@@ -2273,7 +2422,7 @@ footer {
 <footer>
   <div class="footer-grid">
     <div>
-      <div class="footer-brand-name">Prestige<span>.</span></div>
+      <div class="footer-brand-name">Mandja<span>grill</span></div>
       <p class="footer-brand-desc">Al meer dan 15 jaar de specialist in luxe catering voor bijzondere gelegenheden. Van intiem tot grootschalig — altijd onvergetelijk.</p>
       <div class="social-links">
         <a href="#" class="social-link" title="Instagram">📸</a>
@@ -2322,16 +2471,109 @@ footer {
 </footer>
 
 <!-- Toast -->
+<!-- Add-on info modal -->
+<div class="addon-modal-overlay" id="addon-modal" onclick="closeAddonModal()">
+  <div class="addon-modal" onclick="event.stopPropagation()">
+    <button class="addon-modal-close" onclick="closeAddonModal()">×</button>
+    <div class="addon-modal-emoji" id="am-emoji"></div>
+    <h3 class="addon-modal-title" id="am-title"></h3>
+    <div class="addon-modal-price" id="am-price"></div>
+    <p class="addon-modal-desc" id="am-desc"></p>
+    <div class="addon-modal-includes">
+      <div class="addon-modal-includes-title">Inbegrepen</div>
+      <ul id="am-includes"></ul>
+    </div>
+    <div class="addon-modal-actions">
+      <button class="btn-primary" id="am-add-btn" onclick="toggleAddonFromModal()"></button>
+      <button class="btn-ghost" onclick="closeAddonModal()">Sluiten</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast">
   <div class="toast-title" id="toast-title">Verstuurd!</div>
   <div id="toast-msg">We nemen zo snel mogelijk contact met u op.</div>
 </div>
 
 <script>
+/* ── Shared state (must be first to avoid TDZ errors) ── */
+const slider     = document.getElementById('people-slider');
+let selectedPkg  = { name: '', price: 0 };
+
+/* ── Price helpers ── */
+function fmt(n) {
+  if (typeof n !== 'number' || isNaN(n)) return '—';
+  return '€' + n.toFixed(2).replace('.', ',');
+}
+
+function calcPrice() {
+  const guests    = parseInt(slider.value, 10) || 50;
+  let addonPP     = 0, addonFlat = 0;
+  document.querySelectorAll('.addon-item input[type="checkbox"]:checked').forEach(cb => {
+    if (cb.dataset.flat) addonFlat += parseFloat(cb.value) || 0;
+    else                  addonPP  += parseFloat(cb.value) || 0;
+  });
+
+  const addonTotal    = addonPP * guests + addonFlat;
+  const discountPct   = guests > 150 ? 0.20 : guests > 75 ? 0.10 : 0;
+  const discountRow   = document.getElementById('ps-discount-row');
+  const discountEl    = document.getElementById('ps-discount');
+  const discountLabel = document.getElementById('ps-discount-label');
+
+  document.getElementById('ps-guests').textContent = guests + ' personen';
+  document.getElementById('ps-addons').textContent = addonTotal > 0 ? fmt(addonTotal) : '€0,00';
+
+  const hint = document.getElementById('discount-hint');
+  if (guests > 150) {
+    hint.textContent = '🎉 20% groepskorting actief (meer dan 150 personen)';
+    hint.style.color = '#4ade80';
+  } else if (guests > 75) {
+    hint.textContent = '🎉 10% groepskorting actief (meer dan 75 personen)';
+    hint.style.color = '#4ade80';
+  } else if (guests > 60) {
+    hint.textContent = 'Tip: bij meer dan 75 personen krijgt u 10% korting';
+    hint.style.color = 'rgba(245,240,235,0.35)';
+  } else {
+    hint.textContent = '';
+  }
+
+  const pkgEl   = document.getElementById('ps-pkg');
+  const baseEl  = document.getElementById('ps-base');
+  const totalEl = document.getElementById('ps-total');
+
+  if (!selectedPkg || !selectedPkg.name) {
+    pkgEl.textContent      = '— nog niet geselecteerd —';
+    baseEl.textContent     = '—';
+    totalEl.textContent    = '—';
+    discountRow.style.display = 'none';
+    totalEl.style.cssText  = 'color:rgba(245,240,235,0.35);font-size:0.95rem';
+    return;
+  }
+
+  const pkgPrice    = parseFloat(selectedPkg.price) || 0;
+  const subtotal    = pkgPrice * guests + addonTotal;
+  const discount    = subtotal * discountPct;
+  const grandTotal  = subtotal - discount;
+
+  pkgEl.textContent  = selectedPkg.name + ' · ' + fmt(pkgPrice) + ' p.p.';
+  baseEl.textContent = fmt(pkgPrice * guests);
+
+  if (discountPct > 0) {
+    discountLabel.textContent  = 'Groepskorting ' + (discountPct * 100) + '%';
+    discountEl.textContent     = '- ' + fmt(discount);
+    discountRow.style.display  = 'flex';
+  } else {
+    discountRow.style.display  = 'none';
+  }
+
+  totalEl.textContent    = fmt(grandTotal);
+  totalEl.style.cssText  = 'color:#D4001A;font-size:1.4rem;font-weight:800';
+}
+
 /* ── Preloader ── */
 (function() {
   const logo = document.getElementById('pl-logo');
-  const text = 'PRESTIGE.';
+  const text = 'MANDJAGRILL';
   text.split('').forEach((ch, i) => {
     const s = document.createElement('span');
     s.className = 'letter';
@@ -2385,11 +2627,16 @@ let lastY = 0, ticking = false;
 window.addEventListener('scroll', () => {
   if (!ticking) {
     requestAnimationFrame(() => {
-      const y = window.scrollY;
+      const y       = window.scrollY;
+      const mobile  = window.innerWidth <= 768;
       if (y > 80) {
         navbar.classList.add('scrolled');
-        navbar.classList.toggle('hide', y > lastY + 5);
-        navbar.classList.toggle('show', y < lastY - 5);
+        if (mobile) {
+          navbar.classList.toggle('hide', y > lastY + 5);
+          navbar.classList.toggle('show', y < lastY - 5);
+        } else {
+          navbar.classList.remove('hide');
+        }
       } else {
         navbar.classList.remove('scrolled', 'hide', 'show');
       }
@@ -2461,18 +2708,14 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* ── People slider ── */
-const slider = document.getElementById('people-slider');
 function updatePeople(el) {
   document.getElementById('people-display').textContent = el.value;
-  document.getElementById('ps-guests').textContent = el.value;
   const pct = ((el.value - el.min) / (el.max - el.min)) * 100;
   el.style.setProperty('--pct', pct + '%');
   calcPrice();
 }
-updatePeople(slider);
 
 /* ── Package selection ── */
-let selectedPkg = { name: '', price: 0 };
 function selectPackage(btn, name, price) {
   document.querySelectorAll('.package-card').forEach(c => {
     c.classList.remove('selected');
@@ -2516,42 +2759,6 @@ document.getElementById('f-package').addEventListener('change', function() {
   calcPrice();
 });
 
-/* ── Price calc ── */
-function fmt(n) { return '€' + n.toFixed(2).replace('.', ','); }
-function calcPrice() {
-  const guests = parseInt(slider.value, 10) || 50;
-  let addonPP = 0, addonFlat = 0;
-  document.querySelectorAll('.addon-item input[type="checkbox"]:checked').forEach(cb => {
-    if (cb.dataset.flat) addonFlat += parseFloat(cb.value);
-    else addonPP += parseFloat(cb.value);
-  });
-
-  const addonTotal = addonPP * guests + addonFlat;
-  document.getElementById('ps-guests').textContent = guests + ' personen';
-  document.getElementById('ps-addons').textContent = addonTotal > 0 ? fmt(addonTotal) : '€0,00';
-
-  const pkgEl    = document.getElementById('ps-pkg');
-  const baseEl   = document.getElementById('ps-base');
-  const totalEl  = document.getElementById('ps-total');
-
-  if (!selectedPkg || !selectedPkg.name) {
-    pkgEl.textContent   = '— nog niet geselecteerd —';
-    baseEl.textContent  = '—';
-    totalEl.textContent = '—';
-    totalEl.style.cssText = 'color:rgba(245,240,235,0.35);font-size:0.9rem';
-    return;
-  }
-
-  const pkgPrice  = parseFloat(selectedPkg.price);
-  const baseTotal = pkgPrice * guests;
-  const grandTotal = baseTotal + addonTotal;
-
-  pkgEl.textContent   = `${selectedPkg.name} · ${fmt(pkgPrice)} p.p.`;
-  baseEl.textContent  = fmt(baseTotal);
-  totalEl.textContent = fmt(grandTotal);
-  totalEl.style.cssText = 'color:#C41E3A;font-size:1.4rem;font-weight:800';
-}
-
 /* ── Process steps ── */
 function setStep(el) {
   document.querySelectorAll('.process-step').forEach(s => s.classList.remove('active'));
@@ -2577,7 +2784,11 @@ function submitBooking() {
   document.querySelectorAll('#booking input:not([type=range]):not([type=checkbox]), #booking select, #booking textarea')
     .forEach(el => el.value = '');
   document.querySelectorAll('.addon-item input[type=checkbox]').forEach(cb => cb.checked = false);
-  document.querySelectorAll('.package-card').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.package-card').forEach(c => {
+    c.classList.remove('selected');
+    const b = c.querySelector('.pkg-select');
+    if (b) { b.textContent = 'Selecteer Pakket'; b.style.background = ''; b.style.color = ''; }
+  });
   selectedPkg = { name: '', price: 0 };
   calcPrice();
 }
@@ -2612,6 +2823,101 @@ document.querySelectorAll('.package-card').forEach(card => {
   card.setAttribute('tabindex', '0');
   card.addEventListener('keydown', e => { if (e.key === 'Enter') card.querySelector('.pkg-select').click(); });
 });
+
+/* ── Add-on info modal ── */
+const addonData = {
+  ao1: {
+    emoji: '🥂', name: 'Champagnebegroeting', price: '+ €8,50 p.p.',
+    desc: 'Een warme en stijlvolle ontvangst voor uw gasten. Bij aankomst wordt iedereen verwelkomd met een glas fijne champagne of prosecco, gepresenteerd op een decoratief dienblad door onze gastheer of gastvrouw.',
+    includes: ['Glas champagne of prosecco per gast', 'Professionele bediening bij ontvangst', 'Chique presentatie met dienblad', 'Optioneel alcoholvrije variant beschikbaar']
+  },
+  ao2: {
+    emoji: '🍽️', name: 'Amuse Bouche', price: '+ €12,00 p.p.',
+    desc: 'Een culinaire opening van het hoogste niveau. Onze chef-kok bereidt een reeks van 3 verfijnde kleine hapjes die de smaakpapillen prikkelen en het diner perfect inleiden. Volledig seizoensgebonden en vers bereid op locatie.',
+    includes: ['3 ambachtelijke amuses per persoon', 'Bereid door onze chef-kok op locatie', 'Seizoensgebonden verse ingrediënten', 'Gepresenteerd op stijlvol servies', 'Vegetarische optie inbegrepen']
+  },
+  ao3: {
+    emoji: '🍷', name: 'Premium Wijnpakket', price: '+ €15,00 p.p.',
+    desc: 'Een zorgvuldig samengestelde wijnselectie die perfect aansluit bij elk gerecht. Onze sommelier selecteert rode, witte en rosé wijnen van Europese topproducenten en verzorgt een passende begeleiding bij de verschillende gangen.',
+    includes: ['Rode, witte en rosé wijn bij de maaltijd', 'Selectie door onze eigen sommelier', 'Ongelimiteerd bijschenken tijdens het diner', 'Toelichting per wijn op verzoek', 'Topwijnen uit Europa (Italië, Frankrijk, Spanje)']
+  },
+  ao4: {
+    emoji: '🍰', name: 'Dessertbuffet', price: '+ €6,00 p.p.',
+    desc: 'Sluit uw evenement af met een weelderig dessertbuffet dat indruk maakt. Van mini-gebakjes tot verse fruittarteletjes en ambachtelijk ijs — er is voor elke zoetekauw iets lekkers.',
+    includes: ['Minimaal 6 verschillende desserts', 'Mini-gebakjes en tarteletjes', 'Vers fruit en sorbets', 'Ambachtelijk ijs (2 smaken)', 'Chocoladefontein op aanvraag (+toeslag)']
+  },
+  ao5: {
+    emoji: '🎶', name: 'Live Muziek', price: '+ €350 vast',
+    desc: 'Verhoog de sfeer van uw evenement met live muziek. Een professionele muzikant of duo verzorgt sfeervolle achtergrondmuziek die perfect past bij uw gelegenheid. U kiest zelf het genre in overleg.',
+    includes: ['1 muzikant of duo, tot 3 uur', 'Keuze: jazz, akoestisch of klassiek', 'Professionele geluidsapparatuur inbegrepen', 'Korte pauzes na elk uur', 'Aanvraag eigen nummers mogelijk']
+  },
+  ao6: {
+    emoji: '🧒', name: 'Kindermenu', price: '+ €4,50 p.p.',
+    desc: 'Speciaal samengesteld voor de kleinste gasten tot 12 jaar. Voedzame en kindvriendelijke gerechten die kinderen écht lekker vinden, zodat ook zij volop kunnen genieten van uw evenement.',
+    includes: ['Hoofdgerecht naar keuze (pasta of vlees)', 'Groenten en aardappelen of friet', 'Frisdrank of sap inbegrepen', 'Kleurrijk en aantrekkelijk gepresenteerd', 'Geschikt voor allergieën op aanvraag']
+  },
+  ao7: {
+    emoji: '💐', name: 'Bloemenarrangement', price: '+ €280 vast',
+    desc: 'Professionele bloemstukken die de zaal omtoveren tot een feestelijke ruimte. Onze bloemist verzorgt seizoensgebonden arrangements in uw gewenste kleurstelling, passend bij het thema van uw evenement.',
+    includes: ['Tafeldecoratie voor alle tafels', 'Groot centraal arrangement als blikvanger', 'Seizoensgebonden verse bloemen', 'Kleur en stijl in overleg', 'Op- en afbouw door ons team']
+  },
+  ao8: {
+    emoji: '🍹', name: 'Cocktailbar', price: '+ €9,00 p.p.',
+    desc: 'Een professionele cocktailbar compleet met bartender brengt de beleving naar een hoger niveau. Gasten kunnen kiezen uit een curated menu van klassieke cocktails én verfijnde mocktails — voor elk wat wils.',
+    includes: ['8 klassieke cocktails & 4 mocktails', 'Professionele bartender(s)', 'Alle garnering en glaswerk inbegrepen', 'Bar actief gedurende 2,5 uur', 'Maatwerk cocktailmenu op aanvraag']
+  },
+  ao9: {
+    emoji: '⭐', name: "Chef's Table Experience", price: '+ €18,00 p.p.',
+    desc: "Een unieke en interactieve beleving waarbij een selecte groep gasten plaatsneemt aan het chef's table. Onze chef-kok bereidt live de gerechten en legt toe welke technieken en ingrediënten worden gebruikt. Culinair theater op zijn best.",
+    includes: ['Live bereiding door de chef-kok', 'Toelichting per gerecht en techniek', 'Exclusieve plek aan het chef\'s table', 'Tot 12 personen per tafel', 'Inclusief aperitief en amuse']
+  }
+};
+
+let currentAddonId = null;
+
+function showAddonInfo(id, event) {
+  event.preventDefault();
+  event.stopPropagation();
+  currentAddonId = id;
+  const d = addonData[id];
+  document.getElementById('am-emoji').textContent   = d.emoji;
+  document.getElementById('am-title').textContent   = d.name;
+  document.getElementById('am-price').textContent   = d.price;
+  document.getElementById('am-desc').textContent    = d.desc;
+  const ul = document.getElementById('am-includes');
+  ul.innerHTML = d.includes.map(i => `<li>${i}</li>`).join('');
+  updateModalBtn();
+  document.getElementById('addon-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateModalBtn() {
+  if (!currentAddonId) return;
+  const cb  = document.getElementById(currentAddonId);
+  const btn = document.getElementById('am-add-btn');
+  btn.textContent = cb.checked ? '✓ Verwijder extra' : '+ Voeg toe aan boeking';
+  btn.style.background = cb.checked ? 'rgba(245,240,235,0.1)' : '';
+}
+
+function toggleAddonFromModal() {
+  if (!currentAddonId) return;
+  const cb = document.getElementById(currentAddonId);
+  cb.checked = !cb.checked;
+  calcPrice();
+  updateModalBtn();
+}
+
+function closeAddonModal() {
+  document.getElementById('addon-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  currentAddonId = null;
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAddonModal(); });
+
+/* ── Init (must run last, after all functions are defined) ── */
+updatePeople(slider);
+calcPrice();
 </script>
 </body>
 </html>
