@@ -548,67 +548,92 @@ section { padding: 100px 80px; }
 }
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
 }
 .service-card {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  height: 160px;
+  aspect-ratio: 4/5;
   background: var(--dark3);
 }
 .service-card img {
-  position: absolute;
-  inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.7s ease, filter 0.5s ease;
-  filter: brightness(0.45);
+  transition: transform 0.7s ease;
+  filter: brightness(0.55);
 }
-.service-card:hover img { transform: scale(1.06); filter: brightness(0.25); }
+.service-card:hover img { transform: scale(1.08); filter: brightness(0.35); }
 
 .service-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(8,8,8,0.88) 40%, transparent 100%);
+  background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, transparent 60%);
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-  padding: 0 32px;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
   transition: var(--trans);
 }
 .service-num {
-  font-size: 2rem;
-  font-weight: 800;
-  color: rgba(245,240,235,0.06);
-  letter-spacing: 0;
-  flex-shrink: 0;
-  line-height: 1;
-  transition: color 0.4s ease;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--red);
+  margin-bottom: 8px;
 }
-.service-card:hover .service-num { color: rgba(212,0,26,0.25); }
-.service-text { display: flex; flex-direction: column; gap: 4px; }
+.service-text { display: contents; }
 .service-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  line-height: 1.2;
+  margin-bottom: 10px;
 }
 .service-desc {
-  font-size: 0.78rem;
-  color: rgba(245,240,235,0.55);
-  line-height: 1.5;
-  max-width: 340px;
+  font-size: 0.8rem;
+  color: rgba(245,240,235,0.65);
+  line-height: 1.6;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
 }
+.service-card:hover .service-desc { max-height: 80px; }
 .service-line {
-  width: 0; height: 2px;
+  width: 32px; height: 2px;
   background: var(--red);
-  margin-top: 6px;
-  transition: width 0.4s ease;
+  margin: 12px 0 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
-.service-card:hover .service-line { width: 32px; }
+.service-card:hover .service-line { transform: scaleX(1); }
+
+/* ─── Mobile snap-carousel shared ───────────────────────────── */
+.snap-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 12px;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.snap-carousel::-webkit-scrollbar { display: none; }
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+.carousel-dot {
+  width: 20px; height: 2px;
+  border-radius: 2px;
+  background: rgba(245,240,235,0.2);
+  transition: background 0.3s ease, width 0.3s ease;
+  cursor: pointer;
+}
+.carousel-dot.active { background: var(--red); width: 36px; }
 
 /* ─── Booking / Pakketten ────────────────────────────────────── */
 #booking {
@@ -1472,8 +1497,6 @@ footer {
   #navbar { padding: 0 40px; }
   #about { grid-template-columns: 1fr; gap: 48px; }
   .about-images { height: 400px; }
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .service-card { height: 140px; }
   .packages-grid { grid-template-columns: 1fr; }
   .addons-grid { grid-template-columns: repeat(2, 1fr); }
   #contact { grid-template-columns: 1fr; gap: 48px; }
@@ -1492,13 +1515,43 @@ footer {
   .hero-scroll { display: none; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 28px 24px; gap: 16px; }
   .stat-item { border-right: none; }
-  .services-grid { grid-template-columns: 1fr; }
-  .service-card { height: 110px; }
-  .service-num { font-size: 1.4rem; }
-  .service-overlay { padding: 0 20px; gap: 14px; }
-  .service-name { font-size: 1rem; }
-  .service-desc { font-size: 0.72rem; }
-  .addons-grid { grid-template-columns: 1fr; }
+  /* services → snap carousel on mobile */
+  #services .services-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    scrollbar-width: none;
+    padding: 0 24px 4px;
+    margin: 0 -24px;
+  }
+  #services .services-grid::-webkit-scrollbar { display: none; }
+  #services .services-grid .service-card {
+    flex: 0 0 72vw;
+    scroll-snap-align: start;
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  #services .service-desc { max-height: 60px; }
+
+  /* addons → snap carousel on mobile */
+  .addons-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    scrollbar-width: none;
+    padding: 0 24px 4px;
+    margin: 0 -24px;
+  }
+  .addons-grid::-webkit-scrollbar { display: none; }
+  .addons-grid .addon-item {
+    flex: 0 0 72vw;
+    scroll-snap-align: start;
+  }
   .form-grid { grid-template-columns: 1fr; }
   .booking-form-wrapper { padding: 32px 24px; }
   footer { padding: 48px 24px 24px; }
@@ -1832,7 +1885,7 @@ footer {
     <h2 class="section-title fade-up">Zes culinaire <em>werelden</em></h2>
     <p class="section-sub fade-up">Van verfijnd Frans tot authentiek Aziatisch — onze chefs beheersen elke keuken tot in de perfectie.</p>
   </div>
-  <div class="services-grid">
+  <div class="services-grid" id="services-carousel">
     <div class="service-card fade-up">
       <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Fine Dining">
       <div class="service-overlay">
@@ -1899,6 +1952,14 @@ footer {
         </div>
       </div>
     </div>
+  </div>
+  <div class="carousel-dots" id="services-dots" style="display:none">
+    <div class="carousel-dot active"></div>
+    <div class="carousel-dot"></div>
+    <div class="carousel-dot"></div>
+    <div class="carousel-dot"></div>
+    <div class="carousel-dot"></div>
+    <div class="carousel-dot"></div>
   </div>
 </section>
 
@@ -2142,6 +2203,17 @@ footer {
           </label>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao9',event)">?</button>
         </div>
+      </div>
+      <div class="carousel-dots" id="addons-dots" style="display:none">
+        <div class="carousel-dot active"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
       </div>
     </div>
 
@@ -2915,9 +2987,33 @@ function closeAddonModal() {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAddonModal(); });
 
+/* ── Mobile snap-carousel dot indicators ── */
+function initCarousel(carouselId, dotsId) {
+  const carousel = document.getElementById(carouselId);
+  const dotsWrap = document.getElementById(dotsId);
+  if (!carousel || !dotsWrap) return;
+
+  function updateDots() {
+    if (window.innerWidth > 768) { dotsWrap.style.display = 'none'; return; }
+    dotsWrap.style.display = 'flex';
+    const items = carousel.children;
+    if (!items.length) return;
+    const itemW  = items[0].getBoundingClientRect().width + 10;
+    const idx    = Math.round(carousel.scrollLeft / itemW);
+    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === idx));
+  }
+
+  carousel.addEventListener('scroll', updateDots, { passive: true });
+  window.addEventListener('resize', updateDots);
+  updateDots();
+}
+
 /* ── Init (must run last, after all functions are defined) ── */
 updatePeople(slider);
 calcPrice();
+initCarousel('services-carousel', 'services-dots');
+initCarousel('addons-grid', 'addons-dots');
 </script>
 </body>
 </html>
