@@ -2103,12 +2103,12 @@ footer {
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao7',event)">?</button>
         </div>
         <div class="addon-item">
-          <input type="checkbox" id="ao8" value="12.50" data-name="Kids Menu" onchange="calcPrice()">
+          <input type="checkbox" id="ao8" value="0" data-name="Kids Menu" onchange="calcPrice()">
           <label class="addon-label" for="ao8">
             <div class="addon-check"></div>
             <div class="addon-name">🧒 Kids Menu</div>
-            <div class="addon-short">Gegrilde kip, maïs, friet & frisdrank voor kinderen tot 12 jaar. Inclusief €2,50 korting p.p. op uw basispakket.</div>
-            <div class="addon-price">€10 – €15 p.kind</div>
+            <div class="addon-short">Gegrilde kip, maïs, friet & frisdrank voor kinderen — en levert u korting op uw pakket.</div>
+            <div class="addon-price" style="color:#4ade80">− €10 / €12,50 / €15 p.p.</div>
           </label>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao8',event)">?</button>
         </div>
@@ -2501,9 +2501,23 @@ function calcPrice() {
   const guests    = parseInt(slider.value, 10) || 50;
   let addonPP     = 0, addonFlat = 0;
   document.querySelectorAll('.addon-item input[type="checkbox"]:checked').forEach(cb => {
+    if (cb.id === 'ao8') return; // kids menu handled separately below
     if (cb.dataset.flat) addonFlat += parseFloat(cb.value) || 0;
     else                  addonPP  += parseFloat(cb.value) || 0;
   });
+
+  // Kids Menu: tiered discount per package
+  const kidsChecked = document.getElementById('ao8')?.checked;
+  const kidsDiscount = selectedPkg.name === 'BBQ Basis' ? 10 : selectedPkg.name === 'BBQ Compleet' ? 12.50 : 15;
+  if (kidsChecked) addonPP -= kidsDiscount;
+
+  // Update Kids Menu card price label to reflect current discount
+  const kidsLabel = document.querySelector('#ao8 ~ .addon-label .addon-price') ||
+                    document.querySelector('label[for="ao8"] .addon-price');
+  if (kidsLabel) {
+    const kdAmt = selectedPkg.name ? `− €${kidsDiscount.toFixed(2).replace('.',',')} korting p.p.` : '− €10 / €12,50 / €15 p.p.';
+    kidsLabel.textContent = kdAmt;
+  }
 
   const addonTotal    = addonPP * guests + addonFlat;
   const discountPct   = guests > 150 ? 0.20 : guests > 75 ? 0.10 : 0;
@@ -2512,7 +2526,9 @@ function calcPrice() {
   const discountLabel = document.getElementById('ps-discount-label');
 
   document.getElementById('ps-guests').textContent = guests + ' personen';
-  document.getElementById('ps-addons').textContent = addonTotal > 0 ? fmt(addonTotal) : '€0,00';
+  const addonsEl = document.getElementById('ps-addons');
+  addonsEl.textContent = addonTotal === 0 ? '€0,00' : (addonTotal < 0 ? '− ' + fmt(-addonTotal) : fmt(addonTotal));
+  addonsEl.style.color = addonTotal < 0 ? '#4ade80' : '';
 
   const hint = document.getElementById('discount-hint');
   if (guests > 150) {
@@ -2848,9 +2864,9 @@ const addonData = {
     includes: ['1 extra professioneel crewlid', 'Inzetbaar bij grillstation of bediening', 'Volledig getraind in Mandja Grill service', 'Actief voor volledige serviceduur', 'Inclusief uniform & materiaal']
   },
   ao8: {
-    emoji: '🧒', name: 'Kids Menu', price: '€10 – €15 p.kind',
-    desc: 'Kinderen eten ook graag van de BBQ. Gegrilde kipstukjes, maïskolf, friet en frisdrank — kindvriendelijk, vers bereid en altijd een succes. Bonus: neem het Kids Menu mee, en u krijgt €2,50 korting per volwassene op uw basispakket.',
-    includes: ['Gegrilde kip of hamburger', 'Maïskolf & friet', 'Frisdrank of sap inbegrepen', 'Allergie-opties op aanvraag', '🎁 €2,50 korting p.p. op basispakket bij afname']
+    emoji: '🧒', name: 'Kids Menu', price: '− €10 / €12,50 / €15 p.p.',
+    desc: 'Kinderen welkom — en dat scheelt u ook nog geld. Voeg het Kids Menu toe en ontvang automatisch korting per persoon op uw pakket: €10 bij BBQ Basis, €12,50 bij BBQ Compleet, €15 bij BBQ Premium. Kinderen krijgen gegrilde kip, maïskolf, friet en frisdrank.',
+    includes: ['Gegrilde kip of hamburger', 'Maïskolf & friet', 'Frisdrank of sap inbegrepen', 'Allergie-opties op aanvraag', '🎁 BBQ Basis: −€10 p.p. | Compleet: −€12,50 | Premium: −€15']
   }
 };
 let currentAddonId = null;
