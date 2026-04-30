@@ -329,11 +329,10 @@ ul { list-style: none; }
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 0.82rem;
-  letter-spacing: 1.5px;
-
+  letter-spacing: 0.5px;
   border: none;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 50px;
   transition: background var(--trans), transform var(--trans), box-shadow var(--trans);
 }
 .btn-primary:hover {
@@ -349,11 +348,10 @@ ul { list-style: none; }
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 0.82rem;
-  letter-spacing: 1.5px;
-
+  letter-spacing: 0.5px;
   border: 1.5px solid rgba(245,240,235,0.4);
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 50px;
   transition: border-color var(--trans), color var(--trans), transform var(--trans);
 }
 .btn-outline:hover {
@@ -656,7 +654,6 @@ section { padding: 100px 80px; }
 }
 .package-card.featured {
   border-color: rgba(245,240,235,0.08);
-  box-shadow: 0 16px 48px rgba(212,0,26,0.3), 0 0 40px rgba(212,0,26,0.18);
   background: linear-gradient(160deg, var(--dark3) 0%, var(--dark2) 100%);
 }
 /* When another package is selected, remove glow from featured */
@@ -744,9 +741,8 @@ section { padding: 100px 80px; }
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 0.78rem;
-  letter-spacing: 1.5px;
-
-  border-radius: 2px;
+  letter-spacing: 0.5px;
+  border-radius: 50px;
   cursor: pointer;
   transition: background var(--trans), color var(--trans);
 }
@@ -1505,7 +1501,9 @@ footer {
   background: var(--dark3);
   padding: 32px 28px;
   border-radius: 2px;
+  text-align: center;
 }
+.meat-card ul { text-align: left; display: inline-flex; flex-direction: column; gap: 8px; }
 .meat-card-name {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
@@ -1527,7 +1525,6 @@ footer {
   color: rgba(245,240,235,0.3);
   margin-bottom: 10px;
 }
-.meat-card ul { display: flex; flex-direction: column; gap: 8px; }
 .meat-card ul li { font-size: 0.83rem; color: rgba(245,240,235,0.65); display: flex; gap: 8px; }
 .meat-card ul li::before { content: '—'; color: var(--red); flex-shrink: 0; }
 .meats-note {
@@ -1536,6 +1533,10 @@ footer {
   color: rgba(245,240,235,0.35);
   text-align: center;
   letter-spacing: 0.5px;
+}
+.bezorg-standalone {
+  max-width: 560px;
+  margin: 0 auto;
 }
 .bezorg-divider {
   display: flex;
@@ -2712,179 +2713,19 @@ footer {
 
     <div class="form-submit">
       <button class="btn-primary" onclick="submitBooking()">Offerte Aanvragen</button>
-      <div class="bezorg-divider"><span>of</span></div>
-      <a href="mailto:contact@mandjagrill.nl?subject=Ik%20wil%20vlees%20laten%20bezorgen&body=Hi%20Mandja%2C%0A%0AIk%20zou%20graag%20vlees%20willen%20laten%20bezorgen." class="bezorg-link">
-        <span class="bezorg-link-icon">🚚</span>
-        <span class="bezorg-link-text">
-          <span class="bezorg-link-title">Ik laat liever bezorgen</span>
-          <span class="bezorg-link-sub">Stuur ons een bericht, wij regelen de rest</span>
-        </span>
-        <span class="bezorg-link-arrow">→</span>
-      </a>
       <p class="form-privacy">Door te verzenden gaat u akkoord met onze privacyverklaring. Wij delen uw gegevens nooit met derden.</p>
     </div>
   </div>
-</section>
 
-<!-- ── Testimonials ── -->
-<section id="testimonials">
-  <div class="testimonials-header">
-    <p class="section-tag fade-up">Wat Klanten Zeggen</p>
-    <h2 class="section-title fade-up">4,8 sterren op<br><em>500+ evenementen</em></h2>
-    <p class="section-sub fade-up">Van buurtbarbecues tot bedrijfsevenementen met 500 gasten — onze klanten raden ons aan. Altijd.</p>
-  </div>
-  <div class="testimonials-track-wrap">
-    <div class="testimonials-track" id="testimonials-track">
-
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"De BBQ op onze bruiloft was het gespreksonderwerp van de avond. Mandja Grill regelde alles tot in de puntjes — het vlees was perfect en het team werkte onzichtbaar."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">SL</div>
-          <div><div class="author-name">Sophie & Lars</div><div class="author-event">Bruiloft BBQ · 180 gasten</div></div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"320 mensen, buiten, bij wisselvallig weer — Mandja Grill stond er klaar en leverde topkwaliteit. Geen gedoe, geen verrassingen. We boeken volgend jaar direct weer."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">MR</div>
-          <div><div class="author-name">Mark de Ridder</div><div class="author-event">Personeelsfeest · 320 gasten</div></div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Vanaf het eerste telefoongesprek tot de laatste hap: perfect. Ze hadden ook veggie-opties van topkwaliteit. Onze gasten vroegen allemaal naar het contactgegevens."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">AK</div>
-          <div><div class="author-name">Anna Koetsier</div><div class="author-event">Jubileumfeest BBQ · 75 gasten</div></div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Het BBQ Premium pakket was een schot in de roos. Drie grillstations, live carving, cocktailbar — onze klanten waren onder de indruk. Dit boek ik nooit meer ergens anders."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">PV</div>
-          <div><div class="author-name">Peter van Houten</div><div class="author-event">Klantevent · 95 gasten</div></div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"De Asian BBQ Fusion voor onze productlancering was visueel én qua smaak top. Gasten bleven na afloop hangen, puur voor het eten. Chapeau aan het hele Mandja team."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">BH</div>
-          <div><div class="author-name">Bianca Hendriks</div><div class="author-event">Productlancering · 150 gasten</div></div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Mijn 50e verjaardag was onvergetelijk. 30 gasten, een live grillstation in de tuin en vlees dat smolt op je tong. Het mooiste cadeau dat ik mezelf ooit gaf."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">CW</div>
-          <div><div class="author-name">Caroline Winters</div><div class="author-event">Verjaardags BBQ · 30 gasten</div></div>
-        </div>
-      </div>
-
-      <!-- duplicates for infinite scroll -->
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"De BBQ op onze bruiloft was het gespreksonderwerp van de avond. Mandja Grill regelde alles tot in de puntjes — het vlees was perfect en het team werkte onzichtbaar."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">SL</div>
-          <div><div class="author-name">Sophie & Lars</div><div class="author-event">Bruiloft BBQ · 180 gasten</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"320 mensen, buiten, bij wisselvallig weer — Mandja Grill stond er klaar en leverde topkwaliteit. Geen gedoe, geen verrassingen. We boeken volgend jaar direct weer."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">MR</div>
-          <div><div class="author-name">Mark de Ridder</div><div class="author-event">Personeelsfeest · 320 gasten</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Vanaf het eerste telefoongesprek tot de laatste hap: perfect. Ze hadden ook veggie-opties van topkwaliteit. Onze gasten vroegen allemaal naar het contactgegevens."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">AK</div>
-          <div><div class="author-name">Anna Koetsier</div><div class="author-event">Jubileumfeest BBQ · 75 gasten</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Het BBQ Premium pakket was een schot in de roos. Drie grillstations, live carving, cocktailbar — onze klanten waren onder de indruk. Dit boek ik nooit meer ergens anders."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">PV</div>
-          <div><div class="author-name">Peter van Houten</div><div class="author-event">Klantevent · 95 gasten</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"De Asian BBQ Fusion voor onze productlancering was visueel én qua smaak top. Gasten bleven na afloop hangen, puur voor het eten. Chapeau aan het hele Mandja team."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">BH</div>
-          <div><div class="author-name">Bianca Hendriks</div><div class="author-event">Productlancering · 150 gasten</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Mijn 50e verjaardag was onvergetelijk. 30 gasten, een live grillstation in de tuin en vlees dat smolt op je tong. Het mooiste cadeau dat ik mezelf ooit gaf."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">CW</div>
-          <div><div class="author-name">Caroline Winters</div><div class="author-event">Verjaardags BBQ · 30 gasten</div></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── Gallery Strip ── -->
-<div id="gallery">
-  <div class="gallery-strip">
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
-  </div>
-</div>
-
-<!-- ── FAQ ── -->
-<section id="faq">
-  <p class="section-tag fade-up">Veelgestelde Vragen</p>
-  <h2 class="section-title fade-up">Alles wat u wilt <em>weten</em></h2>
-  <div class="faq-list">
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Hoeveel vlees krijgt elke gast?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Onze BBQ is volledig onbeperkt gedurende de service. Gasten kunnen blijven eten zolang de service loopt.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Vanaf hoeveel personen kunnen we boeken?<span class="faq-icon">+</span></button>
-      <div class="faq-a">BBQ Basis vanaf 25 personen, BBQ Compleet vanaf 20 personen en BBQ Premium vanaf 20 personen.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Hoe ver van tevoren moet ik boeken?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Wij adviseren minimaal 4 weken van tevoren te boeken. Voor evenementen boven de 100 personen adviseren wij 6 tot 8 weken. Bij vroegboeking (8+ weken vooraf) ontvangt u automatisch €3 tot €5 korting per persoon.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Regelen jullie ook de op- en afbouw?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Ja, op- en afbouw zijn altijd inbegrepen in de prijs. U hoeft hier niets voor te doen.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Wat als het regent?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Wij cateren bij alle weersomstandigheden. Een feesttent is optioneel bij te boeken. Wij adviseren dit bij evenementen buiten.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Kunnen jullie ook een factuur sturen voor zakelijke boekingen?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Ja, wij werken volledig op factuur voor zakelijke klanten. BTW-nummer en bedrijfsgegevens kunnen worden doorgegeven bij de boeking.</div>
-    </div>
+  <div class="bezorg-standalone fade-up">
+    <div class="bezorg-divider"><span>of</span></div>
+    <a href="mailto:contact@mandjagrill.nl?subject=Ik%20wil%20vlees%20laten%20bezorgen&body=Hi%20Mandja%2C%0A%0AIk%20zou%20graag%20vlees%20willen%20laten%20bezorgen." class="bezorg-link">
+      <span class="bezorg-link-text">
+        <span class="bezorg-link-title">Ik laat liever bezorgen</span>
+        <span class="bezorg-link-sub">Stuur ons een bericht, wij regelen de rest</span>
+      </span>
+      <span class="bezorg-link-arrow">→</span>
+    </a>
   </div>
 </section>
 
@@ -2954,6 +2795,160 @@ footer {
     <button class="btn-primary" onclick="submitContact()" style="width:100%">Verzenden</button>
   </div>
 </section>
+
+<!-- ── FAQ ── -->
+<section id="faq">
+  <p class="section-tag fade-up">Veelgestelde Vragen</p>
+  <h2 class="section-title fade-up">Alles wat u wilt <em>weten</em></h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Hoeveel vlees krijgt elke gast?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Onze BBQ is volledig onbeperkt gedurende de service. Gasten kunnen blijven eten zolang de service loopt.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Vanaf hoeveel personen kunnen we boeken?<span class="faq-icon">+</span></button>
+      <div class="faq-a">BBQ Basis vanaf 25 personen, BBQ Compleet vanaf 20 personen en BBQ Premium vanaf 20 personen.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Hoe ver van tevoren moet ik boeken?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Wij adviseren minimaal 4 weken van tevoren te boeken. Voor evenementen boven de 100 personen adviseren wij 6 tot 8 weken. Bij vroegboeking (8+ weken vooraf) ontvangt u automatisch €3 tot €5 korting per persoon.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Regelen jullie ook de op- en afbouw?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Ja, op- en afbouw zijn altijd inbegrepen in de prijs. U hoeft hier niets voor te doen.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Wat als het regent?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Wij cateren bij alle weersomstandigheden. Een feesttent is optioneel bij te boeken. Wij adviseren dit bij evenementen buiten.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Kunnen jullie ook een factuur sturen voor zakelijke boekingen?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Ja, wij werken volledig op factuur voor zakelijke klanten. BTW-nummer en bedrijfsgegevens kunnen worden doorgegeven bij de boeking.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ── -->
+<section id="testimonials">
+  <div class="testimonials-header">
+    <p class="section-tag fade-up">Wat Klanten Zeggen</p>
+    <h2 class="section-title fade-up">4,8 sterren op<br><em>500+ evenementen</em></h2>
+    <p class="section-sub fade-up">Van buurtbarbecues tot bedrijfsevenementen met 500 gasten — onze klanten raden ons aan. Altijd.</p>
+  </div>
+  <div class="testimonials-track-wrap">
+    <div class="testimonials-track" id="testimonials-track">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"De BBQ op onze bruiloft was het gespreksonderwerp van de avond. Mandja Grill regelde alles tot in de puntjes — het vlees was perfect en het team werkte onzichtbaar."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SL</div>
+          <div><div class="author-name">Sophie & Lars</div><div class="author-event">Bruiloft BBQ · 180 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"320 mensen, buiten, bij wisselvallig weer — Mandja Grill stond er klaar en leverde topkwaliteit. Geen gedoe, geen verrassingen. We boeken volgend jaar direct weer."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MR</div>
+          <div><div class="author-name">Mark de Ridder</div><div class="author-event">Personeelsfeest · 320 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Vanaf het eerste telefoongesprek tot de laatste hap: perfect. Ze hadden ook veggie-opties van topkwaliteit. Onze gasten vroegen allemaal naar het contactgegevens."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AK</div>
+          <div><div class="author-name">Anna Koetsier</div><div class="author-event">Jubileumfeest BBQ · 75 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Het BBQ Premium pakket was een schot in de roos. Drie grillstations, live carving, cocktailbar — onze klanten waren onder de indruk. Dit boek ik nooit meer ergens anders."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">PV</div>
+          <div><div class="author-name">Peter van Houten</div><div class="author-event">Klantevent · 95 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"De Asian BBQ Fusion voor onze productlancering was visueel én qua smaak top. Gasten bleven na afloop hangen, puur voor het eten. Chapeau aan het hele Mandja team."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">BH</div>
+          <div><div class="author-name">Bianca Hendriks</div><div class="author-event">Productlancering · 150 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Mijn 50e verjaardag was onvergetelijk. 30 gasten, een live grillstation in de tuin en vlees dat smolt op je tong. Het mooiste cadeau dat ik mezelf ooit gaf."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">CW</div>
+          <div><div class="author-name">Caroline Winters</div><div class="author-event">Verjaardags BBQ · 30 gasten</div></div>
+        </div>
+      </div>
+      <!-- duplicates for infinite scroll -->
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"De BBQ op onze bruiloft was het gespreksonderwerp van de avond. Mandja Grill regelde alles tot in de puntjes — het vlees was perfect en het team werkte onzichtbaar."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SL</div>
+          <div><div class="author-name">Sophie & Lars</div><div class="author-event">Bruiloft BBQ · 180 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"320 mensen, buiten, bij wisselvallig weer — Mandja Grill stond er klaar en leverde topkwaliteit. Geen gedoe, geen verrassingen. We boeken volgend jaar direct weer."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MR</div>
+          <div><div class="author-name">Mark de Ridder</div><div class="author-event">Personeelsfeest · 320 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Vanaf het eerste telefoongesprek tot de laatste hap: perfect. Ze hadden ook veggie-opties van topkwaliteit. Onze gasten vroegen allemaal naar het contactgegevens."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AK</div>
+          <div><div class="author-name">Anna Koetsier</div><div class="author-event">Jubileumfeest BBQ · 75 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Het BBQ Premium pakket was een schot in de roos. Drie grillstations, live carving, cocktailbar — onze klanten waren onder de indruk. Dit boek ik nooit meer ergens anders."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">PV</div>
+          <div><div class="author-name">Peter van Houten</div><div class="author-event">Klantevent · 95 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"De Asian BBQ Fusion voor onze productlancering was visueel én qua smaak top. Gasten bleven na afloop hangen, puur voor het eten. Chapeau aan het hele Mandja team."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">BH</div>
+          <div><div class="author-name">Bianca Hendriks</div><div class="author-event">Productlancering · 150 gasten</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Mijn 50e verjaardag was onvergetelijk. 30 gasten, een live grillstation in de tuin en vlees dat smolt op je tong. Het mooiste cadeau dat ik mezelf ooit gaf."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">CW</div>
+          <div><div class="author-name">Caroline Winters</div><div class="author-event">Verjaardags BBQ · 30 gasten</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Gallery Strip ── -->
+<div id="gallery">
+  <div class="gallery-strip">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
+  </div>
+</div>
 
 <!-- ── Footer ── -->
 <footer>
