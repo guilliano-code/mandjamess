@@ -516,11 +516,6 @@ section { padding: 100px 80px; }
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
 }
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-}
 .service-card {
   position: relative;
   overflow: hidden;
@@ -1806,7 +1801,6 @@ footer {
   border-bottom: 1px solid rgba(245,240,235,0.05);
   overflow: hidden;
 }
-.brands-label { display: none; }
 .brands-track {
   display: flex;
   gap: 60px;
@@ -1895,9 +1889,7 @@ footer {
   .hamburger { display: flex; }
   #hero { height: 60vh; min-height: 420px; }
   .hero-content { padding: 0 24px; }
-  .hero-indicators { left: 24px; }
   .hero-scroll { display: none; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 28px 24px; gap: 16px; }
   /* services → snap carousel on mobile */
   #services .services-grid {
     display: flex;
@@ -2023,7 +2015,6 @@ footer {
   transition: background var(--trans);
 }
 .addon-modal-close:hover { background: var(--red); color: var(--white); border-color: var(--red); }
-.addon-modal-emoji { display: none; }
 .addon-modal-title { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
 .addon-modal-price {
   display: inline-block;
@@ -2122,11 +2113,8 @@ footer {
   </div>
 </section>
 
-<!-- ── Stats Bar ── -->
-
 <!-- ── Brands ── -->
 <div id="brands">
-  <div class="brands-label">Vertrouwd door topbedrijven</div>
   <div style="overflow:hidden;position:relative;">
     <div class="brands-track">
       <div class="brand-item">Heineken</div>
@@ -2993,7 +2981,6 @@ footer {
 <div class="addon-modal-overlay" id="addon-modal" onclick="closeAddonModal()">
   <div class="addon-modal" onclick="event.stopPropagation()">
     <button class="addon-modal-close" onclick="closeAddonModal()">×</button>
-    <div class="addon-modal-emoji" id="am-emoji"></div>
     <h3 class="addon-modal-title" id="am-title"></h3>
     <div class="addon-modal-price" id="am-price"></div>
     <p class="addon-modal-desc" id="am-desc"></p>
@@ -3231,28 +3218,12 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
-/* ── Intersection observer — fade-up & counters ── */
+/* ── Intersection observer — fade-up ── */
 const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('visible');
-    const num = e.target.querySelector('[data-count]');
-    if (num && !num.dataset.done) { num.dataset.done = 1; animateCount(num, +num.dataset.count); }
-  });
+  entries.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('visible'); });
 }, { threshold: 0.14 });
 
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-
-function animateCount(el, target) {
-  const dur = 1800, step = 16;
-  const inc = target / (dur / step);
-  let v = 0;
-  const t = setInterval(() => {
-    v = Math.min(v + inc, target);
-    el.textContent = Math.round(v) + (el.dataset.count == 98 ? '%' : '+');
-    if (v >= target) clearInterval(t);
-  }, step);
-}
 
 
 /* ── People slider ── */
@@ -3488,7 +3459,6 @@ function showAddonInfo(id, event) {
   event.stopPropagation();
   currentAddonId = id;
   const d = addonData[id];
-  document.getElementById('am-emoji').textContent   = d.emoji;
   document.getElementById('am-title').textContent   = d.name;
   document.getElementById('am-price').textContent   = d.price;
   document.getElementById('am-desc').textContent    = d.desc;
