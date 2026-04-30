@@ -3236,7 +3236,27 @@ function setStep(el) {
   if (current === el) return;
   if (current) current.classList.remove('active');
   requestAnimationFrame(() => el.classList.add('active'));
+  resetStepTimer();
 }
+
+/* ── Auto-cycle process steps every 5s ── */
+const stepEls = Array.from(document.querySelectorAll('.process-step'));
+let stepTimer = null;
+
+function nextStep() {
+  const idx = stepEls.findIndex(s => s.classList.contains('active'));
+  const next = stepEls[(idx + 1) % stepEls.length];
+  const current = stepEls[idx];
+  if (current) current.classList.remove('active');
+  requestAnimationFrame(() => next.classList.add('active'));
+}
+
+function resetStepTimer() {
+  clearInterval(stepTimer);
+  stepTimer = setInterval(nextStep, 5000);
+}
+
+resetStepTimer();
 
 /* ── Toast ── */
 function showToast(title, msg, isError) {
