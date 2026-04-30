@@ -2003,7 +2003,7 @@ footer {
       <div class="pkg-name">BBQ Basis</div>
       <div class="pkg-sub">Compleet BBQ-pakket voor 30–100 gasten</div>
       <div class="pkg-price">Vaste prijs</div>
-      <div class="pkg-price-amount">€65,00 <span>p.p.</span></div>
+      <div class="pkg-price-amount">€65 <span>p.p.</span></div>
       <div class="pkg-price-note">Excl. BTW · Minimaal 30 personen · 3 uur service</div>
       <div class="pkg-divider"></div>
       <ul class="pkg-features">
@@ -2023,7 +2023,7 @@ footer {
       <div class="pkg-name">BBQ Compleet</div>
       <div class="pkg-sub">De volledige BBQ-beleving voor uw evenement</div>
       <div class="pkg-price">Vaste prijs</div>
-      <div class="pkg-price-amount">€70,00 <span>p.p.</span></div>
+      <div class="pkg-price-amount">€70 <span>p.p.</span></div>
       <div class="pkg-price-note">Excl. BTW · Minimaal 25 personen · 4 uur service</div>
       <div class="pkg-divider"></div>
       <ul class="pkg-features">
@@ -2044,7 +2044,7 @@ footer {
       <div class="pkg-name">BBQ Premium</div>
       <div class="pkg-sub">Het volledige BBQ-spektakel zonder compromissen</div>
       <div class="pkg-price">Vaste prijs</div>
-      <div class="pkg-price-amount">€80,00 <span>p.p.</span></div>
+      <div class="pkg-price-amount">€80 <span>p.p.</span></div>
       <div class="pkg-price-note">Excl. BTW · Minimaal 20 personen · 5 uur service</div>
       <div class="pkg-divider"></div>
       <ul class="pkg-features">
@@ -2116,9 +2116,9 @@ footer {
         <label>Gekozen Pakket</label>
         <select id="f-package">
           <option value="">— Selecteer pakket —</option>
-          <option value="basis">BBQ Basis — €65,00 p.p.</option>
-          <option value="compleet">BBQ Compleet — €70,00 p.p.</option>
-          <option value="premium">BBQ Premium — €80,00 p.p.</option>
+          <option value="basis">BBQ Basis — €65 p.p.</option>
+          <option value="compleet">BBQ Compleet — €70 p.p.</option>
+          <option value="premium">BBQ Premium — €80 p.p.</option>
         </select>
       </div>
       <div class="form-field">
@@ -2231,13 +2231,13 @@ footer {
           <input type="checkbox" id="ao8" value="0" data-name="Kids Menu" style="display:none">
           <div class="addon-label kids-stepper-card" id="kids-card">
             <div class="addon-name">Kindermenu</div>
-            <div class="addon-short">Gegrilde kip, maïs, friet & frisdrank voor kinderen t/m 12 jaar. − €15,00 korting per kindermenu.</div>
+            <div class="addon-short">Gegrilde kip, maïs, friet & frisdrank voor kinderen t/m 12 jaar. − €15 korting per kindermenu.</div>
             <div class="kids-stepper">
               <button class="kids-btn" type="button" onclick="adjustKids(-1)">−</button>
               <div class="kids-count-display" id="kids-count">0</div>
               <button class="kids-btn" type="button" onclick="adjustKids(1)">+</button>
             </div>
-            <div class="addon-price" id="kids-price-label" style="color:#4ade80">− €15,00 korting p. kind (t/m 12 jaar)</div>
+            <div class="addon-price" id="kids-price-label" style="color:#4ade80">− €15 korting p. kind (t/m 12 jaar)</div>
           </div>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao8',event)">?</button>
         </div>
@@ -2260,7 +2260,7 @@ footer {
         <div class="price-row"><span>Pakket</span><span id="ps-pkg">— nog niet geselecteerd —</span></div>
         <div class="price-row"><span>Aantal gasten</span><span id="ps-guests">50 personen</span></div>
         <div class="price-row"><span>Pakketkosten</span><span id="ps-base">—</span></div>
-        <div class="price-row"><span>Extra's (incl.)</span><span id="ps-addons">€0,00</span></div>
+        <div class="price-row"><span>Extra's (incl.)</span><span id="ps-addons">€0</span></div>
         <div class="price-row" id="ps-kids-row" style="display:none;color:#4ade80"><span id="ps-kids-label">Kids Menu korting</span><span id="ps-kids">—</span></div>
         <div class="price-row" id="ps-discount-row" style="display:none;color:#4ade80"><span id="ps-discount-label">Groepskorting</span><span id="ps-discount">—</span></div>
         <div class="price-row total"><span>Geschatte totaal</span><span id="ps-total">—</span></div>
@@ -2671,7 +2671,7 @@ function calcPrice() {
 
   document.getElementById('ps-guests').textContent = guests + ' personen';
   const addonsEl = document.getElementById('ps-addons');
-  addonsEl.textContent = addonTotal === 0 ? '€0,00' : (addonTotal < 0 ? '− ' + fmt(-addonTotal) : fmt(addonTotal));
+  addonsEl.textContent = addonTotal === 0 ? '€0' : (addonTotal < 0 ? '− ' + fmt(-addonTotal) : fmt(addonTotal));
   addonsEl.style.color = addonTotal < 0 ? '#4ade80' : '';
 
   const hint = document.getElementById('discount-hint');
@@ -3005,9 +3005,9 @@ const addonData = {
     includes: ['1 extra professioneel crewlid', 'Inzetbaar bij grillstation of bediening', 'Volledig getraind in Mandja Grill service', 'Actief voor volledige serviceduur', 'Inclusief uniform & materiaal']
   },
   ao8: {
-    name: 'Kindermenu', price: '− €15,00 p. kind (t/m 12 jaar)',
-    desc: 'Kinderen t/m 12 jaar zijn welkom aan de BBQ — en dat scheelt u ook. Per kindermenu ontvangt u automatisch €15,00 korting op uw totaalprijs. Kinderen krijgen gegrilde kip, maïskolf, friet en frisdrank, vers bereid door ons team.',
-    includes: ['Gegrilde kip of hamburger (kinderportion)', 'Maïskolf & friet', 'Frisdrank of sap inbegrepen', 'Allergie-opties op aanvraag', '− €15,00 korting per kindermenu, automatisch verrekend']
+    name: 'Kindermenu', price: '− €15 p. kind (t/m 12 jaar)',
+    desc: 'Kinderen t/m 12 jaar zijn welkom aan de BBQ — en dat scheelt u ook. Per kindermenu ontvangt u automatisch €15 korting op uw totaalprijs. Kinderen krijgen gegrilde kip, maïskolf, friet en frisdrank, vers bereid door ons team.',
+    includes: ['Gegrilde kip of hamburger (kinderportion)', 'Maïskolf & friet', 'Frisdrank of sap inbegrepen', 'Allergie-opties op aanvraag', '− €15 korting per kindermenu, automatisch verrekend']
   }
 };
 let currentAddonId = null;
