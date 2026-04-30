@@ -2426,10 +2426,10 @@ footer {
         <label>Aantal Gasten (incl. kinderen)</label>
         <div class="people-slider-wrap">
           <div class="people-display">
-            <span class="people-count" id="people-display">50</span>
+            <span class="people-count" id="people-display">25</span>
             <span class="people-label">gasten (incl. kinderen)</span>
           </div>
-          <input type="range" min="15" max="500" value="50" id="people-slider" oninput="updatePeople(this)">
+          <input type="range" min="15" max="500" value="25" id="people-slider" oninput="updatePeople(this)">
           <div id="discount-hint" style="font-size:0.72rem;font-weight:700;letter-spacing:1px;margin-top:8px;min-height:18px;transition:color 0.3s"></div>
         </div>
       </div>
@@ -2531,16 +2531,16 @@ footer {
           <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao7',event)">?</button>
         </div>
         <div class="addon-item">
-          <input type="checkbox" id="ao8" value="0" data-name="Kids Menu" style="display:none">
+          <input type="checkbox" id="ao8" value="0" data-name="Kinderkorting" style="display:none">
           <div class="addon-label kids-stepper-card" id="kids-card">
-            <div class="addon-name">Kindermenu</div>
-            <div class="addon-short">Gegrilde kip, maïs, friet & frisdrank voor kinderen t/m 12 jaar. − €20 korting per kindermenu.</div>
+            <div class="addon-name">Kinderkorting</div>
+            <div class="addon-short">Geef het aantal kinderen (t/m 12 jaar) op dat u als gast heeft uitgenodigd — u ontvangt automatisch €30 korting per kind op uw totaalprijs.</div>
             <div class="kids-stepper">
               <button class="kids-btn" type="button" onclick="adjustKids(-1)">−</button>
               <div class="kids-count-display" id="kids-count">0</div>
               <button class="kids-btn" type="button" onclick="adjustKids(1)">+</button>
             </div>
-            <div class="addon-price" id="kids-price-label" style="color:#4ade80">− €20 korting p. kind (t/m 12 jaar)</div>
+            <div class="addon-price" id="kids-price-label" style="color:#4ade80">− €30 korting p. kind (t/m 12 jaar)</div>
           </div>
           <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao8',event)">?</button>
         </div>
@@ -2564,7 +2564,7 @@ footer {
         <div class="price-row"><span>Aantal gasten</span><span id="ps-guests">50 personen</span></div>
         <div class="price-row"><span>Pakketkosten</span><span id="ps-base">—</span></div>
         <div class="price-row"><span>Extra's (incl.)</span><span id="ps-addons">€0</span></div>
-        <div class="price-row" id="ps-kids-row" style="display:none;color:#4ade80"><span id="ps-kids-label">Kids Menu korting</span><span id="ps-kids">—</span></div>
+        <div class="price-row" id="ps-kids-row" style="display:none;color:#4ade80"><span id="ps-kids-label">Kinderkorting</span><span id="ps-kids">—</span></div>
         <div class="price-row" id="ps-discount-row" style="display:none;color:#4ade80"><span id="ps-discount-label">Groepskorting</span><span id="ps-discount">—</span></div>
         <div class="price-row total"><span>Geschatte totaal</span><span id="ps-total">—</span></div>
       </div>
@@ -2914,7 +2914,7 @@ function calcPrice() {
 
   // Kids Menu: tiered discount × number of kids chosen
   const kidsCount    = parseInt(document.getElementById('kids-count')?.textContent) || 0;
-  const kidsDiscount = 20;
+  const kidsDiscount = 30;
   const kidsTotal    = kidsCount * kidsDiscount;
   if (kidsCount > 0) addonFlat -= kidsTotal;
 
@@ -2922,8 +2922,8 @@ function calcPrice() {
   const kidsLabel = document.getElementById('kids-price-label');
   if (kidsLabel) {
     kidsLabel.textContent = kidsCount > 0
-      ? kidsCount + ' kind' + (kidsCount > 1 ? 'eren' : '') + ' x €20 = - €' + kidsTotal.toFixed(0)
-      : '- €20 korting per kindermenu (t/m 12 jaar)';
+      ? kidsCount + ' kind' + (kidsCount > 1 ? 'eren' : '') + ' x €30 = - €' + kidsTotal.toFixed(0)
+      : '- €30 kinderkorting p. kind (t/m 12 jaar)';
     kidsLabel.style.color = '#4ade80';
   }
 
@@ -2932,7 +2932,7 @@ function calcPrice() {
   if (kidsRow) {
     if (kidsCount > 0) {
       kidsRow.style.display = 'flex';
-      document.getElementById('ps-kids-label').textContent = `Kids Menu (${kidsCount}×)`;
+      document.getElementById('ps-kids-label').textContent = `Kinderkorting (${kidsCount}×)`;
       document.getElementById('ps-kids').textContent = '- ' + fmt(kidsTotal);
     } else {
       kidsRow.style.display = 'none';
@@ -3119,7 +3119,7 @@ function animateCount(el, target) {
 
 /* ── People slider ── */
 function updatePeople(el) {
-  document.getElementById('people-display').textContent = el.value;
+  document.getElementById('people-display').textContent = +el.value >= +el.max ? el.max + '+' : el.value;
   const pct = ((el.value - el.min) / (el.max - el.min)) * 100;
   el.style.setProperty('--pct', pct + '%');
 
@@ -3153,8 +3153,13 @@ function selectPackage(btn, name, price) {
 
   selectedPkg = { name, price: parseFloat(price) };
 
-  // Use data-package attribute for exact dropdown value match
+  // Reset slider to package default
   const pkgKey = card.dataset.package;
+  const pkgDefaults = { basis: 25, compleet: 15, premium: 15 };
+  const sl = document.getElementById('people-slider');
+  if (sl) { sl.value = pkgDefaults[pkgKey] || 25; updatePeople(sl); calcPrice(); }
+
+  // Use data-package attribute for exact dropdown value match
   const sel = document.getElementById('f-package');
   sel.value = pkgKey;
   sel.classList.remove('field-flash');
@@ -3325,9 +3330,9 @@ const addonData = {
     includes: ['1 extra professioneel crewlid', 'Inzetbaar bij grillstation of bediening', 'Volledig getraind in Mandja Grill service', 'Actief voor volledige serviceduur', 'Inclusief uniform & materiaal']
   },
   ao8: {
-    name: 'Kindermenu', price: '− €20 p. kind (t/m 12 jaar)',
-    desc: 'Kinderen t/m 12 jaar zijn welkom aan de BBQ — en dat scheelt u ook. Per kindermenu ontvangt u automatisch €20 korting op uw totaalprijs. Kinderen krijgen gegrilde kip, maïskolf, friet en frisdrank, vers bereid door ons team.',
-    includes: ['Gegrilde kip of hamburger (kinderportion)', 'Maïskolf & friet', 'Frisdrank of sap inbegrepen', 'Allergie-opties op aanvraag', '− €20 korting per kindermenu, automatisch verrekend']
+    name: 'Kinderkorting', price: '− €30 p. kind (t/m 12 jaar)',
+    desc: 'Heeft u kinderen (t/m 12 jaar) uitgenodigd als gast? Geef het aantal op en u ontvangt automatisch €30 korting per kind op uw totaalprijs. Zo betaalt u alleen voor wat er daadwerkelijk wordt gegeten.',
+    includes: ['€30 korting per kind (t/m 12 jaar)', 'Automatisch verrekend in uw totaalprijs', 'Gebaseerd op aantal opgegeven kinderen', 'Allergie-opties op aanvraag bespreekbaar']
   }
 };
 let currentAddonId = null;
