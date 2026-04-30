@@ -134,7 +134,6 @@ body.cursor-hover .cursor-ring { width: 56px; height: 56px; border-color: rgba(1
 html { scroll-behavior: smooth; }
 
 /* Prevent iOS text-selection mode blocking scroll on touch */
-* { -webkit-user-select: none; user-select: none; }
 input, textarea, [contenteditable] { -webkit-user-select: text; user-select: text; }
 
 body {
@@ -1529,6 +1528,7 @@ footer {
 .meat-card ul li::before { content: '—'; color: var(--red); flex-shrink: 0; }
 .meats-note {
   margin-top: 20px;
+  margin-bottom: 48px;
   font-size: 0.78rem;
   color: rgba(245,240,235,0.35);
   text-align: center;
