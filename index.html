@@ -3139,17 +3139,22 @@ function calcPrice() {
   const noScroll = e => e.preventDefault();
   document.addEventListener('touchmove', noScroll, { passive: false });
 
+  let preloaderHidden = false;
   function hidePreloader() {
+    if (preloaderHidden) return;
+    preloaderHidden = true;
     document.getElementById('preloader').classList.add('done');
     document.documentElement.classList.remove('is-loading');
+    document.body.style.overflow = '';
     document.removeEventListener('touchmove', noScroll);
     window.scrollTo(0, 0);
   }
 
-  // Wait for: min animation time + fonts + hero image
-  const HERO_URL = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80';
+  // Hard fallback: always hide within 3s regardless of image/font loading
+  setTimeout(hidePreloader, 3000);
 
-  const minTime   = new Promise(r => setTimeout(r, 1800));
+  const HERO_URL = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80';
+  const minTime   = new Promise(r => setTimeout(r, 800));
   const fontsOk   = document.fonts ? document.fonts.ready : Promise.resolve();
   const heroReady = new Promise(r => {
     const img = new Image();
@@ -3159,7 +3164,7 @@ function calcPrice() {
 
   Promise.all([minTime, fontsOk, heroReady])
     .then(hidePreloader)
-    .catch(hidePreloader); // always hide even on error
+    .catch(hidePreloader);
 })();
 
 /* ── Custom cursor ── */
