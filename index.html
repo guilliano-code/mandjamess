@@ -126,6 +126,10 @@ body.cursor-hover .cursor-ring { width: 56px; height: 56px; border-color: rgba(1
 
 html { scroll-behavior: smooth; }
 
+/* Prevent iOS text-selection mode blocking scroll on touch */
+* { -webkit-user-select: none; user-select: none; }
+input, textarea, [contenteditable] { -webkit-user-select: text; user-select: text; }
+
 body {
   font-family: 'Poppins', sans-serif;
   background: var(--dark);
