@@ -112,6 +112,7 @@ body.cursor-hover .cursor-ring { width: 56px; height: 56px; border-color: rgba(1
 :root {
   --red:    #D4001A;
   --red-d:  #A80015;
+  --red-t:  #FF2236;
   --red-g:  rgba(196,30,58,0.15);
   --gold:   #C9A96E;
   --dark:   #080808;
@@ -278,7 +279,7 @@ ul { list-style: none; }
   font-weight: 700;
   letter-spacing: 4px;
 
-  color: var(--red);
+  color: var(--red-t);
   margin-bottom: 20px;
   opacity: 0;
   transform: translateY(20px);
@@ -408,7 +409,7 @@ section { padding: 100px 80px; }
   font-weight: 700;
   letter-spacing: 4px;
 
-  color: var(--red);
+  color: var(--red-t);
   margin-bottom: 12px;
 }
 .section-title {
@@ -567,7 +568,7 @@ section { padding: 100px 80px; }
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 3px;
-  color: var(--red);
+  color: var(--red-t);
   margin-bottom: 8px;
 }
 .service-text { display: contents; }
@@ -660,13 +661,13 @@ section { padding: 100px 80px; }
 .package-card:hover::before,
 .package-card.selected::before { transform: scaleX(1); }
 .package-card:hover {
-  border-color: rgba(196,30,58,0.4);
+  border-color: rgba(245,240,235,0.12);
   transform: translateY(-4px);
   box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 .package-card.selected {
-  border-color: rgba(245,240,235,0.08);
-  box-shadow: 0 20px 50px rgba(196,30,58,0.15);
+  border-color: transparent;
+  box-shadow: 0 0 0 0px transparent, 0 0 40px rgba(212,0,26,0.25), 0 20px 50px rgba(0,0,0,0.3);
 }
 .package-card.featured {
   border-color: rgba(245,240,235,0.08);
@@ -841,10 +842,6 @@ section { padding: 100px 80px; }
   border-color: rgba(212,0,26,0.3);
   transform: translateY(-3px);
 }
-.discount-icon {
-  font-size: 1.4rem;
-  margin-bottom: 4px;
-}
 .discount-label {
   font-family: 'Poppins', sans-serif;
   font-size: 0.72rem;
@@ -879,7 +876,33 @@ section { padding: 100px 80px; }
   border: 1px solid rgba(245,240,235,0.08);
   border-radius: 4px;
   padding: 56px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
+/* Upgrade controls */
+.upgrade-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 6px;
+  flex-wrap: wrap;
+}
+.upgrade-all-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(245,240,235,0.15);
+  background: transparent;
+  color: rgba(245,240,235,0.65);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--trans), background var(--trans), color var(--trans);
+  white-space: nowrap;
+}
+.upgrade-all-btn:hover { border-color: rgba(212,0,26,0.5); color: var(--white); }
+.upgrade-all-btn.active { border-color: var(--red); background: var(--red-g); color: var(--white); }
 .booking-form-title {
   font-family: 'Poppins', sans-serif;
   font-size: 1.8rem;
@@ -2160,26 +2183,22 @@ footer {
   <!-- Kortingen -->
   <div class="discounts-grid fade-up">
     <div class="discount-card">
-      <div class="discount-icon">📅</div>
-      <div class="discount-label">Early Bird</div>
+            <div class="discount-label">Early Bird</div>
       <div class="discount-amount">- €3 tot €5 p.p.</div>
       <div class="discount-desc">Boek 8 weken of meer van tevoren en ontvang automatisch korting per persoon.</div>
     </div>
     <div class="discount-card">
-      <div class="discount-icon">👥</div>
-      <div class="discount-label">Referral Bonus</div>
+            <div class="discount-label">Referral Bonus</div>
       <div class="discount-amount">€200 – €300 tegoed</div>
       <div class="discount-desc">Breng een vriend die ook boekt en ontvang €200–€300 als tegoed op uw volgende boeking.</div>
     </div>
     <div class="discount-card">
-      <div class="discount-icon">⭐</div>
-      <div class="discount-label">Vaste Klant</div>
+            <div class="discount-label">Vaste Klant</div>
       <div class="discount-amount">Gratis upgrade</div>
       <div class="discount-desc">Al eerder geboekt? U krijgt een gratis pakket-upgrade en voorrangsplanning voor uw datum.</div>
     </div>
     <div class="discount-card">
-      <div class="discount-icon">📊</div>
-      <div class="discount-label">Volumekorting</div>
+            <div class="discount-label">Volumekorting</div>
       <div class="discount-amount">- €2,50 p.p.</div>
       <div class="discount-desc">Vanaf 200 gasten ontvangt u automatisch €2,50 korting per persoon. Wordt verrekend in de offerte.</div>
     </div>
@@ -2256,18 +2275,18 @@ footer {
       <div class="addons-title">Voeg toe aan uw pakket</div>
       <div class="addons-grid">
         <div class="addon-item">
-          <input type="checkbox" id="ao1" value="400.00" data-name="Tent" data-flat="true" onchange="calcPrice(); toggleTentHeat()">
+          <input type="checkbox" id="ao1" value="250.00" data-name="Tent" data-flat="true" onchange="calcPrice(); toggleTentHeat()">
           <label class="addon-label" for="ao1">
             <div class="addon-check"></div>
             <div class="addon-name">Tent</div>
-            <div class="addon-short">Professionele feesttent voor tot 100 gasten — uw BBQ gaat door, ongeacht het weer.</div>
+            <div class="addon-short">Professionele feesttent voor tot 100 gasten — beschermd tegen regen, wind en zon.</div>
             <div class="tent-heat-row" id="tent-heat-row" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,240,235,0.08)">
               <button type="button" id="ao1-heat-btn" class="tent-heat-btn" onclick="event.stopPropagation();toggleHeat()">
                 Met verwarming <span class="tent-heat-price">+ €150</span>
               </button>
               <input type="checkbox" id="ao1-heat" value="150.00" data-flat="true" style="display:none">
             </div>
-            <div class="addon-price" id="ao1-price">€400 </div>
+            <div class="addon-price" id="ao1-price">Vanaf €250</div>
           </label>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao1',event)">?</button>
         </div>
@@ -2312,13 +2331,20 @@ footer {
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao5',event)">?</button>
         </div>
         <div class="addon-item">
-          <input type="checkbox" id="ao6" value="17.50" data-name="Premium Catering Upgrade" onchange="calcPrice()">
-          <label class="addon-label" for="ao6">
-            <div class="addon-check"></div>
+          <input type="checkbox" id="ao6" value="0" data-name="Premium Catering Upgrade" style="display:none">
+          <div class="addon-label kids-stepper-card" id="upgrade-card">
             <div class="addon-name">Premium Catering Upgrade</div>
-            <div class="addon-short">Wagyu burger, côte de boeuf en Duroc varkenshaas — A-kwaliteit vlees voor gasten die het verschil proeven.</div>
-            <div class="addon-price">+ €15 – €20 p.p.</div>
-          </label>
+            <div class="addon-short">Wagyu burger, côte de boeuf en Duroc varkenshaas — voor gasten die het verschil proeven.</div>
+            <div class="upgrade-controls">
+              <button type="button" class="upgrade-all-btn" id="upgrade-all-btn" onclick="toggleUpgradeAll()">Alle gasten</button>
+              <div class="kids-stepper">
+                <button class="kids-btn" type="button" onclick="adjustUpgrade(-1)">−</button>
+                <div class="kids-count-display" id="upgrade-count">0</div>
+                <button class="kids-btn" type="button" onclick="adjustUpgrade(1)">+</button>
+              </div>
+            </div>
+            <div class="addon-price" id="upgrade-price-label">+ €15 p.p.</div>
+          </div>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao6',event)">?</button>
         </div>
         <div class="addon-item">
@@ -2747,6 +2773,10 @@ function calcPrice() {
   const tpl = document.getElementById('ao1-price');
   if (tpl) tpl.textContent = tentCb && tentCb.checked && heatCb && heatCb.checked ? '€550 ' : '€400 ';
 
+  // Premium Catering Upgrade stepper
+  const upgradeCount = parseInt(document.getElementById('upgrade-count')?.textContent) || 0;
+  if (upgradeCount > 0) addonFlat += upgradeCount * 15;
+
   // Kids Menu: tiered discount × number of kids chosen
   const kidsCount    = parseInt(document.getElementById('kids-count')?.textContent) || 0;
   const kidsDiscount = 15;
@@ -3089,7 +3119,7 @@ document.querySelectorAll('.package-card').forEach(card => {
 /* ── Add-on info modal ── */
 const addonData = {
   ao1: {
-    name: 'Tent', price: '€400  (+ €150 met verwarming)',
+    name: 'Tent', price: 'Vanaf €250 (+ €150 met verwarming)',
     desc: 'Geen compromissen door het weer. Onze feesttent biedt ruimte voor tot 100 gasten en zorgt dat uw BBQ doorgaat — ongeacht regen of zon. Voeg verwarming toe (+€150) voor evenementen in het najaar of bij koude avonden.',
     includes: ['Professionele partytent (tot 100 m²)', 'Sfeerverlichting inbegrepen', 'Opbouw dag voor het evenement', 'Afbraak dag erna — geen omkijken naar', 'Optie: verwarming toevoegen voor +€150']
   },
@@ -3114,7 +3144,7 @@ const addonData = {
     includes: ['Onbeperkt bier (tap of fles)', 'Huiswijn rood & wit', 'Frisdrank & water inbegrepen', 'Bediening door ons barteam', 'Actief gedurende volledige service']
   },
   ao6: {
-    name: 'Premium Catering Upgrade', price: '+ €15 – €20 p.p.',
+    name: 'Premium Catering Upgrade', price: '+ €15 p.p.',
     desc: 'Upgrade uw vleesassortiment naar het absolute topniveau. A-kwaliteit vlees van gespecialiseerde slagers: Wagyu burger, côte de boeuf aan het bot en Duroc varkenshaas met kruidenboter — voor gasten die het verschil proeven.',
     includes: ['Wagyu smash burger (180g)', 'Côte de boeuf aan het bot', 'Duroc varkenshaas met kruidenboter', 'Verse chimichurri & huisdipsauzen', 'Live bereid aan het grillstation']
   },
@@ -3284,7 +3314,7 @@ function toggleTentHeat() {
     heatCb.checked = false;
     if (heatBtn) heatBtn.classList.remove('active');
   }
-  if (priceLabel) priceLabel.textContent = tentChecked && heatCb.checked ? '€550' : '€400';
+  if (priceLabel) priceLabel.textContent = tentChecked && heatCb.checked ? 'Vanaf €400' : 'Vanaf €250';
 }
 
 function toggleHeat() {
@@ -3293,8 +3323,47 @@ function toggleHeat() {
   const priceLabel = document.getElementById('ao1-price');
   heatCb.checked = !heatCb.checked;
   heatBtn.classList.toggle('active', heatCb.checked);
-  if (priceLabel) priceLabel.textContent = heatCb.checked ? '€550' : '€400';
+  if (priceLabel) priceLabel.textContent = heatCb.checked ? 'Vanaf €400' : 'Vanaf €250';
   calcPrice();
+}
+
+/* ── Premium Catering Upgrade stepper ── */
+function adjustUpgrade(delta) {
+  const el   = document.getElementById('upgrade-count');
+  const card = document.getElementById('upgrade-card');
+  const allBtn = document.getElementById('upgrade-all-btn');
+  const max  = parseInt(document.getElementById('people-slider').value) || 500;
+  let count  = parseInt(el.textContent) + delta;
+  count = Math.max(0, Math.min(count, max));
+  el.textContent = count;
+  allBtn.classList.toggle('active', count === max);
+  card.classList.toggle('active', count > 0);
+  document.getElementById('ao6').checked = count > 0;
+  updateUpgradeLabel(count, max);
+  calcPrice();
+}
+
+function toggleUpgradeAll() {
+  const el   = document.getElementById('upgrade-count');
+  const card = document.getElementById('upgrade-card');
+  const allBtn = document.getElementById('upgrade-all-btn');
+  const max  = parseInt(document.getElementById('people-slider').value) || 500;
+  const isAll = allBtn.classList.contains('active');
+  const count = isAll ? 0 : max;
+  el.textContent = count;
+  allBtn.classList.toggle('active', !isAll);
+  card.classList.toggle('active', count > 0);
+  document.getElementById('ao6').checked = count > 0;
+  updateUpgradeLabel(count, max);
+  calcPrice();
+}
+
+function updateUpgradeLabel(count, max) {
+  const lbl = document.getElementById('upgrade-price-label');
+  if (!lbl) return;
+  lbl.textContent = count > 0
+    ? count + ' gast' + (count !== 1 ? 'en' : '') + ' x €15 = + €' + (count * 15)
+    : '+ €15 p.p.';
 }
 
 /* ── Kids Menu stepper ── */
