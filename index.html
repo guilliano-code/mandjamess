@@ -796,29 +796,25 @@ section { padding: 100px 80px; }
 .autocomplete-sub { font-size: 0.75rem; color: rgba(245,240,235,0.4); display: block; margin-top: 1px; }
 
 /* ─── Tent heating sub-option ───────────────────────────────── */
-.tent-heat-row { cursor: default; }
-.tent-heat-label {
+.tent-heat-btn {
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(245,240,235,0.15);
+  background: transparent;
+  color: rgba(245,240,235,0.7);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: rgba(245,240,235,0.75);
-  cursor: pointer;
-  user-select: none;
+  justify-content: space-between;
+  transition: border-color var(--trans), background var(--trans), color var(--trans);
 }
-.tent-heat-label input[type="checkbox"] {
-  width: 16px; height: 16px;
-  accent-color: var(--red);
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.tent-heat-price {
-  margin-left: auto;
-  color: var(--red);
-  font-size: 0.75rem;
-  font-weight: 700;
-}
+.tent-heat-btn:hover { border-color: rgba(212,0,26,0.5); color: var(--white); }
+.tent-heat-btn.active { border-color: var(--red); background: var(--red-g); color: var(--white); }
+.tent-heat-price { color: var(--red); font-size: 0.75rem; font-weight: 700; }
 
 /* ─── Kortingen grid ─────────────────────────────────────────── */
 .discounts-grid {
@@ -2261,14 +2257,13 @@ footer {
             <div class="addon-check"></div>
             <div class="addon-name">Tent</div>
             <div class="addon-short">Professionele feesttent voor tot 100 gasten — uw BBQ gaat door, ongeacht het weer.</div>
-            <div class="tent-heat-row" id="tent-heat-row" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid rgba(245,240,235,0.08)">
-              <label class="tent-heat-label" onclick="event.stopPropagation()">
-                <input type="checkbox" id="ao1-heat" value="150.00" data-flat="true" onchange="event.stopPropagation();calcPrice()">
-                <span>Met verwarming</span>
-                <span class="tent-heat-price">+ €150</span>
-              </label>
+            <div class="tent-heat-row" id="tent-heat-row" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,240,235,0.08)">
+              <button type="button" id="ao1-heat-btn" class="tent-heat-btn" onclick="event.stopPropagation();toggleHeat()">
+                Met verwarming <span class="tent-heat-price">+ €150</span>
+              </button>
+              <input type="checkbox" id="ao1-heat" value="150.00" data-flat="true" style="display:none">
             </div>
-            <div class="addon-price" id="ao1-price">€400 vast</div>
+            <div class="addon-price" id="ao1-price">€400 </div>
           </label>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao1',event)">?</button>
         </div>
@@ -2278,7 +2273,7 @@ footer {
             <div class="addon-check"></div>
             <div class="addon-name">Premium Decoratie</div>
             <div class="addon-short">Tafelkleden, sfeerverlichting, centerpieces en bloemen — uw locatie ziet er direct professioneel uit.</div>
-            <div class="addon-price">€300 – €600 vast</div>
+            <div class="addon-price">€300 – €600 </div>
           </label>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao2',event)">?</button>
         </div>
@@ -2288,7 +2283,7 @@ footer {
             <div class="addon-check"></div>
             <div class="addon-name">DJ / Live Muziek</div>
             <div class="addon-short">Professionele DJ of livemuzikant voor 4 uur — van lounge tijdens het eten tot feest erna.</div>
-            <div class="addon-price">€500 – €1.000 vast</div>
+            <div class="addon-price">€500 – €1.000 </div>
           </label>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao3',event)">?</button>
         </div>
@@ -2296,9 +2291,9 @@ footer {
           <input type="checkbox" id="ao4" value="300.00" data-name="Photo Booth" data-flat="true" onchange="calcPrice()">
           <label class="addon-label" for="ao4">
             <div class="addon-check"></div>
-            <div class="addon-name">Fotohokje</div>
+            <div class="addon-name">Photobooth</div>
             <div class="addon-short">Selfie-booth met props, directe prints en digitale galerij — een hit bij elke leeftijd.</div>
-            <div class="addon-price">€200 – €400 vast</div>
+            <div class="addon-price">€200 – €400 </div>
           </label>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao4',event)">?</button>
         </div>
@@ -2328,7 +2323,7 @@ footer {
             <div class="addon-check"></div>
             <div class="addon-name">Extra Crew Lid</div>
             <div class="addon-short">Een extra professioneel crewlid — kortere wachttijden en meer aandacht voor uw gasten.</div>
-            <div class="addon-price">€150 – €200 vast</div>
+            <div class="addon-price">€150 – €200 </div>
           </label>
           <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao7',event)">?</button>
         </div>
@@ -2746,7 +2741,7 @@ function calcPrice() {
   // Update tent price label
   const tentCb = document.getElementById('ao1');
   const tpl = document.getElementById('ao1-price');
-  if (tpl) tpl.textContent = tentCb && tentCb.checked && heatCb && heatCb.checked ? '€550 vast' : '€400 vast';
+  if (tpl) tpl.textContent = tentCb && tentCb.checked && heatCb && heatCb.checked ? '€550 ' : '€400 ';
 
   // Kids Menu: tiered discount × number of kids chosen
   const kidsCount    = parseInt(document.getElementById('kids-count')?.textContent) || 0;
@@ -2985,8 +2980,10 @@ function selectPackage(btn, name, price) {
 
   selectedPkg = { name, price: parseFloat(price) };
 
+  // Use data-package attribute for exact dropdown value match
+  const pkgKey = card.dataset.package;
   const sel = document.getElementById('f-package');
-  sel.value = name.toLowerCase();
+  sel.value = pkgKey;
   sel.classList.remove('field-flash');
   void sel.offsetWidth;
   sel.classList.add('field-flash');
@@ -3088,22 +3085,22 @@ document.querySelectorAll('.package-card').forEach(card => {
 /* ── Add-on info modal ── */
 const addonData = {
   ao1: {
-    name: 'Tent', price: '€400 vast (+ €150 met verwarming)',
+    name: 'Tent', price: '€400  (+ €150 met verwarming)',
     desc: 'Geen compromissen door het weer. Onze feesttent biedt ruimte voor tot 100 gasten en zorgt dat uw BBQ doorgaat — ongeacht regen of zon. Voeg verwarming toe (+€150) voor evenementen in het najaar of bij koude avonden.',
     includes: ['Professionele partytent (tot 100 m²)', 'Sfeerverlichting inbegrepen', 'Opbouw dag voor het evenement', 'Afbraak dag erna — geen omkijken naar', 'Optie: verwarming toevoegen voor +€150']
   },
   ao2: {
-    name: 'Premium Decoratie', price: '€300 – €600 vast',
+    name: 'Premium Decoratie', price: '€300 – €600 ',
     desc: 'Van linnen tafelkleden en kaarsenhouders tot sfeerverlichting en seizoensbloemen — ons decoratieteam zorgt dat uw locatie er precies uitziet zoals u het in gedachten had. Stijlvol, compleet en zonder gedoe.',
     includes: ['Tafelkleden & linnen servetten', 'Sfeer- en accentverlichting', 'Centerpieces & kaarsenhouders', 'Seizoensgebonden bloemenopstelling', 'Op- en afbouw door ons team']
   },
   ao3: {
-    name: 'DJ / Live Muziek', price: '€500 – €1.000 vast',
+    name: 'DJ / Live Muziek', price: '€500 – €1.000 ',
     desc: 'De juiste muziek maakt het verschil tussen een goed evenement en een feest dat nog maanden nabesproken wordt. Kies een professionele DJ of livemuzikant voor tot 4 uur — van loungemuziek tijdens de BBQ tot feest erna.',
     includes: ['DJ of livemuzikant (tot 4 uur)', 'Professioneel geluidssysteem', 'Sfeerverlichting & LED-installatie', 'Playlist-wensen mogelijk', 'Soundcheck 1 uur voor aanvang']
   },
   ao4: {
-    name: 'Fotohokje', price: '€200 – €400 vast',
+    name: 'Photobooth', price: '€200 – €400 ',
     desc: "Een instant-hit bij gasten van alle leeftijden. Uw gasten maken onbeperkt foto's, krijgen direct een print mee en ontvangen achteraf de volledige digitale galerij. Inclusief props en accessoires.",
     includes: ['Professionele fotobooth (3 uur)', 'Props & accessoires inbegrepen', 'Onbeperkt foto\'s maken', 'Directe prints (10×15 cm)', 'Digitale galerij achteraf per e-mail']
   },
@@ -3118,7 +3115,7 @@ const addonData = {
     includes: ['Wagyu smash burger (180g)', 'Côte de boeuf aan het bot', 'Duroc varkenshaas met kruidenboter', 'Verse chimichurri & huisdipsauzen', 'Live bereid aan het grillstation']
   },
   ao7: {
-    name: 'Extra Crew Lid', price: '€150 – €200 vast',
+    name: 'Extra Crew Lid', price: '€150 – €200 ',
     desc: 'Meer handen betekent snellere service, kortere wachttijden en meer persoonlijke aandacht voor uw gasten. Ideaal bij groepen boven de 75 personen of bij evenementen waarbij service extra belangrijk is.',
     includes: ['1 extra professioneel crewlid', 'Inzetbaar bij grillstation of bediening', 'Volledig getraind in Mandja Grill service', 'Actief voor volledige serviceduur', 'Inclusief uniform & materiaal']
   },
@@ -3277,9 +3274,23 @@ function toggleTentHeat() {
   const heatRow     = document.getElementById('tent-heat-row');
   const heatCb      = document.getElementById('ao1-heat');
   const priceLabel  = document.getElementById('ao1-price');
+  const heatBtn     = document.getElementById('ao1-heat-btn');
   heatRow.style.display = tentChecked ? 'block' : 'none';
-  if (!tentChecked) { heatCb.checked = false; }
-  priceLabel.textContent = tentChecked && heatCb.checked ? '€550 vast' : '€400 vast';
+  if (!tentChecked) {
+    heatCb.checked = false;
+    if (heatBtn) heatBtn.classList.remove('active');
+  }
+  if (priceLabel) priceLabel.textContent = tentChecked && heatCb.checked ? '€550' : '€400';
+}
+
+function toggleHeat() {
+  const heatCb  = document.getElementById('ao1-heat');
+  const heatBtn = document.getElementById('ao1-heat-btn');
+  const priceLabel = document.getElementById('ao1-price');
+  heatCb.checked = !heatCb.checked;
+  heatBtn.classList.toggle('active', heatCb.checked);
+  if (priceLabel) priceLabel.textContent = heatCb.checked ? '€550' : '€400';
+  calcPrice();
 }
 
 /* ── Kids Menu stepper ── */
