@@ -807,23 +807,22 @@ section { padding: 100px 80px; }
 
 /* ─── Tent heating sub-option ───────────────────────────────── */
 .tent-heat-btn {
-  width: 100%;
-  padding: 9px 14px;
-  border-radius: 10px;
-  border: 1.5px solid rgba(245,240,235,0.15);
+  display: block;
+  margin-left: auto;
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(245,240,235,0.2);
   background: transparent;
-  color: rgba(245,240,235,0.7);
+  color: rgba(245,240,235,0.65);
   font-family: 'Poppins', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   transition: border-color var(--trans), background var(--trans), color var(--trans);
+  white-space: nowrap;
 }
 .tent-heat-btn:hover { border-color: rgba(212,0,26,0.5); color: var(--white); }
-.tent-heat-btn.active { border-color: var(--red); background: var(--red-g); color: var(--white); }
+.tent-heat-btn.active { border-color: var(--red); background: var(--red-g); color: var(--white); border-radius: 20px; }
 .tent-heat-price { color: var(--red); font-size: 0.75rem; font-weight: 700; }
 
 /* ─── Kortingen grid ─────────────────────────────────────────── */
