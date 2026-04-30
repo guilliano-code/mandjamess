@@ -1859,58 +1859,18 @@ footer {
   </div>
 </nav>
 
-<!-- ── Hero Slider ── -->
+<!-- ── Hero ── -->
 <section id="hero">
-  <div class="hero-slides">
-
-    <div class="hero-slide active">
-      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=75')"></div>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <p class="hero-tag">Amsterdam's #1 BBQ Caterer</p>
-        <h1 class="hero-title">Grill op locatie,<br><em>wij regelen alles</em></h1>
-        <p class="hero-sub">Van opstelling tot het laatste stuk vlees — Mandja Grill verzorgt uw BBQ-evenement compleet. Crew inbegrepen, vaste prijs, 100% zorgeloos.</p>
-        <div class="hero-btns">
-          <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Bekijk Pakketten</button>
-          <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Ontdek Meer</button>
-        </div>
-      </div>
+  <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80'); position:absolute; inset:0; background-size:cover; background-position:center; will-change:transform;"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content" style="opacity:1; transform:none;">
+    <p class="hero-tag" style="opacity:1; transform:none;">Amsterdam's #1 BBQ Caterer</p>
+    <h1 class="hero-title" style="opacity:1; transform:none;">Grill op locatie,<br><em>wij regelen alles</em></h1>
+    <p class="hero-sub" style="opacity:1; transform:none;">Van opstelling tot het laatste stuk vlees — Mandja Grill verzorgt uw BBQ-evenement compleet. Crew inbegrepen, vaste prijs, 100% zorgeloos.</p>
+    <div class="hero-btns" style="opacity:1; transform:none;">
+      <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Bekijk Pakketten</button>
+      <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Ontdek Meer</button>
     </div>
-
-    <div class="hero-slide">
-      <div class="hero-slide-bg" data-bg="https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&q=75"></div>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <p class="hero-tag">Dagvers & Ambachtelijk</p>
-        <h1 class="hero-title">Vers van de grill,<br><em>bij u op locatie</em></h1>
-        <p class="hero-sub">Wij werken uitsluitend met dagvers Nederlands vlees. Ambachtelijk bereid door onze BBQ-specialisten, live voor uw gasten.</p>
-        <div class="hero-btns">
-          <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Direct Boeken</button>
-          <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Onze Keukens</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-slide-bg" data-bg="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=1200&q=75"></div>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <p class="hero-tag">30 tot 500 Gasten</p>
-        <h1 class="hero-title">Elk budget,<br><em>elk evenement</em></h1>
-        <p class="hero-sub">Bedrijfsfeest, bruiloft of buurtbarbecue — Mandja Grill schaalt mee. Vaste prijzen per persoon, geen verrassingen achteraf.</p>
-        <div class="hero-btns">
-          <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Offerte Aanvragen</button>
-          <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Neem Contact Op</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="hero-indicators">
-    <div class="hero-dot active" data-slide="0"></div>
-    <div class="hero-dot" data-slide="1"></div>
-    <div class="hero-dot" data-slide="2"></div>
   </div>
 
   <div class="hero-scroll">
@@ -2742,12 +2702,6 @@ footer {
 </div>
 
 <script>
-/* ── Deferred hero slide backgrounds ── */
-document.querySelectorAll('.hero-slide-bg[data-bg]').forEach(el => {
-  const img = new Image();
-  img.onload = () => { el.style.backgroundImage = "url('" + el.dataset.bg + "')"; };
-  img.src = el.dataset.bg;
-});
 
 /* ── Scroll to top on every load/refresh ── */
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -2949,24 +2903,6 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-/* ── Hero Slider ── */
-const slides = document.querySelectorAll('.hero-slide');
-const dots   = document.querySelectorAll('.hero-dot');
-let current = 0, slideTimer;
-
-function goToSlide(n) {
-  slides[current].classList.remove('active');
-  dots[current].classList.remove('active');
-  current = (n + slides.length) % slides.length;
-  slides[current].classList.add('active');
-  dots[current].classList.add('active');
-}
-function startSlider() { slideTimer = setInterval(() => goToSlide(current + 1), 6000); }
-dots.forEach(d => d.addEventListener('click', () => {
-  clearInterval(slideTimer); goToSlide(+d.dataset.slide); startSlider();
-}));
-
-startSlider();
 
 /* ── Intersection observer — fade-up & counters ── */
 const io = new IntersectionObserver(entries => {
