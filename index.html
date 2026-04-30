@@ -7,7 +7,14 @@
 html.is-loading,html.is-loading body{overflow:hidden!important;height:100%;touch-action:none}
 #preloader{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;min-height:-webkit-fill-available;background:#080808;z-index:9999}
 </style>
-<title>Mandja Grill — BBQ Catering Amsterdam</title>
+<title>Mandjagrill - Soulfood BBQ Catering</title>
+<meta name="description" content="Mandjagrill levert authentieke soulfood BBQ catering voor evenementen, festivals en bedrijfsfeesten. Smaakvolle gerechten, direct van de grill.">
+<meta property="og:title" content="Mandjagrill - Soulfood BBQ Catering">
+<meta property="og:description" content="Mandjagrill levert authentieke soulfood BBQ catering voor evenementen, festivals en bedrijfsfeesten.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mandjagrill - Soulfood BBQ Catering">
+<meta name="twitter:description" content="Mandjagrill levert authentieke soulfood BBQ catering voor evenementen, festivals en bedrijfsfeesten.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
@@ -674,8 +681,7 @@ section { padding: 100px 80px; }
   border-radius: 20px 20px 0 0;
   transition: transform var(--trans);
 }
-.package-card:hover::before,
-.package-card.selected::before { transform: scaleX(1); }
+.package-card:hover::before { transform: scaleX(1); }
 .package-card:hover {
   border-color: rgba(245,240,235,0.12);
   transform: translateY(-4px);
@@ -1307,7 +1313,21 @@ input[type="range"]::-webkit-slider-runnable-track {
   border-bottom: 1px solid rgba(245,240,235,0.06);
   cursor: pointer;
   position: relative;
+  padding-left: 16px;
+  transition: padding-left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.process-step::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--red);
+  transform: scaleY(0);
+  transform-origin: top;
+  border-radius: 2px;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.process-step.active::before { transform: scaleY(1); }
 .process-step:last-child { border-bottom: none; }
 .step-num {
   font-size: 3.5rem;
@@ -1315,17 +1335,17 @@ input[type="range"]::-webkit-slider-runnable-track {
   color: rgba(245,240,235,0.05);
   line-height: 1;
   min-width: 60px;
-  transition: color var(--trans);
+  transition: color 0.4s ease, transform 0.4s ease;
 }
-.process-step:hover .step-num,
-.process-step.active .step-num { color: rgba(196,30,58,0.3); }
-.step-content {}
+.process-step:hover .step-num { color: rgba(196,30,58,0.2); }
+.process-step.active .step-num { color: rgba(196,30,58,0.35); transform: scale(1.08); }
+.step-content { flex: 1; }
 .step-title {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 8px;
-  transition: color var(--trans);
+  transition: color 0.35s ease;
 }
 .process-step:hover .step-title,
 .process-step.active .step-title { color: var(--red); }
@@ -1335,9 +1355,17 @@ input[type="range"]::-webkit-slider-runnable-track {
   line-height: 1.6;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease,
+              transform 0.4s ease;
 }
-.process-step.active .step-desc { max-height: 100px; }
+.process-step.active .step-desc {
+  max-height: 160px;
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .process-image {
   position: relative;
@@ -1727,6 +1755,8 @@ footer {
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
   .gallery-strip { flex-wrap: nowrap; overflow-x: auto; }
   .gallery-item { min-width: 200px; }
+  .process-image { display: none; }
+  #process { padding-bottom: 0; }
   #booking { padding: 60px 24px; }
   .contact-form-panel { padding: 32px 24px; }
   .contact-form-panel .form-grid { grid-template-columns: 1fr; }
@@ -1735,12 +1765,12 @@ footer {
 .addon-info-btn {
   position: absolute;
   top: 10px; right: 10px;
-  width: 22px; height: 22px;
+  width: 26px; height: 26px;
   border-radius: 50%;
-  background: rgba(245,240,235,0.08);
-  border: 1px solid rgba(245,240,235,0.18);
-  color: rgba(245,240,235,0.5);
-  font-size: 0.72rem;
+  background: rgba(245,240,235,0.1);
+  border: 1.5px solid rgba(245,240,235,0.4);
+  color: rgba(245,240,235,0.85);
+  font-size: 0.82rem;
   font-weight: 800;
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
@@ -1750,6 +1780,7 @@ footer {
   transition: background var(--trans), border-color var(--trans), color var(--trans);
   z-index: 3;
   line-height: 1;
+  letter-spacing: 0;
 }
 .addon-info-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
 
@@ -1999,73 +2030,73 @@ footer {
 <!-- ── Services ── -->
 <section id="services">
   <div class="services-header">
-    <p class="section-tag fade-up">Onze BBQ Formules</p>
-    <h2 class="section-title fade-up">Zes manieren om<br><em>indruk te maken</em></h2>
-    <p class="section-sub fade-up">Van klassiek Amerikaans tot Aziatische fusion — Mandja Grill beheerst elke BBQ-stijl en past die aan op uw evenement.</p>
+    <p class="section-tag fade-up">Extra's & Add-ons</p>
+    <h2 class="section-title fade-up">Maak uw evenement<br><em>compleet</em></h2>
+    <p class="section-sub fade-up">Van feesttent tot live entertainment — voeg toe wat bij uw dag past. Alles wordt door ons geregeld, naadloos gecombineerd met de catering.</p>
   </div>
   <div class="services-grid" id="services-carousel">
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=75" alt="Fine Dining" loading="lazy" decoding="async" width="800" height="600">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=75" alt="Feesttent" loading="lazy" decoding="async" width="800" height="600">
       <div class="service-overlay">
         <div class="service-num">01</div>
         <div class="service-text">
-          <div class="service-name">Premium BBQ Diner</div>
-          <div class="service-desc">Meerdere grill-gangen, tafelservice en premium vlees voor exclusieve diners en gala-evenementen.</div>
+          <div class="service-name">Feesttent</div>
+          <div class="service-desc">Professionele partytent voor tot 100 gasten — beschermt tegen regen, wind en zon. Optioneel met verwarming.</div>
           <div class="service-line"></div>
         </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=75" alt="Borrel Catering" loading="lazy" decoding="async" width="800" height="600">
+      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=75" alt="Premium Decoratie" loading="lazy" decoding="async" width="800" height="600">
       <div class="service-overlay">
         <div class="service-num">02</div>
         <div class="service-text">
-          <div class="service-name">BBQ Borrel</div>
-          <div class="service-desc">Mini-sliders, gegrilde satés en bite-sized BBQ-hapjes — ideaal voor recepties en netwerkevenementen.</div>
+          <div class="service-name">Premium Decoratie</div>
+          <div class="service-desc">Tafelkleden, centerpieces en seizoensbloemen — uw locatie ziet er direct professioneel en stijlvol uit.</div>
           <div class="service-line"></div>
         </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=75" loading="lazy" decoding="async" alt="BBQ">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=75" loading="lazy" decoding="async" alt="Live Entertainment">
       <div class="service-overlay">
         <div class="service-num">03</div>
         <div class="service-text">
-          <div class="service-name">Slow & Low BBQ</div>
-          <div class="service-desc">12 uur gerookt pulled pork, brisket en spareribs — het échte Amerikaanse BBQ-spektakel voor uw gasten.</div>
+          <div class="service-name">Live Entertainment</div>
+          <div class="service-desc">Professionele DJ of livemuzikant voor 4 uur — van loungemuziek tijdens de BBQ tot feest erna.</div>
           <div class="service-line"></div>
         </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=75" loading="lazy" decoding="async" alt="Aziatisch">
+      <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=75" loading="lazy" decoding="async" alt="Photobooth">
       <div class="service-overlay">
         <div class="service-num">04</div>
         <div class="service-text">
-          <div class="service-name">Asian BBQ Fusion</div>
-          <div class="service-desc">Yakitori, Korean BBQ en Thai gegrild vlees — Aziatische marinades en live grill voor een unieke beleving.</div>
+          <div class="service-name">Photobooth</div>
+          <div class="service-desc">Selfie-booth met props, directe prints en een digitale galerij achteraf — een hit bij elke leeftijd.</div>
           <div class="service-line"></div>
         </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=75" loading="lazy" decoding="async" alt="Bruidscatering">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=75" loading="lazy" decoding="async" alt="Premium Bar Service">
       <div class="service-overlay">
         <div class="service-num">05</div>
         <div class="service-text">
-          <div class="service-name">Bruiloft BBQ</div>
-          <div class="service-desc">BBQ op uw trouwdag: stijlvol, memorabel en volledig op maat. Inclusief styling, crew en coördinator.</div>
+          <div class="service-name">Premium Bar Service</div>
+          <div class="service-desc">Onbeperkt bier, wijn en frisdrank gedurende de volledige service — bediend door ons eigen barteam.</div>
           <div class="service-line"></div>
         </div>
       </div>
     </div>
     <div class="service-card fade-up">
-      <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=800&q=75" loading="lazy" decoding="async" alt="Zakelijk">
+      <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=800&q=75" loading="lazy" decoding="async" alt="Premium Catering Upgrade">
       <div class="service-overlay">
         <div class="service-num">06</div>
         <div class="service-text">
-          <div class="service-name">Corporate BBQ</div>
-          <div class="service-desc">Teambuilding, personeelsfeest of productlancering — professionele BBQ-catering tot 500 gasten.</div>
+          <div class="service-name">Premium Catering Upgrade</div>
+          <div class="service-desc">Wagyu burger, côte de boeuf en Duroc varkenshaas — voor gasten die het verschil proeven.</div>
           <div class="service-line"></div>
         </div>
       </div>
@@ -2081,6 +2112,50 @@ footer {
   </div>
 </section>
 
+
+<!-- ── Process ── -->
+<section id="process">
+  <div class="process-inner">
+    <div>
+      <p class="section-tag fade-up">Hoe Het Werkt</p>
+      <h2 class="section-title fade-up">Boeken in<br><em>4 stappen</em></h2>
+      <div class="process-steps">
+        <div class="process-step active" onclick="setStep(this, 0)">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <div class="step-title">Gratis intake</div>
+            <div class="step-desc">U belt of mailt ons met uw datum, locatie en aantal gasten. Wij bellen binnen 24 uur terug voor een kort intakegesprek.</div>
+          </div>
+        </div>
+        <div class="process-step" onclick="setStep(this, 1)">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <div class="step-title">Scherpe offerte</div>
+            <div class="step-desc">Binnen 24 uur een heldere offerte in uw inbox. Vaste prijs per persoon — crew, opbouw en afruimen altijd inbegrepen.</div>
+          </div>
+        </div>
+        <div class="process-step" onclick="setStep(this, 2)">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <div class="step-title">Menu & details</div>
+            <div class="step-desc">Kies uw vleessoorten, bijgerechten en extra's. Voor evenementen boven 100 gasten: gratis proefmenu bij u thuis.</div>
+          </div>
+        </div>
+        <div class="process-step" onclick="setStep(this, 3)">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <div class="step-title">De dag zelf</div>
+            <div class="step-desc">Wij regelen alles: opbouw, grillen, bediening én afruimen. U hoeft alleen te genieten met uw gasten.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="process-image fade-up">
+      <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&q=75" loading="lazy" decoding="async" alt="Chef aan het werk">
+      <div class="process-image-overlay"></div>
+    </div>
+  </div>
+</section>
 
 <!-- ── Booking ── -->
 <section id="booking">
@@ -2270,7 +2345,7 @@ footer {
             </div>
             <div class="addon-price" id="ao1-price">Vanaf €250</div>
           </label>
-          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao1',event)">?</button>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao1',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao2" value="450.00" data-name="Premium Decoration" data-flat="true" onchange="calcPrice()">
@@ -2278,19 +2353,19 @@ footer {
             <div class="addon-check"></div>
             <div class="addon-name">Premium Decoratie</div>
             <div class="addon-short">Tafelkleden, sfeerverlichting, centerpieces en bloemen — uw locatie ziet er direct professioneel uit.</div>
-            <div class="addon-price">€300 – €600 </div>
+            <div class="addon-price">€300 – €2.000 </div>
           </label>
-          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao2',event)">?</button>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao2',event)">?</button>
         </div>
         <div class="addon-item">
-          <input type="checkbox" id="ao3" value="750.00" data-name="DJ / Live Music" data-flat="true" onchange="calcPrice()">
+          <input type="checkbox" id="ao3" value="750.00" data-name="Live Entertainment" data-flat="true" onchange="calcPrice()">
           <label class="addon-label" for="ao3">
             <div class="addon-check"></div>
-            <div class="addon-name">DJ / Live Muziek</div>
+            <div class="addon-name">Live Entertainment</div>
             <div class="addon-short">Professionele DJ of livemuzikant voor 4 uur — van lounge tijdens het eten tot feest erna.</div>
-            <div class="addon-price">€500 – €1.000 </div>
+            <div class="addon-price">€500 – €25.000 </div>
           </label>
-          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao3',event)">?</button>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao3',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao4" value="300.00" data-name="Photo Booth" data-flat="true" onchange="calcPrice()">
@@ -2300,7 +2375,7 @@ footer {
             <div class="addon-short">Selfie-booth met props, directe prints en digitale galerij — een hit bij elke leeftijd.</div>
             <div class="addon-price">€200 – €400 </div>
           </label>
-          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao4',event)">?</button>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao4',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao5" value="20.00" data-name="Premium Bar Service" onchange="calcPrice()">
@@ -2310,7 +2385,7 @@ footer {
             <div class="addon-short">Onbeperkt bier, wijn en frisdrank — bediend door ons team gedurende de volledige service.</div>
             <div class="addon-price">Vanaf €20 p.p.</div>
           </label>
-          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao5',event)">?</button>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao5',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao6" value="0" data-name="Premium Catering Upgrade" style="display:none">
@@ -2327,7 +2402,7 @@ footer {
             </div>
             <div class="addon-price" id="upgrade-price-label">+ €15 p.p.</div>
           </div>
-          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao6',event)">?</button>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao6',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao7" value="175.00" data-name="Extra Crew Member" data-flat="true" onchange="calcPrice()">
@@ -2337,7 +2412,7 @@ footer {
             <div class="addon-short">Een extra professioneel crewlid — kortere wachttijden en meer aandacht voor uw gasten.</div>
             <div class="addon-price">€150 – €200 </div>
           </label>
-          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao7',event)">?</button>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao7',event)">?</button>
         </div>
         <div class="addon-item">
           <input type="checkbox" id="ao8" value="0" data-name="Kids Menu" style="display:none">
@@ -2351,7 +2426,7 @@ footer {
             </div>
             <div class="addon-price" id="kids-price-label" style="color:#4ade80">− €15 korting p. kind (t/m 12 jaar)</div>
           </div>
-          <button class="addon-info-btn" type="button" onclick="showAddonInfo('ao8',event)">?</button>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao8',event)">?</button>
         </div>
       </div>
       <div class="carousel-dots" id="addons-dots" style="display:none">
@@ -2506,50 +2581,6 @@ footer {
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ── Process ── -->
-<section id="process">
-  <div class="process-inner">
-    <div>
-      <p class="section-tag fade-up">Hoe Het Werkt</p>
-      <h2 class="section-title fade-up">Boeken in<br><em>4 stappen</em></h2>
-      <div class="process-steps">
-        <div class="process-step active" onclick="setStep(this, 0)">
-          <div class="step-num">01</div>
-          <div class="step-content">
-            <div class="step-title">Gratis intake</div>
-            <div class="step-desc">U belt of mailt ons met uw datum, locatie en aantal gasten. Wij bellen binnen 24 uur terug voor een kort intakegesprek.</div>
-          </div>
-        </div>
-        <div class="process-step" onclick="setStep(this, 1)">
-          <div class="step-num">02</div>
-          <div class="step-content">
-            <div class="step-title">Scherpe offerte</div>
-            <div class="step-desc">Binnen 24 uur een heldere offerte in uw inbox. Vaste prijs per persoon — crew, opbouw en afruimen altijd inbegrepen.</div>
-          </div>
-        </div>
-        <div class="process-step" onclick="setStep(this, 2)">
-          <div class="step-num">03</div>
-          <div class="step-content">
-            <div class="step-title">Menu & details</div>
-            <div class="step-desc">Kies uw vleessoorten, bijgerechten en extra's. Voor evenementen boven 100 gasten: gratis proefmenu bij u thuis.</div>
-          </div>
-        </div>
-        <div class="process-step" onclick="setStep(this, 3)">
-          <div class="step-num">04</div>
-          <div class="step-content">
-            <div class="step-title">De dag zelf</div>
-            <div class="step-desc">Wij regelen alles: opbouw, grillen, bediening én afruimen. U hoeft alleen te genieten met uw gasten.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="process-image fade-up">
-      <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&q=75" loading="lazy" decoding="async" alt="Chef aan het werk">
-      <div class="process-image-overlay"></div>
     </div>
   </div>
 </section>
@@ -3034,8 +3065,10 @@ document.getElementById('f-package').addEventListener('change', function() {
 
 /* ── Process steps ── */
 function setStep(el) {
-  document.querySelectorAll('.process-step').forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
+  const current = document.querySelector('.process-step.active');
+  if (current === el) return;
+  if (current) current.classList.remove('active');
+  requestAnimationFrame(() => el.classList.add('active'));
 }
 
 /* ── Toast ── */
@@ -3103,15 +3136,15 @@ const addonData = {
   ao1: {
     name: 'Tent', price: 'Vanaf €250 (+ €150 met verwarming)',
     desc: 'Geen compromissen door het weer. Onze feesttent biedt ruimte voor tot 100 gasten en zorgt dat uw BBQ doorgaat — ongeacht regen of zon. Voeg verwarming toe (+€150) voor evenementen in het najaar of bij koude avonden.',
-    includes: ['Professionele partytent (tot 100 m²)', 'Sfeerverlichting inbegrepen', 'Opbouw dag voor het evenement', 'Afbraak dag erna — geen omkijken naar', 'Optie: verwarming toevoegen voor +€150']
+    includes: ['Professionele partytent (tot 100 m²)', 'Opbouw dag voor het evenement', 'Afbraak dag erna — geen omkijken naar', 'Optie: verwarming toevoegen voor +€150']
   },
   ao2: {
-    name: 'Premium Decoratie', price: '€300 – €600 ',
+    name: 'Premium Decoratie', price: '€300 – €2.000 ',
     desc: 'Van linnen tafelkleden en kaarsenhouders tot sfeerverlichting en seizoensbloemen — ons decoratieteam zorgt dat uw locatie er precies uitziet zoals u het in gedachten had. Stijlvol, compleet en zonder gedoe.',
     includes: ['Tafelkleden & linnen servetten', 'Sfeer- en accentverlichting', 'Centerpieces & kaarsenhouders', 'Seizoensgebonden bloemenopstelling', 'Op- en afbouw door ons team']
   },
   ao3: {
-    name: 'DJ / Live Muziek', price: '€500 – €1.000 ',
+    name: 'Live Entertainment', price: '€500 – €25.000 ',
     desc: 'De juiste muziek maakt het verschil tussen een goed evenement en een feest dat nog maanden nabesproken wordt. Kies een professionele DJ of livemuzikant voor tot 4 uur — van loungemuziek tijdens de BBQ tot feest erna.',
     includes: ['DJ of livemuzikant (tot 4 uur)', 'Professioneel geluidssysteem', 'Sfeerverlichting & LED-installatie', 'Playlist-wensen mogelijk', 'Soundcheck 1 uur voor aanvang']
   },
