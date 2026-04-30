@@ -228,6 +228,7 @@ ul { list-style: none; }
   height: 78vh;
   min-height: 520px;
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .hero-slides {
@@ -868,6 +869,11 @@ section { padding: 100px 80px; }
 @media (max-width: 768px) {
   .discounts-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .discount-card { padding: 18px 14px; }
+  .package-card.selected,
+  .package-card.featured,
+  .packages-grid.has-selection .package-card.featured:not(.selected) {
+    box-shadow: none;
+  }
 }
 
 /* ─── Booking Form ───────────────────────────────────────────── */
