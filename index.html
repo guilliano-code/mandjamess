@@ -162,7 +162,7 @@ ul { list-style: none; }
 #navbar.show { transform: translateY(0); }
 
 .nav-logo {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: 1px;
@@ -287,7 +287,7 @@ ul { list-style: none; }
 .hero-slide.active .hero-tag { opacity: 1; transform: translateY(0); }
 
 .hero-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(2.8rem, 6vw, 5.5rem);
   font-weight: 700;
   line-height: 1.1;
@@ -297,7 +297,7 @@ ul { list-style: none; }
   transition: opacity 0.8s 0.5s ease, transform 0.8s 0.5s ease;
 }
 .hero-slide.active .hero-title { opacity: 1; transform: translateY(0); }
-.hero-title em { color: var(--red); font-style: italic; }
+.hero-title em { color: var(--red); font-style: normal; font-weight: 800; }
 
 .hero-sub {
   font-size: 1rem;
@@ -412,13 +412,13 @@ section { padding: 100px 80px; }
   margin-bottom: 12px;
 }
 .section-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 20px;
 }
-.section-title em { color: var(--red); font-style: italic; }
+.section-title em { color: var(--red); font-style: normal; font-weight: 800; }
 .section-sub {
   font-size: 0.95rem;
   font-weight: 300;
@@ -572,7 +572,7 @@ section { padding: 100px 80px; }
 }
 .service-text { display: contents; }
 .service-name {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 10px;
@@ -683,7 +683,7 @@ section { padding: 100px 80px; }
   margin-bottom: 20px;
 }
 .pkg-name {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 6px;
@@ -839,7 +839,7 @@ section { padding: 100px 80px; }
   margin-bottom: 4px;
 }
 .discount-label {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -874,7 +874,7 @@ section { padding: 100px 80px; }
   padding: 56px;
 }
 .booking-form-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.8rem;
   margin-bottom: 8px;
 }
@@ -976,7 +976,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   margin-bottom: 32px;
 }
 .addons-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -1046,7 +1046,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   margin-bottom: 2px;
 }
 .addon-name {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
 }
@@ -1271,7 +1271,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 .process-step.active .step-num { color: rgba(196,30,58,0.3); }
 .step-content {}
 .step-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 8px;
@@ -1399,7 +1399,7 @@ footer {
   margin-bottom: 32px;
 }
 .footer-brand-name {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.3rem;
   font-weight: 800;
   letter-spacing: 1px;
@@ -1585,7 +1585,26 @@ footer {
   #navbar { padding: 0 40px; }
   #about { grid-template-columns: 1fr; gap: 48px; }
   .about-images { height: 400px; }
-  .packages-grid { grid-template-columns: 1fr; }
+  .packages-carousel-wrap { position: relative; }
+  .packages-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px;
+    scrollbar-width: none;
+    padding: 4px calc(50vw - 38vw) 4px;
+    margin: 0 -24px;
+    margin-bottom: 16px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 16%, black 84%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 16%, black 84%, transparent 100%);
+  }
+  .packages-grid::-webkit-scrollbar { display: none; }
+  .packages-grid .package-card {
+    flex: 0 0 76vw;
+    scroll-snap-align: center;
+    min-width: 0;
+  }
   .addons-grid { grid-template-columns: repeat(2, 1fr); }
   #contact { grid-template-columns: 1fr; gap: 48px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -1721,7 +1740,7 @@ footer {
 }
 .addon-modal-close:hover { background: var(--red); color: var(--white); border-color: var(--red); }
 .addon-modal-emoji { display: none; }
-.addon-modal-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+.addon-modal-title { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
 .addon-modal-price {
   display: inline-block;
   background: var(--red-g);
@@ -2054,7 +2073,8 @@ footer {
     <p class="section-sub fade-up">Drie heldere pakketten, vaste prijzen per persoon. Geen verborgen kosten — crew, opbouw en afruimen altijd inbegrepen.</p>
   </div>
 
-  <div class="packages-grid">
+  <div class="packages-carousel-wrap">
+  <div class="packages-grid" id="packages-carousel">
     <!-- Klassiek -->
     <div class="package-card fade-up" data-package="basis" data-price="65.00">
       <div class="pkg-name">BBQ Basis</div>
@@ -2117,6 +2137,12 @@ footer {
       </ul>
       <button class="pkg-select" onclick="selectPackage(this, 'BBQ Premium', 80.00)">Selecteer Pakket</button>
     </div>
+  </div>
+  <div class="carousel-dots" id="packages-dots" style="display:none">
+    <div class="carousel-dot active"></div>
+    <div class="carousel-dot"></div>
+    <div class="carousel-dot"></div>
+  </div>
   </div>
 
   <!-- Kortingen -->
@@ -2954,6 +2980,12 @@ function selectPackage(btn, name, price) {
   sel.classList.add('field-flash');
 
   calcPrice();
+
+  // Auto-scroll to booking form
+  setTimeout(() => {
+    const form = document.querySelector('.booking-form-wrapper');
+    if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 350);
 }
 
 /* sync dropdown → card highlight */
@@ -3256,6 +3288,7 @@ updatePeople(slider);
 calcPrice();
 initCarousel('services-carousel', 'services-dots');
 initCarousel('addons-grid', 'addons-dots');
+initCarousel('packages-carousel', 'packages-dots');
 </script>
 </body>
 </html>
