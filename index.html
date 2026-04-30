@@ -1529,11 +1529,68 @@ footer {
   text-align: center;
   letter-spacing: 0.5px;
 }
-.bezorg-btn {
-  display: inline-flex;
+.bezorg-divider {
+  display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 32px;
+  gap: 12px;
+  margin: 16px 0;
+  color: rgba(245,240,235,0.25);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+}
+.bezorg-divider::before,
+.bezorg-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(245,240,235,0.08);
+}
+.bezorg-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(245,240,235,0.04);
+  border: 1px solid rgba(245,240,235,0.08);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+  text-decoration: none;
+  color: var(--white);
+  width: 100%;
+}
+.bezorg-link:hover {
+  background: rgba(245,240,235,0.07);
+  border-color: rgba(245,240,235,0.15);
+}
+.bezorg-link-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.bezorg-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+.bezorg-link-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+}
+.bezorg-link-sub {
+  font-size: 0.75rem;
+  color: rgba(245,240,235,0.45);
+}
+.bezorg-link-arrow {
+  font-size: 1rem;
+  color: rgba(245,240,235,0.3);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+.bezorg-link:hover .bezorg-link-arrow {
+  transform: translateX(4px);
+  color: var(--red);
 }
 
 /* ─── Meats tab switcher (mobile only) ──────────────────────── */
@@ -1887,7 +1944,6 @@ footer {
   #process { padding-bottom: 0; }
   .meats-grid { grid-template-columns: 1fr; gap: 8px; }
   #meats { margin-top: 40px; padding-top: 40px; }
-  .bezorg-btn { width: 100%; justify-content: center; }
   #booking { padding: 60px 24px; }
   .contact-form-panel { padding: 32px 24px; }
   .contact-form-panel .form-grid { grid-template-columns: 1fr; }
@@ -2416,11 +2472,6 @@ footer {
       </div>
     </div>
     <p class="meats-note fade-up">Exacte selectie wordt tijdens intake afgestemd op uw evenement en dieetwensen.</p>
-    <div style="text-align:center">
-      <a href="mailto:contact@mandjagrill.nl?subject=Ik%20wil%20vlees%20laten%20bezorgen&body=Hi%20Mandja%2C%0A%0AIk%20zou%20graag%20vlees%20willen%20laten%20bezorgen." class="btn-outline bezorg-btn fade-up">
-        <span>🚚</span> Ik laat liever bezorgen
-      </a>
-    </div>
   </div>
 
   <!-- Kortingen -->
@@ -2650,6 +2701,15 @@ footer {
 
     <div class="form-submit">
       <button class="btn-primary" onclick="submitBooking()">Offerte Aanvragen</button>
+      <div class="bezorg-divider"><span>of</span></div>
+      <a href="mailto:contact@mandjagrill.nl?subject=Ik%20wil%20vlees%20laten%20bezorgen&body=Hi%20Mandja%2C%0A%0AIk%20zou%20graag%20vlees%20willen%20laten%20bezorgen." class="bezorg-link">
+        <span class="bezorg-link-icon">🚚</span>
+        <span class="bezorg-link-text">
+          <span class="bezorg-link-title">Ik laat liever bezorgen</span>
+          <span class="bezorg-link-sub">Stuur ons een bericht, wij regelen de rest</span>
+        </span>
+        <span class="bezorg-link-arrow">→</span>
+      </a>
       <p class="form-privacy">Door te verzenden gaat u akkoord met onze privacyverklaring. Wij delen uw gegevens nooit met derden.</p>
     </div>
   </div>
