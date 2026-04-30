@@ -1591,20 +1591,24 @@ footer {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: 14px;
+    gap: 12px;
     scrollbar-width: none;
-    padding: 4px calc(50vw - 38vw) 4px;
+    padding: 4px calc(50vw - 43vw) 4px;
     margin: 0 -24px;
     margin-bottom: 16px;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 16%, black 84%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 16%, black 84%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%);
   }
   .packages-grid::-webkit-scrollbar { display: none; }
   .packages-grid .package-card {
-    flex: 0 0 76vw;
+    flex: 0 0 86vw;
     scroll-snap-align: center;
     min-width: 0;
+    text-align: center;
   }
+  .packages-grid .about-feature,
+  .packages-grid .pkg-features li { text-align: left; }
+  .packages-grid .pkg-select { text-align: center; }
   .addons-grid { grid-template-columns: repeat(2, 1fr); }
   #contact { grid-template-columns: 1fr; gap: 48px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -3289,6 +3293,21 @@ calcPrice();
 initCarousel('services-carousel', 'services-dots');
 initCarousel('addons-grid', 'addons-dots');
 initCarousel('packages-carousel', 'packages-dots');
+
+// Start packages carousel on middle card (BBQ Compleet)
+(function() {
+  if (window.innerWidth > 768) return;
+  const grid = document.getElementById('packages-carousel');
+  if (!grid) return;
+  const cards = grid.querySelectorAll('.package-card');
+  if (cards.length < 2) return;
+  // scroll to card index 1 (middle)
+  requestAnimationFrame(() => {
+    const card = cards[1];
+    const offset = card.offsetLeft - (grid.clientWidth / 2) + (card.offsetWidth / 2);
+    grid.scrollLeft = offset;
+  });
+})();
 </script>
 </body>
 </html>
