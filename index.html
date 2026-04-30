@@ -670,8 +670,13 @@ section { padding: 100px 80px; }
 }
 .package-card.featured {
   border-color: var(--red);
-  box-shadow: 0 0 0 1px var(--red), 0 12px 40px rgba(196,30,58,0.15);
+  box-shadow: 0 0 0 1px var(--red), 0 16px 48px rgba(212,0,26,0.3), 0 0 40px rgba(212,0,26,0.18);
   background: linear-gradient(160deg, var(--dark3) 0%, var(--dark2) 100%);
+}
+/* When another package is selected, dim the featured card */
+.packages-grid.has-selection .package-card.featured:not(.selected) {
+  border-color: rgba(245,240,235,0.08);
+  box-shadow: none;
 }
 
 .pkg-badge {
@@ -2891,8 +2896,13 @@ window.addEventListener('scroll', () => {
       if (y > 80) {
         navbar.classList.add('scrolled');
         if (mobile) {
-          navbar.classList.toggle('hide', y > lastY + 5);
-          navbar.classList.toggle('show', y < lastY - 5);
+          if (y > lastY + 8) {
+            navbar.classList.add('hide');
+            navbar.classList.remove('show');
+          } else if (y < lastY - 12) {
+            navbar.classList.remove('hide');
+            navbar.classList.add('show');
+          }
         } else {
           navbar.classList.remove('hide');
         }
@@ -2967,6 +2977,7 @@ function selectPackage(btn, name, price) {
   });
   const card = btn.closest('.package-card');
   card.classList.add('selected');
+  document.getElementById('packages-carousel').classList.add('has-selection');
   btn.textContent = '✓ Geselecteerd';
   btn.style.background = 'var(--red)';
   btn.style.color = 'var(--white)';
@@ -3041,6 +3052,7 @@ function submitBooking() {
     if (b) { b.textContent = 'Selecteer Pakket'; b.style.background = ''; b.style.color = ''; }
   });
   selectedPkg = { name: '', price: 0 };
+  document.getElementById('packages-carousel').classList.remove('has-selection');
   calcPrice();
 }
 
