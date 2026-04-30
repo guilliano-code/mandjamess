@@ -2226,6 +2226,53 @@ footer {
   </div>
 </section>
 
+<!-- ── Vleessoorten ── -->
+<section id="meats">
+  <p class="section-tag fade-up">Wat staat er op de grill?</p>
+  <h2 class="section-title fade-up">Vlees per <em>pakket</em></h2>
+  <p class="section-sub fade-up">Alles onbeperkt gedurende de service — exact welke vleessoorten worden besproken en afgestemd tijdens het intakegesprek. Zakelijke facturatie is altijd mogelijk.</p>
+  <div class="meats-grid">
+    <div class="meat-card fade-up">
+      <div class="meat-card-name">BBQ Basis</div>
+      <div class="meat-card-price">€60 <span>p.p.</span></div>
+      <ul>
+        <li>Gemarineerde kipfilet</li>
+        <li>Hamburger (180g)</li>
+        <li>Merguez worstje</li>
+        <li>Vegetarische optie inbegrepen</li>
+        <li>Stokbrood + kruidenboter</li>
+        <li>2 sauzen naar keuze</li>
+      </ul>
+    </div>
+    <div class="meat-card fade-up">
+      <div class="meat-card-name">BBQ Compleet</div>
+      <div class="meat-card-price">€70 <span>p.p.</span></div>
+      <ul>
+        <li>Gemarineerde kipfilet & kippendij</li>
+        <li>Smash burger (180g)</li>
+        <li>Sparerib (halve rack)</li>
+        <li>Entrecôte (200g)</li>
+        <li>Gemarineerde garnalen</li>
+        <li>Vegetarisch & vegan optie</li>
+      </ul>
+    </div>
+    <div class="meat-card fade-up">
+      <div class="meat-card-name">BBQ Premium</div>
+      <div class="meat-card-price">€80 <span>p.p.</span></div>
+      <ul>
+        <li>Wagyu burger (180g)</li>
+        <li>Côte de boeuf aan het bot</li>
+        <li>Duroc varkenshaas + kruidenboter</li>
+        <li>Whole chicken (live carving)</li>
+        <li>Tomahawk steak (gedeeld)</li>
+        <li>Zeevruchten van de grill</li>
+        <li>Volledige vegetarisch/vegan lijn</li>
+      </ul>
+    </div>
+  </div>
+  <p class="meats-note fade-up">Exacte selectie wordt tijdens intake afgestemd op uw evenement en dieetwensen.</p>
+</section>
+
 <!-- ── Booking ── -->
 <section id="booking">
   <div class="booking-header">
@@ -2301,11 +2348,6 @@ footer {
       </ul>
       <button class="pkg-select" onclick="selectPackage(this, 'BBQ Premium', 80.00)">Selecteer Pakket</button>
     </div>
-  </div>
-  <div class="carousel-dots" id="packages-dots" style="display:none; margin-bottom:40px">
-    <div class="carousel-dot active"></div>
-    <div class="carousel-dot"></div>
-    <div class="carousel-dot"></div>
   </div>
   </div>
 
@@ -2670,53 +2712,6 @@ footer {
     <div class="gallery-item"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=75" loading="lazy" decoding="async" alt=""></div>
   </div>
 </div>
-
-<!-- ── Vleessoorten ── -->
-<section id="meats">
-  <p class="section-tag fade-up">Wat staat er op de grill?</p>
-  <h2 class="section-title fade-up">Vlees per <em>pakket</em></h2>
-  <p class="section-sub fade-up">Alles onbeperkt gedurende de service — exact welke vleessoorten worden besproken en afgestemd tijdens het intakegesprek. Zakelijke facturatie is altijd mogelijk.</p>
-  <div class="meats-grid">
-    <div class="meat-card fade-up">
-      <div class="meat-card-name">BBQ Basis</div>
-      <div class="meat-card-price">€60 <span>p.p.</span></div>
-      <ul>
-        <li>Gemarineerde kipfilet</li>
-        <li>Hamburger (180g)</li>
-        <li>Merguez worstje</li>
-        <li>Vegetarische optie inbegrepen</li>
-        <li>Stokbrood + kruidenboter</li>
-        <li>2 sauzen naar keuze</li>
-      </ul>
-    </div>
-    <div class="meat-card fade-up">
-      <div class="meat-card-name">BBQ Compleet</div>
-      <div class="meat-card-price">€70 <span>p.p.</span></div>
-      <ul>
-        <li>Gemarineerde kipfilet & kippendij</li>
-        <li>Smash burger (180g)</li>
-        <li>Sparerib (halve rack)</li>
-        <li>Entrecôte (200g)</li>
-        <li>Gemarineerde garnalen</li>
-        <li>Vegetarisch & vegan optie</li>
-      </ul>
-    </div>
-    <div class="meat-card fade-up">
-      <div class="meat-card-name">BBQ Premium</div>
-      <div class="meat-card-price">€80 <span>p.p.</span></div>
-      <ul>
-        <li>Wagyu burger (180g)</li>
-        <li>Côte de boeuf aan het bot</li>
-        <li>Duroc varkenshaas + kruidenboter</li>
-        <li>Whole chicken (live carving)</li>
-        <li>Tomahawk steak (gedeeld)</li>
-        <li>Zeevruchten van de grill</li>
-        <li>Volledige vegetarisch/vegan lijn</li>
-      </ul>
-    </div>
-  </div>
-  <p class="meats-note fade-up">Exacte selectie wordt tijdens intake afgestemd op uw evenement en dieetwensen.</p>
-</section>
 
 <!-- ── FAQ ── -->
 <section id="faq">
@@ -3580,7 +3575,6 @@ updatePeople(slider);
 calcPrice();
 initCarousel('services-carousel', 'services-dots');
 initCarousel('addons-grid', 'addons-dots');
-initCarousel('packages-carousel', 'packages-dots');
 
 // Start packages carousel on middle card (BBQ Compleet)
 (function() {
