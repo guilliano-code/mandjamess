@@ -758,6 +758,35 @@ section { padding: 100px 80px; }
   color: var(--white);
 }
 
+/* ─── Adres autocomplete ─────────────────────────────────────── */
+.autocomplete-wrap { position: relative; }
+.autocomplete-list {
+  position: absolute;
+  top: calc(100% + 4px); left: 0; right: 0;
+  background: var(--dark2);
+  border: 1px solid rgba(212,0,26,0.35);
+  border-radius: 6px;
+  z-index: 500;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  max-height: 220px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.autocomplete-item {
+  padding: 11px 16px;
+  font-size: 0.85rem;
+  color: rgba(245,240,235,0.82);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(245,240,235,0.05);
+  transition: background 0.15s;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.autocomplete-item:last-child { border-bottom: none; }
+.autocomplete-item:hover, .autocomplete-item.active { background: rgba(212,0,26,0.12); color: var(--white); }
+.autocomplete-pin { color: var(--red); flex-shrink: 0; font-size: 0.9rem; margin-top: 1px; }
+.autocomplete-main { font-weight: 600; }
+.autocomplete-sub { font-size: 0.75rem; color: rgba(245,240,235,0.4); display: block; margin-top: 1px; }
+
 /* ─── Kortingen grid ─────────────────────────────────────────── */
 .discounts-grid {
   display: grid;
@@ -2149,7 +2178,10 @@ footer {
 
       <div class="form-field full">
         <label>Locatie / Adres</label>
-        <input type="text" placeholder="Naam locatie, Straat 1, Stad" id="f-location">
+        <div class="autocomplete-wrap">
+          <input type="text" placeholder="Naam locatie, Straat 1, Stad" id="f-location" autocomplete="off">
+          <div class="autocomplete-list" id="addr-list" style="display:none"></div>
+        </div>
       </div>
     </div>
 
@@ -3073,6 +3105,85 @@ function initCarousel(carouselId, dotsId) {
   window.addEventListener('resize', updateDots);
   updateDots();
 }
+
+/* ── Adres autocomplete (Photon / OpenStreetMap) ── */
+(function() {
+  const input   = document.getElementById('f-location');
+  const list    = document.getElementById('addr-list');
+  let timer     = null;
+  let activeIdx = -1;
+  let results   = [];
+
+  function show(items) {
+    results = items;
+    activeIdx = -1;
+    if (!items.length) { list.style.display = 'none'; return; }
+    list.innerHTML = items.map((r, i) => {
+      const props = r.properties;
+      const main  = [props.name, props.housenumber].filter(Boolean).join(' ');
+      const sub   = [props.street, props.postcode, props.city || props.town || props.village, props.country].filter(Boolean).join(', ');
+      return `<div class="autocomplete-item" data-i="${i}">
+        <span class="autocomplete-pin">📍</span>
+        <span><span class="autocomplete-main">${main || props.street || sub}</span>
+        <span class="autocomplete-sub">${sub}</span></span>
+      </div>`;
+    }).join('');
+    list.style.display = 'block';
+
+    list.querySelectorAll('.autocomplete-item').forEach(el => {
+      el.addEventListener('mousedown', e => {
+        e.preventDefault();
+        select(+el.dataset.i);
+      });
+    });
+  }
+
+  function select(i) {
+    const props = results[i].properties;
+    const parts = [
+      props.name !== props.street ? props.name : null,
+      props.street,
+      props.housenumber,
+      props.postcode,
+      props.city || props.town || props.village
+    ].filter(Boolean);
+    input.value = parts.join(', ');
+    list.style.display = 'none';
+    activeIdx = -1;
+  }
+
+  function setActive(i) {
+    const items = list.querySelectorAll('.autocomplete-item');
+    items.forEach(el => el.classList.remove('active'));
+    if (i >= 0 && i < items.length) { items[i].classList.add('active'); activeIdx = i; }
+  }
+
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    const q = input.value.trim();
+    if (q.length < 3) { list.style.display = 'none'; return; }
+    timer = setTimeout(() => {
+      // bias to Netherlands + Belgium
+      fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=6&lang=nl&bbox=2.5,50.5,7.3,53.6`)
+        .then(r => r.json())
+        .then(d => show(d.features || []))
+        .catch(() => { list.style.display = 'none'; });
+    }, 280);
+  });
+
+  input.addEventListener('keydown', e => {
+    const items = list.querySelectorAll('.autocomplete-item');
+    if (!items.length || list.style.display === 'none') return;
+    if (e.key === 'ArrowDown')  { e.preventDefault(); setActive(Math.min(activeIdx + 1, items.length - 1)); }
+    if (e.key === 'ArrowUp')    { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
+    if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); select(activeIdx); }
+    if (e.key === 'Escape')     { list.style.display = 'none'; }
+  });
+
+  document.addEventListener('click', e => {
+    if (!input.contains(e.target) && !list.contains(e.target)) list.style.display = 'none';
+  });
+})();
 
 /* ── Kids Menu stepper ── */
 function adjustKids(delta) {
