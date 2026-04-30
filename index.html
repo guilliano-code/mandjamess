@@ -1491,7 +1491,9 @@ footer {
 
 /* ─── Vleessoorten ──────────────────────────────────────────── */
 #meats {
-  background: var(--dark2);
+  padding-top: 60px;
+  border-top: 1px solid rgba(245,240,235,0.06);
+  margin-top: 60px;
 }
 .meats-grid {
   display: grid;
@@ -1526,6 +1528,12 @@ footer {
   color: rgba(245,240,235,0.35);
   text-align: center;
   letter-spacing: 0.5px;
+}
+.bezorg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 32px;
 }
 
 /* ─── FAQ ───────────────────────────────────────────────────── */
@@ -1826,6 +1834,8 @@ footer {
   .process-image { display: none; }
   #process { padding-bottom: 0; }
   .meats-grid { grid-template-columns: 1fr; gap: 8px; }
+  #meats { margin-top: 40px; padding-top: 40px; }
+  .bezorg-btn { width: 100%; justify-content: center; }
   #booking { padding: 60px 24px; }
   .contact-form-panel { padding: 32px 24px; }
   .contact-form-panel .form-grid { grid-template-columns: 1fr; }
@@ -2305,9 +2315,9 @@ footer {
   </div>
 
   <!-- Vleessoorten -->
-  <div id="meats" style="margin-top:60px">
-    <p class="section-tag fade-up" style="text-align:center">Wat staat er op de grill?</p>
-    <h2 class="section-title fade-up" style="text-align:center">Vlees per <em>pakket</em></h2>
+  <div id="meats">
+    <p class="section-tag fade-up">Wat staat er op de grill?</p>
+    <h2 class="section-title fade-up">Vlees per <em>pakket</em></h2>
     <p class="section-sub fade-up">Alles onbeperkt gedurende de service — exact welke vleessoorten worden besproken en afgestemd tijdens het intakegesprek. Zakelijke facturatie is altijd mogelijk.</p>
     <div class="meats-grid">
       <div class="meat-card fade-up">
@@ -2349,8 +2359,8 @@ footer {
       </div>
     </div>
     <p class="meats-note fade-up">Exacte selectie wordt tijdens intake afgestemd op uw evenement en dieetwensen.</p>
-    <div style="text-align:center; margin-top:32px">
-      <a href="mailto:contact@mandjagrill.nl?subject=Ik%20wil%20vlees%20laten%20bezorgen&body=Hi%20Mandja%2C%0A%0AIk%20zou%20graag%20vlees%20willen%20laten%20bezorgen." class="btn-outline fade-up" style="display:inline-flex; align-items:center; gap:10px; padding:15px 36px; font-size:0.82rem; letter-spacing:1.5px; font-weight:700;">
+    <div style="text-align:center">
+      <a href="mailto:contact@mandjagrill.nl?subject=Ik%20wil%20vlees%20laten%20bezorgen&body=Hi%20Mandja%2C%0A%0AIk%20zou%20graag%20vlees%20willen%20laten%20bezorgen." class="btn-outline bezorg-btn fade-up">
         <span>🚚</span> Ik laat liever bezorgen
       </a>
     </div>
