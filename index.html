@@ -3266,9 +3266,9 @@ function selectPackage(btn, name, price) {
 
   // Reset slider to package default
   const pkgKey = card.dataset.package;
-  const pkgDefaults = { basis: 25, compleet: 15, premium: 15 };
+  const pkgMins = { basis: 25, compleet: 20, premium: 20 };
   const sl = document.getElementById('people-slider');
-  if (sl) { sl.value = pkgDefaults[pkgKey] || 25; updatePeople(sl); calcPrice(); }
+  if (sl) { sl.min = pkgMins[pkgKey] || 15; sl.value = pkgMins[pkgKey] || 25; updatePeople(sl); calcPrice(); }
 
   // Use data-package attribute for exact dropdown value match
   const sel = document.getElementById('f-package');
