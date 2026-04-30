@@ -15,7 +15,7 @@ html.is-loading,html.is-loading body{overflow:hidden!important;height:100%;touch
 <!-- Fonts non-blocking -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"></noscript>
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=75" fetchpriority="high">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80" fetchpriority="high">
 <style>
 /* ─── Preloader ──────────────────────────────────────────────── */
 #preloader {
@@ -2854,12 +2854,27 @@ function calcPrice() {
   const noScroll = e => e.preventDefault();
   document.addEventListener('touchmove', noScroll, { passive: false });
 
-  setTimeout(() => {
+  function hidePreloader() {
     document.getElementById('preloader').classList.add('done');
     document.documentElement.classList.remove('is-loading');
     document.removeEventListener('touchmove', noScroll);
     window.scrollTo(0, 0);
-  }, 2200);
+  }
+
+  // Wait for: min animation time + fonts + hero image
+  const HERO_URL = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80';
+
+  const minTime   = new Promise(r => setTimeout(r, 1800));
+  const fontsOk   = document.fonts ? document.fonts.ready : Promise.resolve();
+  const heroReady = new Promise(r => {
+    const img = new Image();
+    img.onload = img.onerror = r;
+    img.src = HERO_URL;
+  });
+
+  Promise.all([minTime, fontsOk, heroReady])
+    .then(hidePreloader)
+    .catch(hidePreloader); // always hide even on error
 })();
 
 /* ── Custom cursor ── */
