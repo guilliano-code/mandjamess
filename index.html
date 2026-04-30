@@ -2281,16 +2281,16 @@ footer {
       <div class="addons-title">Voeg toe aan uw pakket</div>
       <div class="addons-grid">
         <div class="addon-item">
-          <input type="checkbox" id="ao1" value="250.00" data-name="Tent" data-flat="true" onchange="calcPrice(); toggleTentHeat()">
+          <input type="checkbox" id="ao1" value="0" data-name="Tent" data-flat="true" onchange="calcPrice(); toggleTentHeat()">
           <label class="addon-label" for="ao1">
             <div class="addon-check"></div>
             <div class="addon-name">Tent</div>
             <div class="addon-short">Professionele feesttent voor tot 100 gasten — beschermd tegen regen, wind en zon.</div>
             <div class="tent-heat-row" id="tent-heat-row" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,240,235,0.08)">
               <button type="button" id="ao1-heat-btn" class="tent-heat-btn" onclick="event.stopPropagation();toggleHeat()">
-                Met verwarming <span class="tent-heat-price">+ €150</span>
+                Met verwarming
               </button>
-              <input type="checkbox" id="ao1-heat" value="150.00" data-flat="true" style="display:none">
+              <input type="checkbox" id="ao1-heat" value="0" style="display:none">
             </div>
             <div class="addon-price" id="ao1-price">Vanaf €250</div>
           </label>
@@ -2771,13 +2771,14 @@ function calcPrice() {
     if (cb.dataset.flat) addonFlat += parseFloat(cb.value) || 0;
     else                  addonPP  += parseFloat(cb.value) || 0;
   });
-  // Tent heating (not inside .addon-item but inside ao1 label)
-  const heatCb = document.getElementById('ao1-heat');
-  if (heatCb && heatCb.checked) addonFlat += 150;
-  // Update tent price label
+  // Tent: €250 base + €100 per 50 guests; heating: €0.50 p.p.
   const tentCb = document.getElementById('ao1');
-  const tpl = document.getElementById('ao1-price');
-  if (tpl) tpl.textContent = tentCb && tentCb.checked && heatCb && heatCb.checked ? '€550 ' : '€400 ';
+  const heatCb = document.getElementById('ao1-heat');
+  if (tentCb && tentCb.checked) {
+    const tentBase = 250 + Math.floor((guests - 1) / 50) * 100;
+    addonFlat += tentBase;
+    if (heatCb && heatCb.checked) addonFlat += guests * 0.50;
+  }
 
   // Premium Catering Upgrade stepper
   const upgradeCount = parseInt(document.getElementById('upgrade-count')?.textContent) || 0;
@@ -3307,25 +3308,21 @@ function initCarousel(carouselId, dotsId) {
 /* ── Tent heating toggle ── */
 function toggleTentHeat() {
   const tentChecked = document.getElementById('ao1').checked;
-  const heatRow     = document.getElementById('tent-heat-row');
-  const heatCb      = document.getElementById('ao1-heat');
-  const priceLabel  = document.getElementById('ao1-price');
-  const heatBtn     = document.getElementById('ao1-heat-btn');
+  const heatRow = document.getElementById('tent-heat-row');
+  const heatCb  = document.getElementById('ao1-heat');
+  const heatBtn = document.getElementById('ao1-heat-btn');
   heatRow.style.display = tentChecked ? 'block' : 'none';
   if (!tentChecked) {
     heatCb.checked = false;
     if (heatBtn) heatBtn.classList.remove('active');
   }
-  if (priceLabel) priceLabel.textContent = tentChecked && heatCb.checked ? 'Vanaf €400' : 'Vanaf €250';
 }
 
 function toggleHeat() {
   const heatCb  = document.getElementById('ao1-heat');
   const heatBtn = document.getElementById('ao1-heat-btn');
-  const priceLabel = document.getElementById('ao1-price');
   heatCb.checked = !heatCb.checked;
   heatBtn.classList.toggle('active', heatCb.checked);
-  if (priceLabel) priceLabel.textContent = heatCb.checked ? 'Vanaf €400' : 'Vanaf €250';
   calcPrice();
 }
 
