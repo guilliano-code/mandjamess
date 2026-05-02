@@ -431,6 +431,13 @@ section { padding: 100px 80px; }
   border-radius: 16px;
   overflow: hidden;
 }
+.about-images::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.02);
+  pointer-events: none;
+}
 .about-img-main {
   position: absolute;
   top: 0; left: 0;
@@ -1353,7 +1360,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 .process-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 50%);
+  background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 50%), rgba(0,0,0,0.02);
 }
 
 /* ─── Gallery Strip ──────────────────────────────────────────── */
