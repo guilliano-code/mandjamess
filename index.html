@@ -175,6 +175,7 @@ ul { list-style: none; }
 }
 @media (min-width: 769px) {
   #navbar.scrolled { backdrop-filter: blur(12px); }
+  @media (max-width: 768px) { #navbar.scrolled { backdrop-filter: none; background: rgba(8,8,8,0.98); } }
 }
 #navbar.hide { transform: translateY(-100%); }
 #navbar.show { transform: translateY(0); }
@@ -1521,46 +1522,61 @@ footer {
 .meats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+  gap: 28px;
   margin-top: 48px;
 }
 .meat-card {
   background: var(--dark3);
-  padding: 32px 28px;
-  border-radius: 16px;
+  border-radius: 20px;
   border: 1px solid rgba(245,240,235,0.07);
   text-align: left;
+  overflow: hidden;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .meat-card:hover {
   border-color: rgba(245,240,235,0.14);
   box-shadow: 0 8px 32px rgba(0,0,0,0.25);
 }
-.meat-card ul { display: flex; flex-direction: column; gap: 8px; }
+.meat-card-header {
+  padding: 28px 28px 22px;
+  border-bottom: 1px solid rgba(245,240,235,0.06);
+  position: relative;
+}
+.meat-card-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--red);
+}
+.meat-card-body {
+  padding: 22px 28px 28px;
+}
+.meat-card ul { display: flex; flex-direction: column; gap: 10px; }
 .meat-card-name {
   font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--red);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 .meat-card-price {
-  font-size: 1.4rem;
+  font-size: 2rem;
   font-weight: 800;
-  margin-bottom: 16px;
+  line-height: 1;
 }
-.meat-card-price span { font-size: 0.85rem; font-weight: 400; color: rgba(245,240,235,0.5); }
+.meat-card-price span { font-size: 0.9rem; font-weight: 400; color: rgba(245,240,235,0.5); }
 .meat-card-label {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(245,240,235,0.3);
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(245,240,235,0.07);
+  margin-bottom: 14px;
 }
-.meat-card ul li { font-size: 0.83rem; color: rgba(245,240,235,0.65); display: flex; gap: 8px; }
+.meat-card ul li { font-size: 0.84rem; color: rgba(245,240,235,0.7); display: flex; gap: 10px; align-items: baseline; }
 .meat-card ul li::before { content: '—'; color: var(--red); flex-shrink: 0; }
 .meats-note {
   margin-top: 20px;
@@ -1680,9 +1696,10 @@ footer {
   .meat-card {
     display: none;
     animation: meatFadeIn 0.3s ease;
-    border-radius: 16px;
+    border-radius: 20px;
     border: 1px solid rgba(245,240,235,0.07);
     text-align: left;
+    overflow: hidden;
   }
   .meat-card.active {
     display: block;
@@ -2019,8 +2036,7 @@ footer {
 .addon-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.85);
   z-index: 5000;
   display: flex;
   align-items: center;
@@ -2473,8 +2489,11 @@ footer {
     </div>
     <div class="meats-grid">
       <div class="meat-card active fade-up" data-meat="basis">
-        <div class="meat-card-name">BBQ Basis</div>
-        <div class="meat-card-price">€60 <span>p.p.</span></div>
+        <div class="meat-card-header">
+          <div class="meat-card-name">BBQ Basis</div>
+          <div class="meat-card-price">€60 <span>p.p.</span></div>
+        </div>
+        <div class="meat-card-body">
         <div class="meat-card-label">Keuze uit</div>
         <ul>
           <li>Gemarineerde kipfilet</li>
@@ -2484,10 +2503,14 @@ footer {
           <li>Stokbrood + kruidenboter</li>
           <li>2 sauzen naar keuze</li>
         </ul>
+        </div>
       </div>
       <div class="meat-card fade-up" data-meat="compleet">
-        <div class="meat-card-name">BBQ Compleet</div>
-        <div class="meat-card-price">€70 <span>p.p.</span></div>
+        <div class="meat-card-header">
+          <div class="meat-card-name">BBQ Compleet</div>
+          <div class="meat-card-price">€70 <span>p.p.</span></div>
+        </div>
+        <div class="meat-card-body">
         <div class="meat-card-label">Keuze uit</div>
         <ul>
           <li>Gemarineerde kipfilet & kippendij</li>
@@ -2497,10 +2520,14 @@ footer {
           <li>Gemarineerde garnalen</li>
           <li>Vegetarisch & vegan optie</li>
         </ul>
+        </div>
       </div>
       <div class="meat-card fade-up" data-meat="premium">
-        <div class="meat-card-name">BBQ Premium</div>
-        <div class="meat-card-price">€80 <span>p.p.</span></div>
+        <div class="meat-card-header">
+          <div class="meat-card-name">BBQ Premium</div>
+          <div class="meat-card-price">€80 <span>p.p.</span></div>
+        </div>
+        <div class="meat-card-body">
         <div class="meat-card-label">Keuze uit</div>
         <ul>
           <li>Wagyu burger (180g)</li>
@@ -2511,6 +2538,7 @@ footer {
           <li>Zeevruchten van de grill</li>
           <li>Volledige vegetarisch/vegan lijn</li>
         </ul>
+        </div>
       </div>
     </div>
     <p class="meats-note fade-up">Exacte selectie wordt tijdens intake afgestemd op uw evenement en dieetwensen.</p>
@@ -3440,7 +3468,7 @@ let menuOpen = false;
 ham.addEventListener('click', () => {
   menuOpen = !menuOpen;
   links.style.cssText = menuOpen
-    ? 'display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;bottom:0;background:rgba(8,8,8,0.99);padding:40px 32px;gap:28px;z-index:999;border-top:1px solid rgba(196,30,58,0.3);backdrop-filter:blur(20px);justify-content:flex-start;'
+    ? 'display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;bottom:0;background:rgba(8,8,8,0.99);padding:40px 32px;gap:28px;z-index:999;border-top:1px solid rgba(196,30,58,0.3);justify-content:flex-start;'
     : '';
   ham.children[0].style.cssText = menuOpen ? 'transform:rotate(45deg) translate(5px,5px)' : '';
   ham.children[1].style.cssText = menuOpen ? 'opacity:0' : '';
