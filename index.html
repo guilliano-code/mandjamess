@@ -428,23 +428,20 @@ section { padding: 100px 80px; }
 .about-images {
   position: relative;
   height: 560px;
+  border-radius: 16px;
+  overflow: hidden;
 }
 .about-img-main {
   position: absolute;
   top: 0; left: 0;
-  width: 75%; height: 80%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  border-radius: 2px;
-  filter: brightness(0.85);
+  object-position: center top;
+  border-radius: 16px;
+  filter: brightness(0.9);
 }
 .about-img-accent {
-  position: absolute;
-  bottom: 0; right: 0;
-  width: 55%; height: 55%;
-  object-fit: cover;
-  border-radius: 2px;
-  border: 4px solid var(--dark);
-  filter: brightness(0.9);
+  display: none;
 }
 .about-badge {
   position: absolute;
@@ -2206,8 +2203,7 @@ footer {
 <!-- ── About ── -->
 <section id="about">
   <div class="about-images fade-up">
-    <img class="about-img-main" src="assets/about-main.jpg" alt="Mandja Grill" loading="lazy" decoding="async" width="858" height="1000">
-    <img class="about-img-accent" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75" alt="Chef" loading="lazy" decoding="async" width="600" height="450">
+    <img class="about-img-main" src="assets/about-main.jpg" alt="Mandja Grill" decoding="async" width="858" height="1000">
     <div class="about-badge"><strong>500+</strong>Events<br>Verzorgd</div>
   </div>
   <div class="about-content">
