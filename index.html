@@ -2147,7 +2147,7 @@ footer {
     <li><a href="#booking">Pakketten</a></li>
     <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#booking" class="nav-cta">Boek Nu</a></li>
+    <li><a href="boeken.html" class="nav-cta">Boek Nu</a></li>
   </ul>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
@@ -2423,7 +2423,7 @@ footer {
         <li>Frisdranken onbeperkt inbegrepen</li>
         <li>Op- en afbouw door ons team</li>
       </ul>
-      <button class="pkg-select" onclick="selectPackage(this, 'Mandja Signature', 60.00)">Selecteer Pakket</button>
+      <button class="pkg-select" onclick="location.href='boeken.html?pakket=basis'">Selecteer Pakket</button>
     </div>
 
     <!-- Prestige -->
@@ -2446,7 +2446,7 @@ footer {
         <li>Dedicated event coördinator</li>
         <li>Op- en afbouw door ons team</li>
       </ul>
-      <button class="pkg-select" onclick="selectPackage(this, 'Mandja Pit Master', 70.00)">Selecteer Pakket</button>
+      <button class="pkg-select" onclick="location.href='boeken.html?pakket=compleet'">Selecteer Pakket</button>
     </div>
 
     <!-- Royal -->
@@ -2469,320 +2469,12 @@ footer {
         <li>After-BBQ dessertbar</li>
         <li>Op- en afbouw (tot 5 uur service)</li>
       </ul>
-      <button class="pkg-select" onclick="selectPackage(this, 'Mandja Smokehouse', 80.00)">Selecteer Pakket</button>
+      <button class="pkg-select" onclick="location.href='boeken.html?pakket=premium'">Selecteer Pakket</button>
     </div>
   </div>
-  </div>
-
-  <!-- Vleessoorten -->
-  <div id="meats">
-    <p class="section-tag fade-up">Wat staat er op de grill?</p>
-    <h2 class="section-title fade-up">Vlees per <em>pakket</em></h2>
-    <p class="section-sub fade-up">Alles onbeperkt gedurende de service — exact welke vleessoorten worden besproken en afgestemd tijdens het intakegesprek. Zakelijke facturatie is altijd mogelijk.</p>
-    <div class="meats-tabs">
-      <button class="meats-tab active" onclick="switchMeatsTab('basis', this)">Signature</button>
-      <button class="meats-tab" onclick="switchMeatsTab('compleet', this)">Pit Master</button>
-      <button class="meats-tab" onclick="switchMeatsTab('premium', this)">Smokehouse</button>
-    </div>
-    <div class="meats-grid">
-      <div class="meat-card active fade-up" data-meat="basis">
-        <div class="meat-card-header">
-          <div class="meat-card-name">Mandja Signature</div>
-          <div class="meat-card-price">€60 <span>p.p.</span></div>
-        </div>
-        <div class="meat-card-body">
-        <div class="meat-card-label">Keuze uit</div>
-        <ul>
-          <li>Gemarineerde kipfilet</li>
-          <li>Hamburger (180g)</li>
-          <li>Merguez worstje</li>
-          <li>Vegetarische optie inbegrepen</li>
-          <li>Stokbrood + kruidenboter</li>
-          <li>2 sauzen naar keuze</li>
-        </ul>
-        </div>
-      </div>
-      <div class="meat-card fade-up" data-meat="compleet">
-        <div class="meat-card-header">
-          <div class="meat-card-name">Mandja Pit Master</div>
-          <div class="meat-card-price">€70 <span>p.p.</span></div>
-        </div>
-        <div class="meat-card-body">
-        <div class="meat-card-label">Keuze uit</div>
-        <ul>
-          <li>Gemarineerde kipfilet & kippendij</li>
-          <li>Smash burger (180g)</li>
-          <li>Sparerib (halve rack)</li>
-          <li>Entrecôte (200g)</li>
-          <li>Gemarineerde garnalen</li>
-          <li>Vegetarisch & vegan optie</li>
-        </ul>
-        </div>
-      </div>
-      <div class="meat-card fade-up" data-meat="premium">
-        <div class="meat-card-header">
-          <div class="meat-card-name">Mandja Smokehouse</div>
-          <div class="meat-card-price">€80 <span>p.p.</span></div>
-        </div>
-        <div class="meat-card-body">
-        <div class="meat-card-label">Keuze uit</div>
-        <ul>
-          <li>Wagyu burger (180g)</li>
-          <li>Côte de boeuf aan het bot</li>
-          <li>Duroc varkenshaas + kruidenboter</li>
-          <li>Whole chicken (live carving)</li>
-          <li>Tomahawk steak (gedeeld)</li>
-          <li>Zeevruchten van de grill</li>
-          <li>Volledige vegetarisch/vegan lijn</li>
-        </ul>
-        </div>
-      </div>
-    </div>
-    <p class="meats-note fade-up">Exacte selectie wordt tijdens intake afgestemd op uw evenement en dieetwensen.</p>
-  </div>
-
-  <!-- Kortingen -->
-  <div class="discounts-grid fade-up">
-    <div class="discount-card">
-            <div class="discount-label">Early Bird</div>
-      <div class="discount-amount">- €3 tot €5 p.p.</div>
-      <div class="discount-desc">Boek 8 weken of meer van tevoren en ontvang automatisch korting per persoon.</div>
-    </div>
-    <div class="discount-card">
-            <div class="discount-label">Referral Bonus</div>
-      <div class="discount-amount">€200 – €300 tegoed</div>
-      <div class="discount-desc">Breng een vriend die ook boekt en ontvang €200–€300 als tegoed op uw volgende boeking.</div>
-    </div>
-    <div class="discount-card">
-            <div class="discount-label">Vaste Klant</div>
-      <div class="discount-amount">Gratis upgrade</div>
-      <div class="discount-desc">Al eerder geboekt? U krijgt een gratis pakket-upgrade en voorrangsplanning voor uw datum.</div>
-    </div>
-    <div class="discount-card">
-            <div class="discount-label">Volumekorting</div>
-      <div class="discount-amount">- €2,50 p.p.</div>
-      <div class="discount-desc">Vanaf 200 gasten ontvangt u automatisch €2,50 korting per persoon. Wordt verrekend in de offerte.</div>
-    </div>
-  </div>
-
-  <!-- Booking Form -->
-  <div class="booking-form-wrapper fade-up">
-    <h3 class="booking-form-title">Vraag uw offerte aan</h3>
-    <p class="booking-form-sub">Vul uw gegevens in — binnen 24 uur nemen wij contact met u op met een scherpe offerte op maat.</p>
-
-    <div class="form-grid">
-      <div class="form-field">
-        <label>Uw Naam</label>
-        <input type="text" placeholder="Jan de Vries" id="f-name">
-      </div>
-      <div class="form-field">
-        <label>E-mailadres</label>
-        <input type="email" placeholder="jan@voorbeeld.nl" id="f-email">
-      </div>
-      <div class="form-field">
-        <label>Telefoonnummer <span style="color:var(--red)">*</span></label>
-        <input type="tel" placeholder="+31 6 12345678" id="f-tel" required>
-      </div>
-      <div class="form-field">
-        <label>Datum Evenement</label>
-        <input type="date" id="f-date">
-      </div>
-      <div class="form-field">
-        <label>Gekozen Pakket</label>
-        <select id="f-package">
-          <option value="">— Selecteer pakket —</option>
-          <option value="basis">Mandja Signature — €60 p.p.</option>
-          <option value="compleet">Mandja Pit Master — €70 p.p.</option>
-          <option value="premium">Mandja Smokehouse — €80 p.p.</option>
-        </select>
-      </div>
-      <div class="form-field">
-        <label>Type Evenement</label>
-        <select id="f-type">
-          <option value="">— Type evenement —</option>
-          <option>Bedrijfsevenement</option>
-          <option>Personeelsfeest</option>
-          <option>Teambuilding</option>
-          <option>Bruiloft</option>
-          <option>Verjaardag / Jubileum</option>
-          <option>Receptie / Borrel</option>
-          <option>Congres / Seminar</option>
-          <option>Privédiner</option>
-          <option>Anders</option>
-        </select>
-      </div>
-
-      <div class="form-field full">
-        <label>Aantal Gasten (incl. kinderen)</label>
-        <div class="people-slider-wrap">
-          <div class="people-display">
-            <span class="people-count" id="people-display">25</span>
-            <span class="people-label">gasten (incl. kinderen)</span>
-          </div>
-          <input type="range" min="15" max="500" value="25" id="people-slider" oninput="updatePeople(this)">
-          <div id="discount-hint" style="font-size:0.72rem;font-weight:700;letter-spacing:1px;margin-top:8px;min-height:18px;transition:color 0.3s"></div>
-        </div>
-      </div>
-
-      <div class="form-field full">
-        <label>Locatie / Adres</label>
-        <div class="autocomplete-wrap">
-          <input type="text" placeholder="Naam locatie, Straat 1, Stad" id="f-location" autocomplete="off">
-          <div class="autocomplete-list" id="addr-list" style="display:none"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Add-ons -->
-    <div class="addons-section">
-      <div class="addons-title">Voeg toe aan uw pakket</div>
-      <div class="addons-grid">
-        <div class="addon-item">
-          <input type="checkbox" id="ao1" value="0" data-name="Tent" data-flat="true" onchange="calcPrice(); toggleTentHeat()">
-          <label class="addon-label" for="ao1">
-            <div class="addon-check"></div>
-            <div class="addon-name">Tent</div>
-            <div class="addon-short">Professionele feesttent voor tot 100 gasten — beschermd tegen regen, wind en zon.</div>
-            <div class="tent-heat-row" id="tent-heat-row" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,240,235,0.08)">
-              <button type="button" id="ao1-heat-btn" class="tent-heat-btn" onclick="event.stopPropagation();toggleHeat()">
-                Met verwarming
-              </button>
-              <input type="checkbox" id="ao1-heat" value="0" style="display:none">
-            </div>
-            <div class="addon-price" id="ao1-price">Vanaf €250</div>
-          </label>
-          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao1',event)">?</button>
-        </div>
-        <div class="addon-item">
-          <input type="checkbox" id="ao2" value="450.00" data-name="Premium Decoration" data-flat="true" onchange="calcPrice()">
-          <label class="addon-label" for="ao2">
-            <div class="addon-check"></div>
-            <div class="addon-name">Premium Decoratie</div>
-            <div class="addon-short">Tafelkleden, sfeerverlichting, centerpieces en bloemen — uw locatie ziet er direct professioneel uit.</div>
-            <div class="addon-price">€300 – €2.000 </div>
-          </label>
-          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao2',event)">?</button>
-        </div>
-        <div class="addon-item">
-          <input type="checkbox" id="ao3" value="750.00" data-name="Live Entertainment" data-flat="true" onchange="calcPrice()">
-          <label class="addon-label" for="ao3">
-            <div class="addon-check"></div>
-            <div class="addon-name">Live Entertainment</div>
-            <div class="addon-short">Professionele DJ of livemuzikant voor 4 uur — van lounge tijdens het eten tot feest erna.</div>
-            <div class="addon-price">€500 – €25.000 </div>
-          </label>
-          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao3',event)">?</button>
-        </div>
-        <div class="addon-item">
-          <input type="checkbox" id="ao4" value="300.00" data-name="Photo Booth" data-flat="true" onchange="calcPrice()">
-          <label class="addon-label" for="ao4">
-            <div class="addon-check"></div>
-            <div class="addon-name">Photobooth</div>
-            <div class="addon-short">Selfie-booth met props, directe prints en digitale galerij — een hit bij elke leeftijd.</div>
-            <div class="addon-price">€200 – €400 </div>
-          </label>
-          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao4',event)">?</button>
-        </div>
-        <div class="addon-item">
-          <input type="checkbox" id="ao5" value="20.00" data-name="Premium Bar Service" onchange="calcPrice()">
-          <label class="addon-label" for="ao5">
-            <div class="addon-check"></div>
-            <div class="addon-name">Premium Bar Service</div>
-            <div class="addon-short">Onbeperkt bier, wijn en frisdrank — bediend door ons team gedurende de volledige service.</div>
-            <div class="addon-price">Vanaf €20 p.p.</div>
-          </label>
-          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao5',event)">?</button>
-        </div>
-        <div class="addon-item">
-          <input type="checkbox" id="ao6" value="0" data-name="Premium Catering Upgrade" style="display:none">
-          <div class="addon-label kids-stepper-card" id="upgrade-card">
-            <div class="addon-name">Premium Catering Upgrade</div>
-            <div class="addon-short">Wagyu burger, côte de boeuf en Duroc varkenshaas — voor gasten die het verschil proeven.</div>
-            <div class="upgrade-controls">
-              <button type="button" class="upgrade-all-btn" id="upgrade-all-btn" onclick="toggleUpgradeAll()">Alle gasten</button>
-              <div class="kids-stepper">
-                <button class="kids-btn" type="button" onclick="adjustUpgrade(-1)">−</button>
-                <div class="kids-count-display" id="upgrade-count">0</div>
-                <button class="kids-btn" type="button" onclick="adjustUpgrade(1)">+</button>
-              </div>
-            </div>
-            <div class="addon-price" id="upgrade-price-label">+ €15 p.p.</div>
-          </div>
-          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao6',event)">?</button>
-        </div>
-        <div class="addon-item">
-          <input type="checkbox" id="ao7" value="175.00" data-name="Extra Crew Member" data-flat="true" onchange="calcPrice()">
-          <label class="addon-label" for="ao7">
-            <div class="addon-check"></div>
-            <div class="addon-name">Extra Crew Lid</div>
-            <div class="addon-short">Een extra professioneel crewlid — kortere wachttijden en meer aandacht voor uw gasten.</div>
-            <div class="addon-price">€150 – €200 </div>
-          </label>
-          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao7',event)">?</button>
-        </div>
-        <div class="addon-item">
-          <input type="checkbox" id="ao8" value="0" data-name="Kinderkorting" style="display:none">
-          <div class="addon-label kids-stepper-card" id="kids-card">
-            <div class="addon-name">Kinderkorting</div>
-            <div class="addon-short">Geef het aantal kinderen (t/m 12 jaar) op dat u als gast heeft uitgenodigd — u ontvangt automatisch €30 korting per kind op uw totaalprijs.</div>
-            <div class="kids-stepper">
-              <button class="kids-btn" type="button" onclick="adjustKids(-1)">−</button>
-              <div class="kids-count-display" id="kids-count">0</div>
-              <button class="kids-btn" type="button" onclick="adjustKids(1)">+</button>
-            </div>
-            <div class="addon-price" id="kids-price-label" style="color:#4ade80">− €30 korting p. kind (t/m 12 jaar)</div>
-          </div>
-          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao8',event)">?</button>
-        </div>
-      </div>
-      <div class="carousel-dots" id="addons-dots" style="display:none">
-        <div class="carousel-dot active"></div>
-        <div class="carousel-dot"></div>
-        <div class="carousel-dot"></div>
-        <div class="carousel-dot"></div>
-        <div class="carousel-dot"></div>
-        <div class="carousel-dot"></div>
-        <div class="carousel-dot"></div>
-        <div class="carousel-dot"></div>
-      </div>
-    </div>
-
-    <!-- Price summary -->
-    <div class="price-summary" id="price-summary">
-      <div class="price-breakdown">
-        <div class="price-row"><span>Pakket</span><span id="ps-pkg">— nog niet geselecteerd —</span></div>
-        <div class="price-row"><span>Aantal gasten</span><span id="ps-guests">50 personen</span></div>
-        <div class="price-row"><span>Pakketkosten</span><span id="ps-base">—</span></div>
-        <div class="price-row"><span>Extra's (incl.)</span><span id="ps-addons">€0</span></div>
-        <div class="price-row" id="ps-kids-row" style="display:none;color:#4ade80"><span id="ps-kids-label">Kinderkorting</span><span id="ps-kids">—</span></div>
-        <div class="price-row" id="ps-discount-row" style="display:none;color:#4ade80"><span id="ps-discount-label">Groepskorting</span><span id="ps-discount">—</span></div>
-        <div class="price-row total"><span>Geschatte totaal</span><span id="ps-total">—</span></div>
-      </div>
-      <div class="price-note">* Indicatieve prijs excl. BTW.<br>Exacte offerte na intake gesprek.</div>
-    </div>
-
-    <div class="form-field" style="margin-bottom:24px">
-      <label>Bijzonderheden / Dieetwensen</label>
-      <textarea placeholder="Vertel ons over allergieën, speciale wensen, thema of andere details die we moeten weten..." id="f-notes"></textarea>
-    </div>
-
-    <div class="form-submit">
-      <button class="btn-primary" onclick="submitBooking()">Offerte Aanvragen</button>
-      <p class="form-privacy">Door te verzenden gaat u akkoord met onze privacyverklaring. Wij delen uw gegevens nooit met derden.</p>
-    </div>
-  </div>
-
-  <div class="bezorg-standalone fade-up">
-    <div class="bezorg-divider"><span>of</span></div>
-    <a href="mailto:contact@mandjagrill.nl?subject=Ik%20wil%20vlees%20laten%20bezorgen&body=Hi%20Mandja%2C%0A%0AIk%20zou%20graag%20vlees%20willen%20laten%20bezorgen." class="bezorg-link">
-      <span class="bezorg-link-text">
-        <span class="bezorg-link-title">Ik laat liever bezorgen</span>
-        <span class="bezorg-link-sub">Stuur ons een bericht, wij regelen de rest</span>
-      </span>
-      <span class="bezorg-link-arrow">→</span>
-    </a>
   </div>
 </section>
+
 
 <!-- ── Gallery Strip ── -->
 <div id="gallery">
@@ -3357,7 +3049,8 @@ function selectPackage(btn, name, price) {
 }
 
 /* sync dropdown → card highlight */
-document.getElementById('f-package').addEventListener('change', function() {
+const _fpkg = document.getElementById('f-package');
+if (_fpkg) _fpkg.addEventListener('change', function() {
   const val = this.value;
   document.querySelectorAll('.package-card').forEach(c => {
     const b = c.querySelector('.pkg-select');
@@ -3374,7 +3067,7 @@ document.getElementById('f-package').addEventListener('change', function() {
   });
   if (!val) selectedPkg = { name: '', price: 0 };
   calcPrice();
-});
+}); // end if (_fpkg)
 
 /* ── Meats tab switcher ── */
 function switchMeatsTab(pkg, btn) {
@@ -3740,8 +3433,7 @@ function adjustKids(delta) {
 }
 
 /* ── Init (must run last, after all functions are defined) ── */
-updatePeople(slider);
-calcPrice();
+if (slider) { updatePeople(slider); calcPrice(); }
 initCarousel('services-carousel', 'services-dots');
 initCarousel('addons-grid', 'addons-dots');
 

@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="nl" class="is-loading">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<style>
+html.is-loading,html.is-loading body{overflow:hidden!important;height:100%;touch-action:none}
+#preloader{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;min-height:-webkit-fill-available;background:#080808;z-index:9999}
+</style>
+<title>Offerte Aanvragen — Mandjagrill</title>
+<meta name="description" content="Vraag een offerte aan voor uw BBQ-evenement. Kies uit Mandja Signature, Pit Master of Smokehouse — vaste prijs, crew inbegrepen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"></noscript>
+<style>
+/* ─── Preloader ──────────────────────────────────────────────── */
+#preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100vh;
+  background: var(--dark);
+  z-index: 9999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+  overscroll-behavior: none; touch-action: none;
+}
+#preloader.done { opacity: 0; visibility: hidden; }
+.preloader-logo { font-size: 2.2rem; font-weight: 800; letter-spacing: 2px; overflow: hidden; }
+.preloader-logo span { color: var(--red); }
+.preloader-logo .letter { display: inline-block; opacity: 0; transform: translateY(40px); animation: letterIn 0.5s ease forwards; }
+@keyframes letterIn { to { opacity: 1; transform: translateY(0); } }
+.preloader-bar { width: 180px; height: 2px; background: rgba(245,240,235,0.08); border-radius: 2px; overflow: hidden; }
+.preloader-fill { height: 100%; background: var(--red); border-radius: 2px; animation: fillBar 1.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+@keyframes fillBar { from { width: 0; } to { width: 100%; } }
+.preloader-tag { font-size: 0.65rem; letter-spacing: 4px; color: rgba(245,240,235,0.3); }
+
+/* ─── Custom Cursor ──────────────────────────────────────────── */
+.cursor-dot { width:8px;height:8px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:8888;transform:translate(-50%,-50%);transition:transform .1s ease,width .25s ease,height .25s ease; }
+.cursor-ring { width:36px;height:36px;border:1.5px solid rgba(196,30,58,0.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:8887;transform:translate(-50%,-50%);transition:transform .08s ease,width .25s ease,height .25s ease; }
+body.cursor-hover .cursor-dot { width:14px;height:14px; }
+body.cursor-hover .cursor-ring { width:56px;height:56px;border-color:rgba(196,30,58,0.8); }
+@media (hover:none) { .cursor-dot,.cursor-ring { display:none; } }
+
+/* ─── Reset & Base ───────────────────────────────────────────── */
+*,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
+:root {
+  --red:#D4001A; --red-d:#A80015; --red-t:#FF2236; --red-g:rgba(196,30,58,0.15);
+  --dark:#080808; --dark2:#111111; --dark3:#1a1a1a; --dark4:#222222;
+  --white:#F5F0EB; --grey:#888;
+  --trans:0.4s cubic-bezier(0.25,0.8,0.25,1);
+}
+html { scroll-behavior: smooth; }
+input,textarea,[contenteditable] { -webkit-user-select:text;user-select:text; }
+body { font-family:'Poppins',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden; }
+a { text-decoration:none;color:inherit; }
+img { display:block;width:100%; }
+a,button,input,select,textarea,label,[role="button"] { touch-action:manipulation; }
+ul { list-style:none; }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--dark2); }
+::-webkit-scrollbar-thumb { background:var(--red);border-radius:3px; }
+
+/* ─── Navbar ─────────────────────────────────────────────────── */
+#navbar { position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 60px;height:80px;display:flex;align-items:center;justify-content:space-between;transition:background var(--trans),transform var(--trans),box-shadow var(--trans); }
+#navbar.scrolled { background:rgba(8,8,8,0.97);box-shadow:0 2px 40px rgba(0,0,0,0.6); }
+@media (min-width:769px) { #navbar.scrolled { backdrop-filter:blur(12px); } }
+#navbar.hide { transform:translateY(-100%); }
+#navbar.show { transform:translateY(0); }
+.nav-logo { font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:1px; }
+.nav-logo span { color:var(--red); }
+.nav-links { display:flex;gap:36px;align-items:center; }
+.nav-links a { font-size:0.8rem;font-weight:700;letter-spacing:1.5px;color:rgba(245,240,235,0.75);position:relative;transition:color var(--trans); }
+.nav-links a::after { content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--red);transition:width var(--trans); }
+.nav-links a:hover { color:var(--white); }
+.nav-links a:hover::after { width:100%; }
+.nav-cta { background:var(--red);color:var(--white)!important;padding:10px 24px;border-radius:2px;font-weight:700!important;letter-spacing:1px;transition:background var(--trans)!important; }
+.nav-cta:hover { background:var(--red-d)!important; }
+.nav-cta::after { display:none!important; }
+.hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px; }
+.hamburger span { width:26px;height:2px;background:var(--white);border-radius:2px;transition:var(--trans); }
+
+/* ─── Section Shared ─────────────────────────────────────────── */
+section { padding:100px 80px; }
+.section-tag { font-size:0.7rem;font-weight:700;letter-spacing:4px;color:var(--red-t);margin-bottom:12px; }
+.section-title { font-family:'Poppins',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.2;margin-bottom:20px; }
+.section-title em { color:var(--red);font-style:normal;font-weight:800; }
+.section-sub { font-size:0.95rem;font-weight:300;color:rgba(245,240,235,0.6);line-height:1.8;max-width:560px; }
+.fade-up { opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease; }
+.fade-up.visible { opacity:1;transform:translateY(0); }
+
+/* ─── Booking / Pakketten ────────────────────────────────────── */
+#booking { background:var(--dark);padding:120px 80px 100px; }
+.booking-header { text-align:center;margin-bottom:60px; }
+.booking-header .section-sub { margin:0 auto; }
+.packages-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:80px;padding-top:20px; }
+.package-card { border:1px solid rgba(245,240,235,0.08);border-radius:20px;padding:40px 32px;background:var(--dark2);cursor:pointer;transition:border-color var(--trans),transform var(--trans),box-shadow var(--trans);position:relative;overflow:visible;contain:style layout;display:flex;flex-direction:column; }
+.package-card::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);border-radius:20px 20px 0 0;transition:transform var(--trans); }
+.package-card:hover::before { transform:scaleX(1); }
+.package-card:hover { border-color:rgba(245,240,235,0.12);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+.package-card.selected { border-color:transparent;box-shadow:0 0 0 0px transparent,0 0 40px rgba(212,0,26,0.25),0 20px 50px rgba(0,0,0,0.3); }
+.package-card.featured { border-color:rgba(245,240,235,0.08);background:linear-gradient(160deg,var(--dark3) 0%,var(--dark2) 100%); }
+.packages-grid.has-selection .package-card.featured:not(.selected) { box-shadow:none; }
+.pkg-badge { position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--red);color:var(--white);font-size:0.62rem;font-weight:700;letter-spacing:2px;white-space:nowrap;padding:5px 16px;border-radius:20px;box-shadow:0 2px 12px rgba(196,30,58,0.4); }
+.pkg-name { font-family:'Poppins',sans-serif;font-size:1.8rem;font-weight:700;margin-bottom:6px; }
+.pkg-sub { font-size:0.78rem;color:rgba(245,240,235,0.5);margin-bottom:24px;font-weight:300; }
+.pkg-price { font-size:0.72rem;font-weight:700;letter-spacing:1px;color:rgba(245,240,235,0.5);margin-bottom:4px; }
+.pkg-price-amount { font-size:2.2rem;font-weight:800;color:var(--white);margin-bottom:4px;line-height:1; }
+.pkg-price-amount span { font-size:1rem;font-weight:400;color:rgba(245,240,235,0.5); }
+.pkg-price-note { font-size:0.72rem;color:rgba(245,240,235,0.4);margin-bottom:28px; }
+.pkg-divider { height:1px;background:rgba(245,240,235,0.08);margin-bottom:24px; }
+.pkg-features li { display:flex;align-items:flex-start;gap:10px;font-size:0.82rem;color:rgba(245,240,235,0.75);margin-bottom:12px;line-height:1.4; }
+.pkg-features li::before { content:'';width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:6px; }
+.pkg-select { width:100%;margin-top:auto;padding:13px;background:transparent;border:1.5px solid rgba(196,30,58,0.5);color:var(--red);font-family:'Poppins',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.5px;border-radius:10px;cursor:pointer;transition:background var(--trans),color var(--trans); }
+.pkg-select:hover,.package-card.selected .pkg-select { background:var(--red);color:var(--white); }
+
+/* ─── Autocomplete ───────────────────────────────────────────── */
+.autocomplete-wrap { position:relative; }
+.autocomplete-list { position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--dark2);border:1px solid rgba(212,0,26,0.35);border-radius:6px;z-index:500;box-shadow:0 8px 32px rgba(0,0,0,0.5);max-height:220px;overflow-y:auto;scrollbar-width:thin; }
+.autocomplete-item { padding:11px 16px;font-size:0.85rem;color:rgba(245,240,235,0.82);cursor:pointer;border-bottom:1px solid rgba(245,240,235,0.05);transition:background .15s;display:flex;gap:10px;align-items:flex-start; }
+.autocomplete-item:last-child { border-bottom:none; }
+.autocomplete-item:hover,.autocomplete-item.active { background:rgba(212,0,26,0.12);color:var(--white); }
+.autocomplete-pin { color:var(--red);flex-shrink:0;font-size:0.9rem;margin-top:1px; }
+.autocomplete-main { font-weight:600; }
+.autocomplete-sub { font-size:0.75rem;color:rgba(245,240,235,0.4);display:block;margin-top:1px; }
+
+/* ─── Tent heat button ───────────────────────────────────────── */
+.tent-heat-btn { display:block;margin-left:auto;padding:7px 18px;border-radius:20px;border:1.5px solid rgba(245,240,235,0.2);background:transparent;color:rgba(245,240,235,0.65);font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:border-color var(--trans),background var(--trans),color var(--trans);white-space:nowrap; }
+.tent-heat-btn:hover { border-color:rgba(212,0,26,0.5);color:var(--white); }
+.tent-heat-btn.active { border-color:var(--red);background:var(--red-g);color:var(--white); }
+
+/* ─── Kortingen ──────────────────────────────────────────────── */
+.discounts-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:48px; }
+.discount-card { background:var(--dark2);border:1px solid rgba(245,240,235,0.07);border-radius:10px;padding:24px 20px;display:flex;flex-direction:column;gap:6px;transition:border-color var(--trans),transform var(--trans); }
+.discount-card:hover { border-color:rgba(212,0,26,0.3);transform:translateY(-3px); }
+.discount-label { font-family:'Poppins',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;color:rgba(245,240,235,0.4); }
+.discount-amount { font-size:1.1rem;font-weight:800;color:#4ade80;line-height:1.2; }
+.discount-desc { font-size:0.78rem;color:rgba(245,240,235,0.5);line-height:1.55;margin-top:4px; }
+
+/* ─── Booking Form ───────────────────────────────────────────── */
+.booking-form-wrapper { background:var(--dark2);border:1px solid rgba(245,240,235,0.08);border-radius:4px;padding:56px;max-width:1200px;margin-left:auto;margin-right:auto; }
+.upgrade-controls { display:flex;align-items:center;gap:12px;margin:10px 0 6px;flex-wrap:wrap; }
+.upgrade-all-btn { padding:6px 14px;border-radius:8px;border:1.5px solid rgba(245,240,235,0.15);background:transparent;color:rgba(245,240,235,0.65);font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:border-color var(--trans),background var(--trans),color var(--trans);white-space:nowrap; }
+.upgrade-all-btn:hover { border-color:rgba(212,0,26,0.5);color:var(--white); }
+.upgrade-all-btn.active { border-color:var(--red);background:var(--red-g);color:var(--white); }
+.booking-form-title { font-family:'Poppins',sans-serif;font-size:1.8rem;margin-bottom:8px; }
+.booking-form-sub { font-size:0.85rem;color:rgba(245,240,235,0.5);margin-bottom:40px; }
+.form-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px; }
+.form-field { display:flex;flex-direction:column;gap:8px; }
+.form-field.full { grid-column:1 / -1; }
+.form-field label { font-size:0.72rem;font-weight:700;letter-spacing:1.5px;color:rgba(245,240,235,0.6); }
+.form-field input,.form-field select,.form-field textarea { background:var(--dark3);border:1px solid rgba(245,240,235,0.1);color:var(--white);font-family:'Poppins',sans-serif;font-size:16px;padding:14px 18px;border-radius:2px;outline:none;transition:border-color var(--trans);appearance:none; }
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus { border-color:var(--red); }
+.form-field input::placeholder,.form-field textarea::placeholder { color:rgba(245,240,235,0.25); }
+.form-field select option { background:var(--dark3); }
+.form-field textarea { resize:vertical;min-height:120px; }
+.people-slider-wrap { display:flex;flex-direction:column;gap:8px; }
+.people-display { display:flex;justify-content:space-between;align-items:center; }
+.people-count { font-size:2rem;font-weight:800;color:var(--red); }
+.people-label { font-size:0.75rem;color:rgba(245,240,235,0.5); }
+input[type="range"] { -webkit-appearance:none;width:100%;height:44px;background:transparent;outline:none;border:none!important;padding:0!important;cursor:ew-resize; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance:none;width:38px;height:18px;border-radius:3px 3px 6px 6px;background:linear-gradient(180deg,rgba(200,200,200,0.25) 0%,rgba(245,240,235,0.55) 35%,rgba(245,240,235,0.45) 60%,var(--red) 60%,var(--red) 100%);cursor:ew-resize;box-shadow:0 3px 10px rgba(0,0,0,0.5),0 0 6px rgba(196,30,58,0.4);border:1px solid rgba(245,240,235,0.2);margin-top:-7px; }
+input[type="range"]::-webkit-slider-runnable-track { background:linear-gradient(to right,var(--red) var(--pct,0%),rgba(245,240,235,0.1) var(--pct,0%));height:4px;border-radius:2px; }
+
+/* ─── Add-ons ────────────────────────────────────────────────── */
+.addons-section { margin-bottom:32px; }
+.addons-title { font-family:'Poppins',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;color:rgba(245,240,235,0.6);margin-bottom:16px; }
+.addons-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:12px; }
+.addon-item { position:relative; }
+.addon-item input[type="checkbox"] { position:absolute;opacity:0;width:0;height:0; }
+.addon-label { display:flex;flex-direction:column;gap:4px;padding:16px 18px;background:var(--dark3);border:1px solid rgba(245,240,235,0.08);border-radius:14px;cursor:pointer;transition:border-color var(--trans),background var(--trans),box-shadow var(--trans); }
+.addon-label:hover { border-color:rgba(196,30,58,0.4);box-shadow:0 4px 16px rgba(0,0,0,0.3); }
+.addon-item input:checked + .addon-label { border-color:var(--red);background:var(--red-g); }
+.addon-check { width:20px;height:20px;border:1.5px solid rgba(245,240,235,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;transition:border-color var(--trans),background var(--trans);flex-shrink:0; }
+.addon-item input:checked + .addon-label .addon-check { border-color:var(--red);background:var(--red); }
+.addon-check::after { content:'✓';font-size:0.7rem;color:var(--white);opacity:0;transition:opacity .2s; }
+.addon-item input:checked + .addon-label .addon-check::after { opacity:1; }
+.addon-short { font-size:0.74rem;color:rgba(245,240,235,0.45);line-height:1.45;margin-bottom:2px; }
+.addon-name { font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600; }
+.addon-price { font-size:0.72rem;color:var(--red);font-weight:700; }
+
+/* ─── Kids stepper ───────────────────────────────────────────── */
+.kids-stepper-card { cursor:default; }
+.kids-stepper-card:hover { border-color:rgba(196,30,58,0.4); }
+.kids-stepper-card.active { border-color:var(--red);background:var(--red-g); }
+.kids-stepper { display:flex;align-items:center;gap:0;margin:10px 0 6px;border:1px solid rgba(245,240,235,0.15);border-radius:8px;overflow:hidden;width:fit-content; }
+.kids-btn { width:32px;height:32px;background:rgba(245,240,235,0.06);border:none;color:var(--white);font-size:1.1rem;font-weight:700;cursor:pointer;transition:background var(--trans);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+.kids-btn:hover { background:var(--red); }
+.kids-count-display { min-width:36px;text-align:center;font-size:1rem;font-weight:800;color:var(--white);padding:0 4px;background:rgba(245,240,235,0.04);line-height:32px; }
+
+/* ─── Price summary ──────────────────────────────────────────── */
+.price-summary { background:var(--dark);border:1px solid rgba(196,30,58,0.2);border-radius:2px;padding:24px 28px;margin-bottom:28px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px; }
+.price-breakdown { display:flex;flex-direction:column;gap:6px; }
+.price-row { display:flex;justify-content:space-between;gap:40px;font-size:0.82rem;color:rgba(245,240,235,0.6); }
+.price-row.total { font-size:1rem;font-weight:700;color:var(--white);border-top:1px solid rgba(245,240,235,0.08);padding-top:8px;margin-top:4px; }
+.price-row.total span:last-child { color:var(--red);font-size:1.3rem; }
+.price-note { font-size:0.72rem;color:rgba(245,240,235,0.35); }
+.form-submit { display:flex;align-items:center;gap:20px;flex-wrap:wrap; }
+.form-submit .btn-primary { padding:16px 48px;font-size:0.85rem; }
+.form-privacy { font-size:0.72rem;color:rgba(245,240,235,0.35);max-width:340px;line-height:1.5; }
+
+/* ─── Vleessoorten ───────────────────────────────────────────── */
+#meats { padding-top:60px;border-top:1px solid rgba(245,240,235,0.06);margin-top:60px;text-align:center; }
+#meats .section-sub { margin:0 auto; }
+.meats-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px; }
+.meat-card { background:var(--dark3);border-radius:20px;border:1px solid rgba(245,240,235,0.07);text-align:left;overflow:hidden;transition:border-color .2s ease,box-shadow .2s ease; }
+.meat-card:hover { border-color:rgba(245,240,235,0.14);box-shadow:0 8px 32px rgba(0,0,0,0.25); }
+.meat-card-header { padding:28px 28px 22px;border-bottom:1px solid rgba(245,240,235,0.06);position:relative; }
+.meat-card-header::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red); }
+.meat-card-body { padding:22px 28px 28px; }
+.meat-card ul { display:flex;flex-direction:column;gap:10px; }
+.meat-card-name { font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:700;color:var(--red);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px; }
+.meat-card-price { font-size:2rem;font-weight:800;line-height:1; }
+.meat-card-price span { font-size:0.9rem;font-weight:400;color:rgba(245,240,235,0.5); }
+.meat-card-label { font-size:0.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,235,0.3);margin-bottom:14px; }
+.meat-card ul li { font-size:0.84rem;color:rgba(245,240,235,0.7);display:flex;gap:10px;align-items:baseline; }
+.meat-card ul li::before { content:'—';color:var(--red);flex-shrink:0; }
+.meats-note { margin-top:20px;margin-bottom:48px;font-size:0.78rem;color:rgba(245,240,235,0.35);text-align:center;letter-spacing:0.5px; }
+.meats-tabs { display:none; }
+
+/* ─── Bezorg ─────────────────────────────────────────────────── */
+.bezorg-standalone { max-width:560px;margin:0 auto; }
+.bezorg-divider { display:flex;align-items:center;gap:12px;margin:16px 0;color:rgba(245,240,235,0.25);font-size:0.72rem;letter-spacing:2px; }
+.bezorg-divider::before,.bezorg-divider::after { content:'';flex:1;height:1px;background:rgba(245,240,235,0.08); }
+.bezorg-link { display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(245,240,235,0.04);border:1px solid rgba(245,240,235,0.08);border-radius:10px;cursor:pointer;transition:background .25s ease,border-color .25s ease;text-decoration:none;color:var(--white);width:100%; }
+.bezorg-link:hover { background:rgba(245,240,235,0.07);border-color:rgba(245,240,235,0.15); }
+.bezorg-link-text { display:flex;flex-direction:column;gap:2px;flex:1; }
+.bezorg-link-title { font-size:0.88rem;font-weight:700;font-family:'Poppins',sans-serif; }
+.bezorg-link-sub { font-size:0.75rem;color:rgba(245,240,235,0.45); }
+.bezorg-link-arrow { font-size:1rem;color:rgba(245,240,235,0.3);transition:transform .25s ease,color .25s ease; }
+.bezorg-link:hover .bezorg-link-arrow { transform:translateX(4px);color:var(--red); }
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+.btn-primary { background:var(--red);color:var(--white);padding:15px 36px;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.5px;border:none;cursor:pointer;border-radius:10px;transition:background var(--trans),transform var(--trans),box-shadow var(--trans); }
+.btn-primary:hover { background:var(--red-d);transform:translateY(-2px);box-shadow:0 10px 30px rgba(196,30,58,0.4); }
+.btn-ghost { flex:1;padding:13px;background:transparent;border:1.5px solid rgba(245,240,235,0.15);color:rgba(245,240,235,0.6);font-family:'Poppins',sans-serif;font-weight:700;font-size:0.8rem;border-radius:2px;cursor:pointer;transition:border-color var(--trans),color var(--trans); }
+.btn-ghost:hover { border-color:rgba(245,240,235,0.4);color:var(--white); }
+
+/* ─── Carousel dots ──────────────────────────────────────────── */
+.carousel-dots { display:flex;justify-content:center;gap:6px;margin-top:16px; }
+.carousel-dot { width:20px;height:2px;border-radius:2px;background:rgba(245,240,235,0.2);transition:background .3s ease,width .3s ease;cursor:pointer; }
+.carousel-dot.active { background:var(--red);width:36px; }
+
+/* ─── Field flash ────────────────────────────────────────────── */
+@keyframes fieldFlash { 0% { border-color:var(--red);box-shadow:0 0 0 3px rgba(196,30,58,0.25); } 60% { border-color:var(--red);box-shadow:0 0 0 6px rgba(196,30,58,0.08); } 100% { border-color:rgba(245,240,235,0.1);box-shadow:none; } }
+.field-flash { animation:fieldFlash 0.9s ease forwards; }
+
+/* ─── Scroll progress ────────────────────────────────────────── */
+#scroll-progress { position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:9998;width:100%;transform:scaleX(0);transform-origin:left;will-change:transform;box-shadow:0 0 8px rgba(196,30,58,0.6); }
+
+/* ─── Toast ──────────────────────────────────────────────────── */
+.toast { position:fixed;bottom:32px;right:32px;background:var(--dark2);border:1px solid var(--red);border-radius:4px;padding:16px 24px;font-size:0.85rem;font-weight:600;color:var(--white);z-index:9999;transform:translateY(80px);opacity:0;transition:transform .4s ease,opacity .4s ease;max-width:320px; }
+.toast.show { transform:translateY(0);opacity:1; }
+.toast-title { color:var(--red);margin-bottom:4px;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase; }
+
+/* ─── Float actions ──────────────────────────────────────────── */
+.float-actions { position:fixed;bottom:36px;right:36px;display:flex;flex-direction:column;gap:12px;z-index:900; }
+.float-btn { width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;border:none;transition:transform var(--trans),box-shadow var(--trans);box-shadow:0 4px 20px rgba(0,0,0,0.4); }
+.float-btn:hover { transform:scale(1.12); }
+.float-wa { background:#25D366; }
+.float-wa:hover { box-shadow:0 6px 28px rgba(37,211,102,0.4); }
+.float-book { background:var(--red);opacity:0;transform:scale(0.7);pointer-events:none;transition:opacity .4s ease,transform .4s ease,box-shadow var(--trans); }
+.float-book.visible { opacity:1;transform:scale(1);pointer-events:auto; }
+.float-book:hover { box-shadow:0 6px 28px rgba(196,30,58,0.5); }
+.float-tooltip { position:absolute;right:60px;background:var(--dark2);color:var(--white);font-size:0.72rem;font-weight:700;letter-spacing:1px;white-space:nowrap;padding:6px 14px;border-radius:2px;border:1px solid rgba(245,240,235,0.08);opacity:0;pointer-events:none;transition:opacity .2s ease; }
+.float-btn:hover .float-tooltip { opacity:1; }
+
+/* ─── Addon modal ────────────────────────────────────────────── */
+.addon-info-btn { position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:rgba(245,240,235,0.1);border:1.5px solid rgba(245,240,235,0.4);color:rgba(245,240,235,0.85);font-size:0.82rem;font-weight:800;font-family:'Poppins',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--trans),border-color var(--trans),color var(--trans);z-index:3;line-height:1;letter-spacing:0; }
+.addon-info-btn:hover { background:var(--red);border-color:var(--red);color:var(--white); }
+.addon-modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:5000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease; }
+.addon-modal-overlay.open { opacity:1;visibility:visible; }
+.addon-modal { background:var(--dark2);border:1px solid rgba(245,240,235,0.1);border-radius:16px;padding:40px 36px;max-width:420px;width:100%;position:relative;transform:translateY(20px) scale(0.97);transition:transform .3s cubic-bezier(0.34,1.56,0.64,1); }
+.addon-modal-overlay.open .addon-modal { transform:translateY(0) scale(1); }
+.addon-modal-close { position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(245,240,235,0.06);border:1px solid rgba(245,240,235,0.1);color:rgba(245,240,235,0.6);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--trans); }
+.addon-modal-close:hover { background:var(--red);color:var(--white);border-color:var(--red); }
+.addon-modal-title { font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:6px; }
+.addon-modal-price { display:inline-block;background:var(--red-g);border:1px solid rgba(232,0,28,0.3);color:var(--red);font-size:0.78rem;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;margin-bottom:20px; }
+.addon-modal-desc { font-size:0.88rem;line-height:1.7;color:rgba(245,240,235,0.7);margin-bottom:20px; }
+.addon-modal-includes { background:var(--dark3);border-radius:10px;padding:16px 18px;margin-bottom:24px; }
+.addon-modal-includes-title { font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,235,0.4);margin-bottom:10px; }
+.addon-modal-includes ul { display:flex;flex-direction:column;gap:7px; }
+.addon-modal-includes li { display:flex;gap:8px;font-size:0.82rem;color:rgba(245,240,235,0.7); }
+.addon-modal-includes li::before { content:'v';color:var(--red);font-weight:700;flex-shrink:0; }
+.addon-modal-actions { display:flex;gap:10px; }
+.addon-modal-actions .btn-primary { flex:1;padding:13px;font-size:0.8rem; }
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+footer { background:var(--dark2);padding:80px 80px 40px;border-top:1px solid rgba(245,240,235,0.06); }
+.footer-grid { display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:60px; }
+.footer-brand-name { font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:1px;margin-bottom:12px; }
+.footer-brand-name span { color:var(--red); }
+.footer-brand-desc { font-size:0.82rem;color:rgba(245,240,235,0.4);line-height:1.7;margin-bottom:24px; }
+.social-links { display:flex;gap:12px; }
+.social-link { width:38px;height:38px;background:rgba(245,240,235,0.05);border:1px solid rgba(245,240,235,0.08);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:0.85rem;transition:background var(--trans),border-color var(--trans); }
+.social-link:hover { background:var(--red);border-color:var(--red); }
+.footer-col-title { font-size:0.72rem;font-weight:700;letter-spacing:2px;color:rgba(245,240,235,0.4);margin-bottom:20px; }
+.footer-col ul { display:flex;flex-direction:column;gap:10px; }
+.footer-col ul li a { font-size:0.85rem;color:rgba(245,240,235,0.55);transition:color var(--trans); }
+.footer-col ul li a:hover { color:var(--red); }
+.footer-bottom { display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:rgba(245,240,235,0.25); }
+.footer-bottom a { color:var(--red); }
+
+/* ─── Mobile ─────────────────────────────────────────────────── */
+@media (max-width:1024px) {
+  section { padding:80px 40px; }
+  #booking { padding:100px 40px 80px; }
+  #navbar { padding:0 40px; }
+  .discounts-grid { grid-template-columns:repeat(2,1fr); }
+  .packages-carousel-wrap { position:relative; }
+  .packages-grid { display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;scrollbar-width:none;padding:20px calc(50vw - 43vw) 12px;margin:0 -24px;margin-bottom:16px; }
+  .packages-grid::-webkit-scrollbar { display:none; }
+  .packages-grid .package-card { flex:0 0 86vw;scroll-snap-align:center;scroll-snap-stop:always;min-width:0;text-align:center;touch-action:pan-x; }
+  .packages-grid .pkg-features li { text-align:left; }
+  .packages-grid .pkg-select { text-align:center; }
+  .addons-grid { grid-template-columns:repeat(2,1fr); }
+  .footer-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:768px) {
+  section { padding:60px 24px; }
+  #booking { padding:90px 24px 60px; }
+  #navbar { padding:0 24px;height:68px; }
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+  .discounts-grid { grid-template-columns:repeat(2,1fr);gap:10px; }
+  .discount-card { padding:18px 14px; }
+  .addons-section { position:relative; }
+  .addons-grid { display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;scrollbar-width:none;padding:4px calc(50vw - 36vw) 4px;margin:0 -24px; }
+  .addons-grid::-webkit-scrollbar { display:none; }
+  .addons-grid .addon-item { flex:0 0 72vw;scroll-snap-align:center;scroll-snap-stop:always;touch-action:pan-x; }
+  .form-grid { grid-template-columns:1fr; }
+  .booking-form-wrapper { padding:32px 24px; }
+  footer { padding:48px 24px 24px; }
+  .footer-grid { grid-template-columns:1fr; }
+  .footer-bottom { flex-direction:column;gap:12px;text-align:center; }
+  .meats-grid { grid-template-columns:1fr;gap:0; }
+  #meats { margin-top:40px;padding-top:40px; }
+  .meats-tabs { display:flex;background:var(--dark3);border-radius:12px;padding:4px;gap:4px;margin-top:28px;margin-bottom:20px; }
+  .meats-tab { flex:1;background:none;border:none;color:rgba(245,240,235,0.45);font-family:'Poppins',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.5px;padding:10px 6px;border-radius:8px;cursor:pointer;transition:background .25s ease,color .25s ease;line-height:1.3;text-align:center; }
+  .meats-tab.active { background:var(--red);color:var(--white); }
+  .meat-card { display:none;animation:meatFadeIn .3s ease; }
+  .meat-card.active { display:block; }
+  @keyframes meatFadeIn { from { opacity:0;transform:translateY(6px); } to { opacity:1;transform:translateY(0); } }
+  .package-card.selected,.package-card.featured,.packages-grid.has-selection .package-card.featured:not(.selected) { box-shadow:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Preloader ── -->
+<div id="preloader">
+  <div class="preloader-logo" id="pl-logo"></div>
+  <div class="preloader-bar"><div class="preloader-fill"></div></div>
+  <div class="preloader-tag">Soulfood BBQ</div>
+</div>
+
+<!-- ── Scroll progress ── -->
+<div id="scroll-progress"></div>
+
+<!-- ── Custom cursor ── -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- ── Floating Actions ── -->
+<div class="float-actions">
+  <a href="https://wa.me/31201234567" target="_blank" class="float-btn float-wa" title="WhatsApp">
+    <span class="float-tooltip">WhatsApp ons</span>💬
+  </a>
+  <button class="float-btn float-book" id="float-book"
+    onclick="document.getElementById('booking-form').scrollIntoView({behavior:'smooth'})" title="Offerte Aanvragen">
+    <span class="float-tooltip">Offerte Aanvragen</span>📅
+  </button>
+</div>
+
+<!-- ── Navbar ── -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Mandja<span>grill</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">Over Ons</a></li>
+    <li><a href="index.html#services">Keukens</a></li>
+    <li><a href="#booking">Pakketten</a></li>
+    <li><a href="index.html#testimonials">Reviews</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="#booking-form" class="nav-cta">Offerte Aanvragen</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── Booking ── -->
+<section id="booking">
+  <div class="booking-header">
+    <p class="section-tag fade-up">Direct Boeken</p>
+    <h1 class="section-title fade-up">Kies uw <em>BBQ-pakket</em></h1>
+    <p class="section-sub fade-up">Drie heldere pakketten, vaste prijzen per persoon. Geen verborgen kosten — crew, opbouw en afruimen altijd inbegrepen.</p>
+  </div>
+
+  <div class="packages-carousel-wrap">
+  <div class="packages-grid" id="packages-carousel">
+    <div class="package-card fade-up" data-package="basis" data-price="60.00">
+      <div class="pkg-name">Mandja Signature</div>
+      <div class="pkg-sub">Compleet BBQ-pakket voor 25–100 gasten</div>
+      <div class="pkg-price">Vaste prijs</div>
+      <div class="pkg-price-amount">€60 <span>p.p.</span></div>
+      <div class="pkg-price-note">Excl. BTW · Minimaal 25 personen · 3 uur service</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>1 live grillstation met BBQ-chef</li>
+        <li>3 soorten vlees + 2 bijgerechten</li>
+        <li>1 vegetarische optie inbegrepen</li>
+        <li>Stokbrood + kruidenboter</li>
+        <li>2 sauzen naar keuze</li>
+        <li>Frisdranken onbeperkt inbegrepen</li>
+        <li>Op- en afbouw door ons team</li>
+      </ul>
+      <button class="pkg-select" onclick="selectPackage(this, 'Mandja Signature', 60.00)">Selecteer Pakket</button>
+    </div>
+
+    <div class="package-card featured fade-up" data-package="compleet" data-price="70.00">
+      <div class="pkg-badge">Meest Gekozen</div>
+      <div class="pkg-name">Mandja Pit Master</div>
+      <div class="pkg-sub">De volledige BBQ-beleving voor uw evenement</div>
+      <div class="pkg-price">Vaste prijs</div>
+      <div class="pkg-price-amount">€70 <span>p.p.</span></div>
+      <div class="pkg-price-note">Excl. BTW · Minimaal 20 personen · 4 uur service</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>2 live grillstations, 2 BBQ-chefs</li>
+        <li>5 soorten vlees + 3 bijgerechten & salades</li>
+        <li>Vegetarisch & kindermenu inbegrepen</li>
+        <li>Premium tafelopstelling & servies</li>
+        <li>Frisdrank + bier & wijnpakket inbegrepen</li>
+        <li>Welkomstdrankje bij aankomst</li>
+        <li>Starters & broodjes bij aankomst</li>
+        <li>Dedicated event coördinator</li>
+        <li>Op- en afbouw door ons team</li>
+      </ul>
+      <button class="pkg-select" onclick="selectPackage(this, 'Mandja Pit Master', 70.00)">Selecteer Pakket</button>
+    </div>
+
+    <div class="package-card fade-up" data-package="premium" data-price="80.00">
+      <div class="pkg-name">Mandja Smokehouse</div>
+      <div class="pkg-sub">Het volledige BBQ-spektakel zonder compromissen</div>
+      <div class="pkg-price">Vaste prijs</div>
+      <div class="pkg-price-amount">€80 <span>p.p.</span></div>
+      <div class="pkg-price-note">Excl. BTW · Minimaal 20 personen · 5 uur service</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>3 grillstations, 3 BBQ-specialisten</li>
+        <li>Wagyu burger, côte de boeuf & Duroc varkenshaas</li>
+        <li>7 soorten vlees incl. signature marinades</li>
+        <li>Volledige vegetarisch/vegan lijn</li>
+        <li>Live carving station voor uw gasten</li>
+        <li>Premium dranken: bier, wijn & cocktails</li>
+        <li>Luxe styling & bloemendekoratie</li>
+        <li>Dedicated event manager</li>
+        <li>After-BBQ dessertbar</li>
+        <li>Op- en afbouw (tot 5 uur service)</li>
+      </ul>
+      <button class="pkg-select" onclick="selectPackage(this, 'Mandja Smokehouse', 80.00)">Selecteer Pakket</button>
+    </div>
+  </div>
+  </div>
+
+  <!-- Vleessoorten -->
+  <div id="meats">
+    <p class="section-tag fade-up">Wat staat er op de grill?</p>
+    <h2 class="section-title fade-up">Vlees per <em>pakket</em></h2>
+    <p class="section-sub fade-up">Alles onbeperkt gedurende de service — exact welke vleessoorten worden besproken en afgestemd tijdens het intakegesprek. Zakelijke facturatie is altijd mogelijk.</p>
+    <div class="meats-tabs">
+      <button class="meats-tab active" onclick="switchMeatsTab('basis', this)">Signature</button>
+      <button class="meats-tab" onclick="switchMeatsTab('compleet', this)">Pit Master</button>
+      <button class="meats-tab" onclick="switchMeatsTab('premium', this)">Smokehouse</button>
+    </div>
+    <div class="meats-grid">
+      <div class="meat-card active fade-up" data-meat="basis">
+        <div class="meat-card-header">
+          <div class="meat-card-name">Mandja Signature</div>
+          <div class="meat-card-price">€60 <span>p.p.</span></div>
+        </div>
+        <div class="meat-card-body">
+          <div class="meat-card-label">Keuze uit</div>
+          <ul>
+            <li>Gemarineerde kipfilet</li>
+            <li>Hamburger (180g)</li>
+            <li>Merguez worstje</li>
+            <li>Vegetarische optie inbegrepen</li>
+            <li>Stokbrood + kruidenboter</li>
+            <li>2 sauzen naar keuze</li>
+          </ul>
+        </div>
+      </div>
+      <div class="meat-card fade-up" data-meat="compleet">
+        <div class="meat-card-header">
+          <div class="meat-card-name">Mandja Pit Master</div>
+          <div class="meat-card-price">€70 <span>p.p.</span></div>
+        </div>
+        <div class="meat-card-body">
+          <div class="meat-card-label">Keuze uit</div>
+          <ul>
+            <li>Gemarineerde kipfilet & kippendij</li>
+            <li>Smash burger (180g)</li>
+            <li>Sparerib (halve rack)</li>
+            <li>Entrecôte (200g)</li>
+            <li>Gemarineerde garnalen</li>
+            <li>Vegetarisch & vegan optie</li>
+          </ul>
+        </div>
+      </div>
+      <div class="meat-card fade-up" data-meat="premium">
+        <div class="meat-card-header">
+          <div class="meat-card-name">Mandja Smokehouse</div>
+          <div class="meat-card-price">€80 <span>p.p.</span></div>
+        </div>
+        <div class="meat-card-body">
+          <div class="meat-card-label">Keuze uit</div>
+          <ul>
+            <li>Wagyu burger (180g)</li>
+            <li>Côte de boeuf aan het bot</li>
+            <li>Duroc varkenshaas + kruidenboter</li>
+            <li>Whole chicken (live carving)</li>
+            <li>Tomahawk steak (gedeeld)</li>
+            <li>Zeevruchten van de grill</li>
+            <li>Volledige vegetarisch/vegan lijn</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="meats-note fade-up">Exacte selectie wordt tijdens intake afgestemd op uw evenement en dieetwensen.</p>
+  </div>
+
+  <!-- Kortingen -->
+  <div class="discounts-grid fade-up">
+    <div class="discount-card">
+      <div class="discount-label">Early Bird</div>
+      <div class="discount-amount">- €3 tot €5 p.p.</div>
+      <div class="discount-desc">Boek 8 weken of meer van tevoren en ontvang automatisch korting per persoon.</div>
+    </div>
+    <div class="discount-card">
+      <div class="discount-label">Referral Bonus</div>
+      <div class="discount-amount">€200 – €300 tegoed</div>
+      <div class="discount-desc">Breng een vriend die ook boekt en ontvang €200–€300 als tegoed op uw volgende boeking.</div>
+    </div>
+    <div class="discount-card">
+      <div class="discount-label">Vaste Klant</div>
+      <div class="discount-amount">Gratis upgrade</div>
+      <div class="discount-desc">Al eerder geboekt? U krijgt een gratis pakket-upgrade en voorrangsplanning voor uw datum.</div>
+    </div>
+    <div class="discount-card">
+      <div class="discount-label">Volumekorting</div>
+      <div class="discount-amount">- €2,50 p.p.</div>
+      <div class="discount-desc">Vanaf 200 gasten ontvangt u automatisch €2,50 korting per persoon. Wordt verrekend in de offerte.</div>
+    </div>
+  </div>
+
+  <!-- Booking Form -->
+  <div class="booking-form-wrapper fade-up" id="booking-form">
+    <h3 class="booking-form-title">Vraag uw offerte aan</h3>
+    <p class="booking-form-sub">Vul uw gegevens in — binnen 24 uur nemen wij contact met u op met een scherpe offerte op maat.</p>
+
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Uw Naam</label>
+        <input type="text" placeholder="Jan de Vries" id="f-name">
+      </div>
+      <div class="form-field">
+        <label>E-mailadres</label>
+        <input type="email" placeholder="jan@voorbeeld.nl" id="f-email">
+      </div>
+      <div class="form-field">
+        <label>Telefoonnummer <span style="color:var(--red)">*</span></label>
+        <input type="tel" placeholder="+31 6 12345678" id="f-tel" required>
+      </div>
+      <div class="form-field">
+        <label>Datum Evenement</label>
+        <input type="date" id="f-date">
+      </div>
+      <div class="form-field">
+        <label>Gekozen Pakket</label>
+        <select id="f-package">
+          <option value="">— Selecteer pakket —</option>
+          <option value="basis">Mandja Signature — €60 p.p.</option>
+          <option value="compleet">Mandja Pit Master — €70 p.p.</option>
+          <option value="premium">Mandja Smokehouse — €80 p.p.</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Type Evenement</label>
+        <select id="f-type">
+          <option value="">— Type evenement —</option>
+          <option>Bedrijfsevenement</option>
+          <option>Personeelsfeest</option>
+          <option>Teambuilding</option>
+          <option>Bruiloft</option>
+          <option>Verjaardag / Jubileum</option>
+          <option>Receptie / Borrel</option>
+          <option>Congres / Seminar</option>
+          <option>Privédiner</option>
+          <option>Anders</option>
+        </select>
+      </div>
+
+      <div class="form-field full">
+        <label>Aantal Gasten (incl. kinderen)</label>
+        <div class="people-slider-wrap">
+          <div class="people-display">
+            <span class="people-count" id="people-display">25</span>
+            <span class="people-label">gasten (incl. kinderen)</span>
+          </div>
+          <input type="range" min="15" max="500" value="25" id="people-slider" oninput="updatePeople(this)">
+          <div id="discount-hint" style="font-size:0.72rem;font-weight:700;letter-spacing:1px;margin-top:8px;min-height:18px;transition:color 0.3s"></div>
+        </div>
+      </div>
+
+      <div class="form-field full">
+        <label>Locatie / Adres</label>
+        <div class="autocomplete-wrap">
+          <input type="text" placeholder="Naam locatie, Straat 1, Stad" id="f-location" autocomplete="off">
+          <div class="autocomplete-list" id="addr-list" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add-ons -->
+    <div class="addons-section">
+      <div class="addons-title">Voeg toe aan uw pakket</div>
+      <div class="addons-grid" id="addons-grid">
+        <div class="addon-item">
+          <input type="checkbox" id="ao1" value="0" data-name="Tent" data-flat="true" onchange="calcPrice(); toggleTentHeat()">
+          <label class="addon-label" for="ao1">
+            <div class="addon-check"></div>
+            <div class="addon-name">Tent</div>
+            <div class="addon-short">Professionele feesttent voor tot 100 gasten — beschermd tegen regen, wind en zon.</div>
+            <div class="tent-heat-row" id="tent-heat-row" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,240,235,0.08)">
+              <button type="button" id="ao1-heat-btn" class="tent-heat-btn" onclick="event.stopPropagation();toggleHeat()">Met verwarming</button>
+              <input type="checkbox" id="ao1-heat" value="0" style="display:none">
+            </div>
+            <div class="addon-price" id="ao1-price">Vanaf €250</div>
+          </label>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao1',event)">?</button>
+        </div>
+        <div class="addon-item">
+          <input type="checkbox" id="ao2" value="450.00" data-name="Premium Decoration" data-flat="true" onchange="calcPrice()">
+          <label class="addon-label" for="ao2">
+            <div class="addon-check"></div>
+            <div class="addon-name">Premium Decoratie</div>
+            <div class="addon-short">Tafelkleden, sfeerverlichting, centerpieces en bloemen — uw locatie ziet er direct professioneel uit.</div>
+            <div class="addon-price">€300 – €2.000</div>
+          </label>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao2',event)">?</button>
+        </div>
+        <div class="addon-item">
+          <input type="checkbox" id="ao3" value="750.00" data-name="Live Entertainment" data-flat="true" onchange="calcPrice()">
+          <label class="addon-label" for="ao3">
+            <div class="addon-check"></div>
+            <div class="addon-name">Live Entertainment</div>
+            <div class="addon-short">Professionele DJ of livemuzikant voor 4 uur — van lounge tijdens het eten tot feest erna.</div>
+            <div class="addon-price">€500 – €25.000</div>
+          </label>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao3',event)">?</button>
+        </div>
+        <div class="addon-item">
+          <input type="checkbox" id="ao4" value="300.00" data-name="Photo Booth" data-flat="true" onchange="calcPrice()">
+          <label class="addon-label" for="ao4">
+            <div class="addon-check"></div>
+            <div class="addon-name">Photobooth</div>
+            <div class="addon-short">Selfie-booth met props, directe prints en digitale galerij — een hit bij elke leeftijd.</div>
+            <div class="addon-price">€200 – €400</div>
+          </label>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao4',event)">?</button>
+        </div>
+        <div class="addon-item">
+          <input type="checkbox" id="ao5" value="20.00" data-name="Premium Bar Service" onchange="calcPrice()">
+          <label class="addon-label" for="ao5">
+            <div class="addon-check"></div>
+            <div class="addon-name">Premium Bar Service</div>
+            <div class="addon-short">Onbeperkt bier, wijn en frisdrank — bediend door ons team gedurende de volledige service.</div>
+            <div class="addon-price">Vanaf €20 p.p.</div>
+          </label>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao5',event)">?</button>
+        </div>
+        <div class="addon-item">
+          <input type="checkbox" id="ao6" value="0" data-name="Premium Catering Upgrade" style="display:none">
+          <div class="addon-label kids-stepper-card" id="upgrade-card">
+            <div class="addon-name">Premium Catering Upgrade</div>
+            <div class="addon-short">Wagyu burger, côte de boeuf en Duroc varkenshaas — voor gasten die het verschil proeven.</div>
+            <div class="upgrade-controls">
+              <button type="button" class="upgrade-all-btn" id="upgrade-all-btn" onclick="toggleUpgradeAll()">Alle gasten</button>
+              <div class="kids-stepper">
+                <button class="kids-btn" type="button" onclick="adjustUpgrade(-1)">−</button>
+                <div class="kids-count-display" id="upgrade-count">0</div>
+                <button class="kids-btn" type="button" onclick="adjustUpgrade(1)">+</button>
+              </div>
+            </div>
+            <div class="addon-price" id="upgrade-price-label">+ €15 p.p.</div>
+          </div>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao6',event)">?</button>
+        </div>
+        <div class="addon-item">
+          <input type="checkbox" id="ao7" value="175.00" data-name="Extra Crew Member" data-flat="true" onchange="calcPrice()">
+          <label class="addon-label" for="ao7">
+            <div class="addon-check"></div>
+            <div class="addon-name">Extra Crew Lid</div>
+            <div class="addon-short">Een extra professioneel crewlid — kortere wachttijden en meer aandacht voor uw gasten.</div>
+            <div class="addon-price">€150 – €200</div>
+          </label>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao7',event)">?</button>
+        </div>
+        <div class="addon-item">
+          <input type="checkbox" id="ao8" value="0" data-name="Kinderkorting" style="display:none">
+          <div class="addon-label kids-stepper-card" id="kids-card">
+            <div class="addon-name">Kinderkorting</div>
+            <div class="addon-short">Geef het aantal kinderen (t/m 12 jaar) op — u ontvangt automatisch €30 korting per kind op uw totaalprijs.</div>
+            <div class="kids-stepper">
+              <button class="kids-btn" type="button" onclick="adjustKids(-1)">−</button>
+              <div class="kids-count-display" id="kids-count">0</div>
+              <button class="kids-btn" type="button" onclick="adjustKids(1)">+</button>
+            </div>
+            <div class="addon-price" id="kids-price-label" style="color:#4ade80">− €30 korting p. kind (t/m 12 jaar)</div>
+          </div>
+          <button class="addon-info-btn" type="button" title="Meer info" onclick="showAddonInfo('ao8',event)">?</button>
+        </div>
+      </div>
+      <div class="carousel-dots" id="addons-dots" style="display:none">
+        <div class="carousel-dot active"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+      </div>
+    </div>
+
+    <!-- Price summary -->
+    <div class="price-summary" id="price-summary">
+      <div class="price-breakdown">
+        <div class="price-row"><span>Pakket</span><span id="ps-pkg">— nog niet geselecteerd —</span></div>
+        <div class="price-row"><span>Aantal gasten</span><span id="ps-guests">25 personen</span></div>
+        <div class="price-row"><span>Pakketkosten</span><span id="ps-base">—</span></div>
+        <div class="price-row"><span>Extra's (incl.)</span><span id="ps-addons">€0</span></div>
+        <div class="price-row" id="ps-kids-row" style="display:none;color:#4ade80"><span id="ps-kids-label">Kinderkorting</span><span id="ps-kids">—</span></div>
+        <div class="price-row" id="ps-discount-row" style="display:none;color:#4ade80"><span id="ps-discount-label">Groepskorting</span><span id="ps-discount">—</span></div>
+        <div class="price-row total"><span>Geschatte totaal</span><span id="ps-total">—</span></div>
+      </div>
+      <div class="price-note">* Indicatieve prijs excl. BTW.<br>Exacte offerte na intake gesprek.</div>
+    </div>
+
+    <div class="form-field" style="margin-bottom:24px">
+      <label>Bijzonderheden / Dieetwensen</label>
+      <textarea placeholder="Vertel ons over allergieën, speciale wensen, thema of andere details die we moeten weten..." id="f-notes"></textarea>
+    </div>
+
+    <div class="form-submit">
+      <button class="btn-primary" onclick="submitBooking()">Offerte Aanvragen</button>
+      <p class="form-privacy">Door te verzenden gaat u akkoord met onze privacyverklaring. Wij delen uw gegevens nooit met derden.</p>
+    </div>
+  </div>
+
+  <div class="bezorg-standalone fade-up">
+    <div class="bezorg-divider"><span>of</span></div>
+    <a href="mailto:contact@mandjagrill.nl?subject=Ik%20wil%20vlees%20laten%20bezorgen&body=Hi%20Mandja%2C%0A%0AIk%20zou%20graag%20vlees%20willen%20laten%20bezorgen." class="bezorg-link">
+      <span class="bezorg-link-text">
+        <span class="bezorg-link-title">Ik laat liever bezorgen</span>
+        <span class="bezorg-link-sub">Stuur ons een bericht, wij regelen de rest</span>
+      </span>
+      <span class="bezorg-link-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Mandja<span>grill</span></div>
+      <p class="footer-brand-desc">Rotterdam's BBQ-specialist voor evenementen van 25 tot 500 gasten. Van buurtfeest tot bedrijfsgala — wij grillen, u geniet.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" title="Instagram">📸</a>
+        <a href="#" class="social-link" title="Facebook">👍</a>
+        <a href="#" class="social-link" title="LinkedIn">💼</a>
+        <a href="#" class="social-link" title="TikTok">🎵</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigatie</div>
+      <ul>
+        <li><a href="index.html#about">Over Ons</a></li>
+        <li><a href="index.html#services">Keukens</a></li>
+        <li><a href="#booking">Pakketten</a></li>
+        <li><a href="index.html#testimonials">Reviews</a></li>
+        <li><a href="index.html#process">Werkwijze</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <ul>
+        <li><a href="mailto:contact@mandjagrill.nl">contact@mandjagrill.nl</a></li>
+        <li><a href="#">Rotterdam</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Mandjagrill. Alle rechten voorbehouden.</span>
+    <span><a href="#">Privacyverklaring</a> · <a href="#">Algemene Voorwaarden</a></span>
+  </div>
+</footer>
+
+<!-- Addon info modal -->
+<div class="addon-modal-overlay" id="addon-modal" onclick="closeAddonModal()">
+  <div class="addon-modal" onclick="event.stopPropagation()">
+    <button class="addon-modal-close" onclick="closeAddonModal()">×</button>
+    <h3 class="addon-modal-title" id="am-title"></h3>
+    <div class="addon-modal-price" id="am-price"></div>
+    <p class="addon-modal-desc" id="am-desc"></p>
+    <div class="addon-modal-includes">
+      <div class="addon-modal-includes-title">Inbegrepen</div>
+      <ul id="am-includes"></ul>
+    </div>
+    <div class="addon-modal-actions">
+      <button class="btn-primary" id="am-add-btn" onclick="toggleAddonFromModal()"></button>
+      <button class="btn-ghost" onclick="closeAddonModal()">Sluiten</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <div class="toast-title" id="toast-title">Verstuurd!</div>
+  <div id="toast-msg">We nemen zo snel mogelijk contact met u op.</div>
+</div>
+
+<script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
+const pkgNames  = { basis: 'Mandja Signature', compleet: 'Mandja Pit Master', premium: 'Mandja Smokehouse' };
+const slider    = document.getElementById('people-slider');
+let selectedPkg = { name: '', price: 0 };
+
+function fmt(n) {
+  if (typeof n !== 'number' || isNaN(n)) return '—';
+  return '€' + (n % 1 === 0 ? n.toFixed(0) : n.toFixed(2).replace('.', ','));
+}
+
+function calcPrice() {
+  const guests = parseInt(slider.value, 10) || 25;
+  let addonPP = 0, addonFlat = 0;
+  document.querySelectorAll('.addon-item input[type="checkbox"]:checked').forEach(cb => {
+    if (cb.id === 'ao8') return;
+    if (cb.dataset.flat) addonFlat += parseFloat(cb.value) || 0;
+    else addonPP += parseFloat(cb.value) || 0;
+  });
+  const tentCb = document.getElementById('ao1');
+  const heatCb = document.getElementById('ao1-heat');
+  if (tentCb && tentCb.checked) {
+    addonFlat += 250 + Math.floor((guests - 1) / 50) * 100;
+    if (heatCb && heatCb.checked) addonFlat += guests * 0.50;
+  }
+  const upgradeCount = parseInt(document.getElementById('upgrade-count')?.textContent) || 0;
+  if (upgradeCount > 0) addonFlat += upgradeCount * 15;
+  const kidsCount = parseInt(document.getElementById('kids-count')?.textContent) || 0;
+  const kidsTotal = kidsCount * 30;
+  if (kidsCount > 0) addonFlat -= kidsTotal;
+  const kidsLabel = document.getElementById('kids-price-label');
+  if (kidsLabel) {
+    kidsLabel.textContent = kidsCount > 0
+      ? kidsCount + ' kind' + (kidsCount > 1 ? 'eren' : '') + ' x €30 = - €' + kidsTotal
+      : '- €30 kinderkorting p. kind (t/m 12 jaar)';
+    kidsLabel.style.color = '#4ade80';
+  }
+  const kidsRow = document.getElementById('ps-kids-row');
+  if (kidsRow) {
+    if (kidsCount > 0) {
+      kidsRow.style.display = 'flex';
+      document.getElementById('ps-kids-label').textContent = `Kinderkorting (${kidsCount}×)`;
+      document.getElementById('ps-kids').textContent = '- ' + fmt(kidsTotal);
+    } else { kidsRow.style.display = 'none'; }
+  }
+  const addonTotal  = addonPP * guests + addonFlat;
+  const discountPct = guests >= 200 ? 0.025 : 0;
+  const discountRow = document.getElementById('ps-discount-row');
+  document.getElementById('ps-guests').textContent = guests + ' personen';
+  const addonsEl = document.getElementById('ps-addons');
+  addonsEl.textContent = addonTotal === 0 ? '€0' : (addonTotal < 0 ? '− ' + fmt(-addonTotal) : fmt(addonTotal));
+  addonsEl.style.color = addonTotal < 0 ? '#4ade80' : '';
+  const hint = document.getElementById('discount-hint');
+  if (guests >= 200) { hint.textContent = 'Volumekorting actief — €2,50 p.p. korting bij 200+ gasten'; hint.style.color = '#4ade80'; }
+  else if (guests >= 180) { hint.textContent = 'Tip: bij 200+ gasten ontvangt u €2,50 p.p. volumekorting'; hint.style.color = 'rgba(245,240,235,0.35)'; }
+  else { hint.textContent = ''; }
+  const pkgEl = document.getElementById('ps-pkg');
+  const baseEl = document.getElementById('ps-base');
+  const totalEl = document.getElementById('ps-total');
+  if (!selectedPkg.name) {
+    pkgEl.textContent = '— nog niet geselecteerd —';
+    baseEl.textContent = '—'; totalEl.textContent = '—';
+    if (discountRow) discountRow.style.display = 'none';
+    totalEl.style.cssText = 'color:rgba(245,240,235,0.35);font-size:0.95rem';
+    return;
+  }
+  const pkgPrice   = parseFloat(selectedPkg.price) || 0;
+  const subtotal   = pkgPrice * guests + addonTotal;
+  const discount   = subtotal * discountPct;
+  const grandTotal = subtotal - discount;
+  pkgEl.textContent  = selectedPkg.name + ' · ' + fmt(pkgPrice) + ' p.p.';
+  baseEl.textContent = fmt(pkgPrice * guests);
+  if (discountPct > 0) {
+    document.getElementById('ps-discount-label').textContent = 'Volumekorting (200+ gasten)';
+    document.getElementById('ps-discount').textContent = '- ' + fmt(discount);
+    discountRow.style.display = 'flex';
+  } else if (discountRow) { discountRow.style.display = 'none'; }
+  totalEl.textContent   = fmt(grandTotal);
+  totalEl.style.cssText = 'color:#D4001A;font-size:1.4rem;font-weight:800';
+}
+
+/* ── Preloader ── */
+(function() {
+  const logo = document.getElementById('pl-logo');
+  'MANDJAGRILL'.split('').forEach((ch, i) => {
+    const s = document.createElement('span');
+    s.className = 'letter';
+    s.textContent = ch;
+    s.style.animationDelay = (i * 0.07) + 's';
+    logo.appendChild(s);
+  });
+  const noScroll = e => e.preventDefault();
+  document.addEventListener('touchmove', noScroll, { passive: false });
+  let hidden = false;
+  function hide() {
+    if (hidden) return; hidden = true;
+    document.getElementById('preloader').classList.add('done');
+    document.documentElement.classList.remove('is-loading');
+    document.body.style.overflow = '';
+    document.removeEventListener('touchmove', noScroll);
+  }
+  setTimeout(hide, 3000);
+  Promise.all([
+    new Promise(r => setTimeout(r, 600)),
+    document.fonts ? document.fonts.ready : Promise.resolve()
+  ]).then(hide).catch(hide);
+})();
+
+/* ── Custom cursor ── */
+const dot  = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  (function raf() {
+    rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(raf);
+  })();
+}
+document.querySelectorAll('a,button,.package-card,.addon-label').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+
+/* ── Scroll handler ── */
+const scrollBar  = document.getElementById('scroll-progress');
+const navbar     = document.getElementById('navbar');
+const floatBook  = document.getElementById('float-book');
+let lastY = 0, ticking = false;
+window.addEventListener('scroll', () => {
+  if (ticking) return; ticking = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY;
+    const mobile = window.innerWidth <= 768;
+    scrollBar.style.transform = 'scaleX(' + Math.min(y / Math.max(document.body.scrollHeight - window.innerHeight, 1), 1) + ')';
+    if (y > 80) {
+      navbar.classList.add('scrolled');
+      if (mobile) {
+        if (y > lastY + 8) { navbar.classList.add('hide'); navbar.classList.remove('show'); }
+        else if (y < lastY - 12) { navbar.classList.remove('hide'); navbar.classList.add('show'); }
+      } else { navbar.classList.remove('hide'); }
+    } else { navbar.classList.remove('scrolled', 'hide', 'show'); }
+    floatBook.classList.toggle('visible', y > 300);
+    lastY = y; ticking = false;
+  });
+}, { passive: true });
+
+/* ── Intersection observer ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('visible'); });
+}, { threshold: 0.14 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+/* ── People slider ── */
+function updatePeople(el) {
+  document.getElementById('people-display').textContent = +el.value >= +el.max ? el.max + '+' : el.value;
+  const pct = ((el.value - el.min) / (el.max - el.min)) * 100;
+  el.style.setProperty('--pct', pct + '%');
+  const allBtn = document.getElementById('upgrade-all-btn');
+  if (allBtn && allBtn.classList.contains('active')) {
+    const countEl = document.getElementById('upgrade-count');
+    if (countEl) { countEl.textContent = +el.value; updateUpgradeLabel(+el.value, +el.value); }
+  }
+  calcPrice();
+}
+
+/* ── Package selection ── */
+function selectPackage(btn, name, price) {
+  document.querySelectorAll('.package-card').forEach(c => {
+    c.classList.remove('selected');
+    const b = c.querySelector('.pkg-select');
+    if (b) { b.textContent = 'Selecteer Pakket'; b.style.background = ''; b.style.color = ''; }
+  });
+  const card = btn.closest('.package-card');
+  card.classList.add('selected');
+  document.getElementById('packages-carousel').classList.add('has-selection');
+  btn.textContent = '✓ Geselecteerd';
+  btn.style.background = 'var(--red)';
+  btn.style.color = 'var(--white)';
+  selectedPkg = { name, price: parseFloat(price) };
+  const pkgKey = card.dataset.package;
+  const pkgMins = { basis: 25, compleet: 20, premium: 20 };
+  if (slider) { slider.min = pkgMins[pkgKey] || 15; slider.value = pkgMins[pkgKey] || 25; updatePeople(slider); }
+  const sel = document.getElementById('f-package');
+  if (sel) { sel.value = pkgKey; sel.classList.remove('field-flash'); void sel.offsetWidth; sel.classList.add('field-flash'); }
+  calcPrice();
+  setTimeout(() => {
+    const form = document.getElementById('booking-form');
+    if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 350);
+}
+
+/* ── Dropdown sync ── */
+document.getElementById('f-package').addEventListener('change', function() {
+  const val = this.value;
+  document.querySelectorAll('.package-card').forEach(c => {
+    const b = c.querySelector('.pkg-select');
+    const match = c.dataset.package === val;
+    c.classList.toggle('selected', match);
+    if (b) { b.textContent = match ? '✓ Geselecteerd' : 'Selecteer Pakket'; b.style.background = match ? 'var(--red)' : ''; b.style.color = match ? 'var(--white)' : ''; }
+    if (match) selectedPkg = { name: pkgNames[val] || val, price: +c.dataset.price };
+  });
+  if (!val) selectedPkg = { name: '', price: 0 };
+  calcPrice();
+});
+
+/* ── Meats tab switcher ── */
+function switchMeatsTab(pkg, btn) {
+  btn.closest('.meats-tabs').querySelectorAll('.meats-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.meat-card[data-meat]').forEach(c => c.classList.remove('active'));
+  document.querySelector('.meat-card[data-meat="' + pkg + '"]').classList.add('active');
+}
+
+/* ── Toast ── */
+function showToast(title, msg, isError) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-title').textContent = title;
+  document.getElementById('toast-msg').textContent = msg;
+  t.style.borderColor = isError ? '#e63946' : 'var(--red)';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4500);
+}
+
+/* ── Submit ── */
+function submitBooking() {
+  const name  = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const tel   = document.getElementById('f-tel').value.trim();
+  if (!name || !email || !tel) { showToast('Veld ontbreekt', 'Vul uw naam, e-mailadres en telefoonnummer in.', true); return; }
+  showToast('Aanvraag Ontvangen!', 'We nemen binnen 24 uur contact met u op met een persoonlijke offerte.');
+  document.querySelectorAll('#booking input:not([type=range]):not([type=checkbox]), #booking select, #booking textarea').forEach(el => el.value = '');
+  document.querySelectorAll('.addon-item input[type=checkbox]').forEach(cb => cb.checked = false);
+  document.querySelectorAll('.package-card').forEach(c => {
+    c.classList.remove('selected');
+    const b = c.querySelector('.pkg-select');
+    if (b) { b.textContent = 'Selecteer Pakket'; b.style.background = ''; b.style.color = ''; }
+  });
+  selectedPkg = { name: '', price: 0 };
+  document.getElementById('packages-carousel').classList.remove('has-selection');
+  calcPrice();
+}
+
+/* ── Hamburger ── */
+const ham   = document.getElementById('hamburger');
+const links = document.querySelector('.nav-links');
+let menuOpen = false;
+ham.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  links.style.cssText = menuOpen ? 'display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;bottom:0;background:rgba(8,8,8,0.99);padding:40px 32px;gap:28px;z-index:999;border-top:1px solid rgba(196,30,58,0.3);justify-content:flex-start;' : '';
+  ham.children[0].style.cssText = menuOpen ? 'transform:rotate(45deg) translate(5px,5px)' : '';
+  ham.children[1].style.cssText = menuOpen ? 'opacity:0' : '';
+  ham.children[2].style.cssText = menuOpen ? 'transform:rotate(-45deg) translate(5px,-5px)' : '';
+});
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  if (menuOpen) { menuOpen = false; links.style.cssText = ''; ham.children[0].style.cssText = ''; ham.children[1].style.cssText = ''; ham.children[2].style.cssText = ''; }
+}));
+
+/* ── Package card a11y ── */
+document.querySelectorAll('.package-card').forEach(card => {
+  card.setAttribute('tabindex', '0');
+  card.addEventListener('keydown', e => { if (e.key === 'Enter') card.querySelector('.pkg-select').click(); });
+});
+
+/* ── Addon info modal ── */
+const addonData = {
+  ao1: { name:'Tent', price:'Vanaf €250 (+ €150 met verwarming)', desc:'Geen compromissen door het weer. Onze feesttent biedt ruimte voor tot 100 gasten en zorgt dat uw BBQ doorgaat — ongeacht regen of zon.', includes:['Professionele partytent (tot 100 m²)','Opbouw dag voor het evenement','Afbraak dag erna — geen omkijken naar','Optie: verwarming toevoegen voor +€150'] },
+  ao2: { name:'Premium Decoratie', price:'€300 – €2.000', desc:'Van linnen tafelkleden en kaarsenhouders tot sfeerverlichting en seizoensbloemen — ons decoratieteam zorgt dat uw locatie er precies uitziet zoals u het in gedachten had.', includes:['Tafelkleden & linnen servetten','Sfeer- en accentverlichting','Centerpieces & kaarsenhouders','Seizoensgebonden bloemenopstelling','Op- en afbouw door ons team'] },
+  ao3: { name:'Live Entertainment', price:'€500 – €25.000', desc:'De juiste muziek maakt het verschil tussen een goed evenement en een feest dat nog maanden nabesproken wordt.', includes:['DJ of livemuzikant (tot 4 uur)','Professioneel geluidssysteem','Sfeerverlichting & LED-installatie','Playlist-wensen mogelijk','Soundcheck 1 uur voor aanvang'] },
+  ao4: { name:'Photobooth', price:'€200 – €400', desc:"Een instant-hit bij gasten van alle leeftijden. Uw gasten maken onbeperkt foto's, krijgen direct een print mee en ontvangen achteraf de volledige digitale galerij.", includes:['Professionele fotobooth (3 uur)','Props & accessoires inbegrepen','Onbeperkt foto\'s maken','Directe prints (10×15 cm)','Digitale galerij achteraf per e-mail'] },
+  ao5: { name:'Premium Bar Service', price:'Vanaf €20 p.p.', desc:'Geen bonnetjes, geen bar-wachtrijen. Ons barteam schenkt onbeperkt bier, huiswijn en frisdrank bij — voor de volledige serviceduur.', includes:['Onbeperkt bier (tap of fles)','Huiswijn rood & wit','Frisdrank & water inbegrepen','Bediening door ons barteam','Actief gedurende volledige service'] },
+  ao6: { name:'Premium Catering Upgrade', price:'+ €15 p.p.', desc:'Upgrade uw vleesassortiment naar het absolute topniveau. A-kwaliteit vlees van gespecialiseerde slagers.', includes:['Wagyu smash burger (180g)','Côte de boeuf aan het bot','Duroc varkenshaas met kruidenboter','Verse chimichurri & huisdipsauzen','Live bereid aan het grillstation'] },
+  ao7: { name:'Extra Crew Lid', price:'€150 – €200', desc:'Meer handen betekent snellere service, kortere wachttijden en meer persoonlijke aandacht voor uw gasten.', includes:['1 extra professioneel crewlid','Inzetbaar bij grillstation of bediening','Volledig getraind in Mandja Grill service','Actief voor volledige serviceduur','Inclusief uniform & materiaal'] },
+  ao8: { name:'Kinderkorting', price:'− €30 p. kind (t/m 12 jaar)', desc:'Heeft u kinderen (t/m 12 jaar) uitgenodigd? Geef het aantal op en u ontvangt automatisch €30 korting per kind.', includes:['€30 korting per kind (t/m 12 jaar)','Automatisch verrekend in uw totaalprijs','Gebaseerd op aantal opgegeven kinderen','Allergie-opties op aanvraag bespreekbaar'] }
+};
+let currentAddonId = null;
+function showAddonInfo(id, event) {
+  event.preventDefault(); event.stopPropagation();
+  currentAddonId = id;
+  const d = addonData[id];
+  document.getElementById('am-title').textContent = d.name;
+  document.getElementById('am-price').textContent = d.price;
+  document.getElementById('am-desc').textContent  = d.desc;
+  document.getElementById('am-includes').innerHTML = d.includes.map(i => `<li>${i}</li>`).join('');
+  updateModalBtn();
+  document.getElementById('addon-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function updateModalBtn() {
+  if (!currentAddonId) return;
+  const cb  = document.getElementById(currentAddonId);
+  const btn = document.getElementById('am-add-btn');
+  btn.textContent = cb.checked ? '✓ Verwijder extra' : '+ Voeg toe aan boeking';
+  btn.style.background = cb.checked ? 'rgba(245,240,235,0.1)' : '';
+}
+function toggleAddonFromModal() {
+  if (!currentAddonId) return;
+  const cb = document.getElementById(currentAddonId);
+  cb.checked = !cb.checked; calcPrice(); updateModalBtn();
+}
+function closeAddonModal() {
+  document.getElementById('addon-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  currentAddonId = null;
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAddonModal(); });
+
+/* ── Carousel dots ── */
+function initCarousel(carouselId, dotsId) {
+  const carousel = document.getElementById(carouselId);
+  const dotsWrap = document.getElementById(dotsId);
+  if (!carousel || !dotsWrap) return;
+  function updateDots() {
+    if (window.innerWidth > 768) { dotsWrap.style.display = 'none'; return; }
+    dotsWrap.style.display = 'flex';
+    const items = carousel.children;
+    if (!items.length) return;
+    const itemW = items[0].getBoundingClientRect().width + 10;
+    const idx   = Math.round(carousel.scrollLeft / itemW);
+    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+  carousel.addEventListener('scroll', updateDots, { passive: true });
+  window.addEventListener('resize', updateDots);
+  updateDots();
+}
+
+/* ── Autocomplete ── */
+(function() {
+  const input = document.getElementById('f-location');
+  const list  = document.getElementById('addr-list');
+  let timer = null, activeIdx = -1, results = [];
+  function show(items) {
+    results = items; activeIdx = -1;
+    if (!items.length) { list.style.display = 'none'; return; }
+    list.innerHTML = items.map((r, i) => {
+      const p = r.properties;
+      const main = [p.name, p.housenumber].filter(Boolean).join(' ');
+      const sub  = [p.street, p.postcode, p.city || p.town || p.village, p.country].filter(Boolean).join(', ');
+      return `<div class="autocomplete-item" data-i="${i}"><span class="autocomplete-pin">📍</span><span><span class="autocomplete-main">${main || p.street || sub}</span><span class="autocomplete-sub">${sub}</span></span></div>`;
+    }).join('');
+    list.style.display = 'block';
+    list.querySelectorAll('.autocomplete-item').forEach(el => {
+      el.addEventListener('mousedown', e => { e.preventDefault(); select(+el.dataset.i); });
+    });
+  }
+  function select(i) {
+    const p = results[i].properties;
+    input.value = [p.name !== p.street ? p.name : null, p.street, p.housenumber, p.postcode, p.city || p.town || p.village].filter(Boolean).join(', ');
+    list.style.display = 'none'; activeIdx = -1;
+  }
+  function setActive(i) {
+    const items = list.querySelectorAll('.autocomplete-item');
+    items.forEach(el => el.classList.remove('active'));
+    if (i >= 0 && i < items.length) { items[i].classList.add('active'); activeIdx = i; }
+  }
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    const q = input.value.trim();
+    if (q.length < 3) { list.style.display = 'none'; return; }
+    timer = setTimeout(() => {
+      fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=6&lang=nl&bbox=2.5,50.5,7.3,53.6`)
+        .then(r => r.json()).then(d => show(d.features || [])).catch(() => { list.style.display = 'none'; });
+    }, 280);
+  });
+  input.addEventListener('keydown', e => {
+    const items = list.querySelectorAll('.autocomplete-item');
+    if (!items.length || list.style.display === 'none') return;
+    if (e.key === 'ArrowDown')  { e.preventDefault(); setActive(Math.min(activeIdx + 1, items.length - 1)); }
+    if (e.key === 'ArrowUp')    { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
+    if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); select(activeIdx); }
+    if (e.key === 'Escape') { list.style.display = 'none'; }
+  });
+  document.addEventListener('click', e => { if (!input.contains(e.target) && !list.contains(e.target)) list.style.display = 'none'; });
+})();
+
+/* ── Tent heat ── */
+function toggleTentHeat() {
+  const tentChecked = document.getElementById('ao1').checked;
+  const heatRow = document.getElementById('tent-heat-row');
+  const heatCb  = document.getElementById('ao1-heat');
+  const heatBtn = document.getElementById('ao1-heat-btn');
+  heatRow.style.display = tentChecked ? 'block' : 'none';
+  if (!tentChecked) { heatCb.checked = false; if (heatBtn) heatBtn.classList.remove('active'); }
+}
+function toggleHeat() {
+  const heatCb  = document.getElementById('ao1-heat');
+  const heatBtn = document.getElementById('ao1-heat-btn');
+  heatCb.checked = !heatCb.checked;
+  heatBtn.classList.toggle('active', heatCb.checked);
+  calcPrice();
+}
+
+/* ── Upgrade stepper ── */
+function adjustUpgrade(delta) {
+  const el = document.getElementById('upgrade-count');
+  const card = document.getElementById('upgrade-card');
+  const allBtn = document.getElementById('upgrade-all-btn');
+  const max = parseInt(slider.value) || 500;
+  let count = parseInt(el.textContent) + delta;
+  count = Math.max(0, Math.min(count, max));
+  el.textContent = count;
+  allBtn.classList.toggle('active', count === max);
+  card.classList.toggle('active', count > 0);
+  document.getElementById('ao6').checked = count > 0;
+  updateUpgradeLabel(count, max);
+  calcPrice();
+}
+function toggleUpgradeAll() {
+  const el = document.getElementById('upgrade-count');
+  const card = document.getElementById('upgrade-card');
+  const allBtn = document.getElementById('upgrade-all-btn');
+  const max = parseInt(slider.value) || 500;
+  const isAll = allBtn.classList.contains('active');
+  const count = isAll ? 0 : max;
+  el.textContent = count;
+  allBtn.classList.toggle('active', !isAll);
+  card.classList.toggle('active', count > 0);
+  document.getElementById('ao6').checked = count > 0;
+  updateUpgradeLabel(count, max);
+  calcPrice();
+}
+function updateUpgradeLabel(count, max) {
+  const lbl = document.getElementById('upgrade-price-label');
+  if (!lbl) return;
+  lbl.textContent = count > 0 ? count + ' gast' + (count !== 1 ? 'en' : '') + ' x €15 = + €' + (count * 15) : '+ €15 p.p.';
+}
+
+/* ── Kids stepper ── */
+function adjustKids(delta) {
+  const el   = document.getElementById('kids-count');
+  const card = document.getElementById('kids-card');
+  const max  = parseInt(slider.value) || 500;
+  let count  = parseInt(el.textContent) + delta;
+  count = Math.max(0, Math.min(count, max));
+  el.textContent = count;
+  card.classList.toggle('active', count > 0);
+  document.getElementById('ao8').checked = count > 0;
+  calcPrice();
+}
+
+/* ── Init ── */
+updatePeople(slider);
+calcPrice();
+initCarousel('addons-grid', 'addons-dots');
+
+(function() {
+  if (window.innerWidth > 768) return;
+  const grid = document.getElementById('packages-carousel');
+  if (!grid) return;
+  const cards = grid.querySelectorAll('.package-card');
+  if (cards.length < 2) return;
+  requestAnimationFrame(() => {
+    const card = cards[1];
+    grid.scrollLeft = card.offsetLeft - (grid.clientWidth / 2) + (card.offsetWidth / 2);
+  });
+})();
+
+/* ── URL param pre-selection ── */
+(function() {
+  const pkg = new URLSearchParams(window.location.search).get('pakket');
+  if (!pkg) return;
+  const pkgPrices = { basis: 60, compleet: 70, premium: 80 };
+  const pkgMins   = { basis: 25, compleet: 20, premium: 20 };
+  const card = document.querySelector('.package-card[data-package="' + pkg + '"]');
+  if (!card) return;
+  const btn = card.querySelector('.pkg-select');
+  document.querySelectorAll('.package-card').forEach(c => {
+    c.classList.remove('selected');
+    const b = c.querySelector('.pkg-select');
+    if (b) { b.textContent = 'Selecteer Pakket'; b.style.background = ''; b.style.color = ''; }
+  });
+  card.classList.add('selected');
+  document.getElementById('packages-carousel').classList.add('has-selection');
+  if (btn) { btn.textContent = '✓ Geselecteerd'; btn.style.background = 'var(--red)'; btn.style.color = 'var(--white)'; }
+  selectedPkg = { name: pkgNames[pkg] || pkg, price: pkgPrices[pkg] || 60 };
+  const sel = document.getElementById('f-package');
+  if (sel) sel.value = pkg;
+  if (slider) { slider.min = pkgMins[pkg] || 15; slider.value = pkgMins[pkg] || 25; updatePeople(slider); }
+  calcPrice();
+})();
+</script>
+</body>
+</html>
