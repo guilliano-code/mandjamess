@@ -13,6 +13,8 @@ html.is-loading,html.is-loading body{overflow:hidden!important;height:100%;touch
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"></noscript>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WPrE=" crossorigin=""></script>
 <style>
 /* ─── Preloader ──────────────────────────────────────────────── */
 #preloader { position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--dark);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity 0.7s ease,visibility 0.7s ease; }
@@ -288,14 +290,14 @@ body.cursor-hover .cursor-ring { width:56px;height:56px;border-color:rgba(196,30
 .map-frame-wrap {
   position: relative;
   overflow: hidden;
-  background: #0e0e0e;
 }
 #nl-map {
   width: 100%;
   height: 100%;
   min-height: 480px;
-  display: block;
 }
+/* Block all Leaflet interaction visually */
+#nl-map .leaflet-control-container { display: none; }
 .map-overlay-link {
   position: absolute;
   bottom: 20px; right: 20px;
@@ -529,39 +531,7 @@ footer { background:var(--dark2);padding:80px 80px 40px;border-top:1px solid rgb
     </div>
 
     <div class="map-frame-wrap">
-      <svg id="nl-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <pattern id="grid" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-            <path d="M50 0L0 0 0 50" fill="none" stroke="rgba(245,240,235,0.03)" stroke-width="1"/>
-          </pattern>
-        </defs>
-        <!-- Achtergrond -->
-        <rect width="800" height="500" fill="#0e0e0e"/>
-        <rect width="800" height="500" fill="url(#grid)"/>
-        <!-- Nederland fill -->
-        <path d="M202,389 L32,389 L34,359 L63,262 L168,161 L267,115 L284,103 L304,87 L332,80 L379,67 L435,35 L514,27 L573,28 L648,32 L707,32 L766,60 L790,88 L770,134 L766,166 L744,201 L716,244 L694,293 L623,325 L586,336 L550,371 L528,417 L509,447 L473,447 L424,495 L363,486 L286,484 L210,474 L127,426 Z" fill="rgba(212,0,26,0.08)" stroke="none"/>
-        <!-- Waddeneilanden -->
-        <ellipse cx="313" cy="88" rx="18" ry="7" fill="rgba(212,0,26,0.08)" stroke="#D4001A" stroke-width="1.5"/>
-        <ellipse cx="388" cy="56" rx="13" ry="5" fill="rgba(212,0,26,0.08)" stroke="#D4001A" stroke-width="1.5"/>
-        <ellipse cx="452" cy="40" rx="14" ry="5" fill="rgba(212,0,26,0.08)" stroke="#D4001A" stroke-width="1.5"/>
-        <ellipse cx="518" cy="25" rx="12" ry="5" fill="rgba(212,0,26,0.08)" stroke="#D4001A" stroke-width="1.5"/>
-        <ellipse cx="578" cy="18" rx="10" ry="4" fill="rgba(212,0,26,0.08)" stroke="#D4001A" stroke-width="1.5"/>
-        <!-- Nederland outline -->
-        <path d="M202,389 L32,389 L34,359 L63,262 L168,161 L267,115 L284,103 L304,87 L332,80 L379,67 L435,35 L514,27 L573,28 L648,32 L707,32 L766,60 L790,88 L770,134 L766,166 L744,201 L716,244 L694,293 L623,325 L586,336 L550,371 L528,417 L509,447 L473,447 L424,495 L363,486 L286,484 L210,474 L127,426 Z" fill="none" stroke="#D4001A" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-        <!-- Steden -->
-        <circle cx="336" cy="214" r="5" fill="#D4001A"/>
-        <text x="344" y="212" fill="rgba(245,240,235,0.85)" font-family="Poppins,sans-serif" font-size="12" font-weight="700">Amsterdam</text>
-        <circle cx="253" cy="291" r="5" fill="#D4001A"/>
-        <text x="261" y="289" fill="rgba(245,240,235,0.85)" font-family="Poppins,sans-serif" font-size="12" font-weight="700">Rotterdam</text>
-        <circle cx="218" cy="266" r="3.5" fill="#D4001A" opacity="0.8"/>
-        <text x="226" y="264" fill="rgba(245,240,235,0.55)" font-family="Poppins,sans-serif" font-size="10">Den Haag</text>
-        <circle cx="379" cy="263" r="3.5" fill="#D4001A" opacity="0.8"/>
-        <text x="386" y="261" fill="rgba(245,240,235,0.55)" font-family="Poppins,sans-serif" font-size="10">Utrecht</text>
-        <circle cx="448" cy="371" r="3.5" fill="#D4001A" opacity="0.8"/>
-        <text x="456" y="369" fill="rgba(245,240,235,0.55)" font-family="Poppins,sans-serif" font-size="10">Eindhoven</text>
-        <circle cx="666" cy="64" r="3.5" fill="#D4001A" opacity="0.8"/>
-        <text x="558" y="61" fill="rgba(245,240,235,0.55)" font-family="Poppins,sans-serif" font-size="10">Groningen</text>
-      </svg>
+      <div id="nl-map"></div>
       <a href="https://maps.google.com/maps?q=Nederland" target="_blank" class="map-overlay-link">
         📍 Open in Google Maps
       </a>
@@ -716,6 +686,50 @@ function submitContact() {
   setTimeout(() => t.classList.remove('show'), 4500);
 }
 
+/* ── Leaflet kaart: heel Nederland, geen interactie ── */
+(function() {
+  const map = L.map('nl-map', {
+    zoomControl:       false,
+    dragging:          false,
+    touchZoom:         false,
+    scrollWheelZoom:   false,
+    doubleClickZoom:   false,
+    boxZoom:           false,
+    keyboard:          false,
+    tap:               false,
+    attributionControl: false
+  });
+
+  // CartoDB Dark Matter — past bij het donkere design
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Zoom naar heel Nederland
+  map.fitBounds([[50.75, 3.20], [53.58, 7.25]], { padding: [20, 20] });
+
+  // Outline van Nederland (vereenvoudigd maar herkenbaar)
+  const nl = {"type":"Polygon","coordinates":[[
+    [4.22,51.38],[3.36,51.38],[3.37,51.55],[3.52,52.10],[4.05,52.67],
+    [4.55,52.93],[4.64,53.00],[4.74,53.09],[4.88,53.13],[5.12,53.20],
+    [5.40,53.38],[5.80,53.43],[6.10,53.42],[6.48,53.40],[6.78,53.40],
+    [7.08,53.24],[7.20,53.08],[7.10,52.82],[7.08,52.64],[6.97,52.44],
+    [6.83,52.20],[6.72,51.92],[6.36,51.74],[6.17,51.68],[5.99,51.48],
+    [5.88,51.22],[5.78,51.05],[5.60,51.05],[5.35,50.78],[5.04,50.83],
+    [4.65,50.84],[4.24,50.90],[3.82,51.17],[4.22,51.38]
+  ]]};
+
+  L.geoJSON({ type: 'Feature', geometry: nl }, {
+    style: {
+      color:       '#D4001A',
+      weight:      2.5,
+      opacity:     0.9,
+      fillColor:   '#D4001A',
+      fillOpacity: 0.07
+    }
+  }).addTo(map);
+})();
 </script>
 </body>
 </html>
