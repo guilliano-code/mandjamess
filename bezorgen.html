@@ -157,29 +157,11 @@ body.cursor-hover .cursor-ring { width:56px;height:56px;border-color:rgba(196,30
   transform: translateY(-4px);
   box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
-.delivery-card.featured {
-  border-color: rgba(245,240,235,0.1);
-  background: linear-gradient(160deg, var(--dark3) 0%, var(--dark2) 100%);
-}
 .delivery-card.selected {
   border-color: var(--red);
   box-shadow: 0 0 40px rgba(212,0,26,0.2), 0 20px 50px rgba(0,0,0,0.3);
 }
-.dc-badge {
-  position: absolute;
-  top: -14px; left: 50%;
-  transform: translateX(-50%);
-  background: var(--red);
-  color: var(--white);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  white-space: nowrap;
-  padding: 5px 16px;
-  border-radius: 20px;
-  box-shadow: 0 2px 12px rgba(196,30,58,0.4);
-}
-.dc-body { padding: 36px 28px 28px; }
+.dc-body { padding: 28px; }
 .dc-persons {
   font-size: 0.68rem;
   font-weight: 700;
@@ -502,9 +484,8 @@ footer { background:var(--dark2);padding:80px 80px 40px;border-top:1px solid rgb
       </div>
     </div>
 
-    <!-- Box 2: Familie (featured) -->
-    <div class="delivery-card featured" onclick="selectBox(this)">
-      <div class="dc-badge">Meest Besteld</div>
+    <!-- Box 2: Familie -->
+    <div class="delivery-card" onclick="selectBox(this)">
       <div class="dc-body">
         <div class="dc-persons">VOOR 4 – 6 PERSONEN</div>
         <div class="dc-name">Mandja Familie Box</div>
