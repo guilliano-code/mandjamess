@@ -349,6 +349,35 @@ footer { background:var(--dark2);padding:80px 80px 40px;border-top:1px solid rgb
 </style>
 </head>
 <body>
+<!-- ── Onderhoud overlay ── -->
+<div id="maintenance-overlay" style="
+  position:fixed;inset:0;z-index:99999;
+  background:#080808;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:28px;padding:32px;text-align:center;
+  font-family:'Poppins',sans-serif;color:#F5F0EB;">
+  <div style="font-size:1.5rem;font-weight:800;letter-spacing:1px;">
+    Mandja<span style="color:#D4001A">grill</span>
+  </div>
+  <div style="width:48px;height:2px;background:#D4001A;border-radius:2px;"></div>
+  <div>
+    <div style="font-size:clamp(1.4rem,4vw,2rem);font-weight:700;line-height:1.3;margin-bottom:12px;">
+      Website werkzaamheden
+    </div>
+    <div style="font-size:0.9rem;font-weight:300;color:rgba(245,240,235,0.55);max-width:400px;line-height:1.8;">
+      We zijn druk bezig om de website nog beter te maken.<br>We zijn snel terug — bedankt voor uw geduld.
+    </div>
+  </div>
+  <a href="mailto:contact@mandjagrill.nl" style="
+    margin-top:8px;padding:12px 28px;
+    background:#D4001A;color:#F5F0EB;
+    font-family:'Poppins',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.5px;
+    border-radius:8px;text-decoration:none;
+    transition:background 0.3s;">
+    Neem contact op
+  </a>
+</div>
+
 
 <!-- ── Preloader ── -->
 <div id="preloader">
